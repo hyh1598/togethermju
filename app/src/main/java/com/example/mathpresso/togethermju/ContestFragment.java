@@ -10,23 +10,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.cachapa.expandablelayout.ExpandableLinearLayout;
+
 
 /**
  * Created by choijinjoo on 2016. 11. 9..
  */
 public class ContestFragment extends Fragment {
+
+    SimpleAdapter mSimpleAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_contest, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new SimpleAdapter(recyclerView));
+        mSimpleAdapter = new SimpleAdapter(recyclerView);
+        recyclerView.setAdapter(mSimpleAdapter);
+
         return rootView;
     }
     private static class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {
         private static final int UNSELECTED = -1;
 
+        private ExpandableLinearLayout expandableLayout;
         private RecyclerView recyclerView;
         private int selectedItem = UNSELECTED;
 
@@ -51,42 +58,43 @@ public class ContestFragment extends Fragment {
             return 100;
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnFocusChangeListener {
 
+            private ExpandableLinearLayout expandableLayout;
             private TextView expandButton;
-            private int position;
 
             public ViewHolder(View itemView) {
                 super(itemView);
 
+                expandableLayout = (ExpandableLinearLayout) itemView.findViewById(R.id.expandable_layout);
                 expandButton = (TextView) itemView.findViewById(R.id.expand_button);
 
                 expandButton.setOnClickListener(this);
+                expandButton.setFocusableInTouchMode(true);
+                expandButton.setOnFocusChangeListener(this);
             }
 
             public void bind(int position) {
-                this.position = position;
-
-                expandButton.setText(position + ". Tap to expand");
-
-                expandButton.setSelected(false);
+                expandButton.setText(position + ". Click to expand");
             }
 
             @Override
             public void onClick(View view) {
-                ViewHolder holder = (ViewHolder) recyclerView.findViewHolderForAdapterPosition(selectedItem);
-                if (holder != null) {
-                    holder.expandButton.setSelected(false);
-                }
-
-                if (position == selectedItem) {
-                    selectedItem = UNSELECTED;
+                if (expandButton.isFocused()) {
+                    expandButton.clearFocus();
                 } else {
-                    expandButton.setSelected(true);
-                    selectedItem = position;
+                    expandButton.requestFocus();
+                }
+            }
+
+            @Override
+            public void onFocusChange(View view, boolean focused) {
+                if (focused) {
+                    expandableLayout.expand();
+                } else {
+                    expandableLayout.collapse();
                 }
             }
         }
     }
-
 }
