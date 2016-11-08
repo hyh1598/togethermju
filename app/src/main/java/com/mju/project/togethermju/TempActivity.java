@@ -1,10 +1,12 @@
-package com.example.mathpresso.togethermju;
+package com.mju.project.togethermju;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.mju.project.togethermju.R;
 
 public class TempActivity extends AppCompatActivity {
 
