@@ -8,88 +8,53 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import net.cachapa.expandablelayout.ExpandableLinearLayout;
+import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
+import com.example.mathpresso.togethermju.model.Notice;
+
+
+import java.util.ArrayList;
 
 
 /**
  * Created by choijinjoo on 2016. 11. 9..
  */
 public class NoticeFragment extends Fragment {
+    NoticeAdapter mAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_notice, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new SimpleAdapter(recyclerView));
+
+        // add mock data
+        ArrayList<Notice> items = new ArrayList<>();
+        items.add(new Notice(1,"공지사항입니다1","공지사항1 내용입니다."));
+        items.add(new Notice(2,"공지사항입니다2","공지사항2 내용입니다."));
+        items.add(new Notice(3,"공지사항입니다3","공지사항3 내용입니다."));
+        items.add(new Notice(4,"공지사항입니다4","공지사항4 내용입니다."));
+        items.add(new Notice(5,"공지사항입니다5","공지사항5 내용입니다."));
+        items.add(new Notice(6,"공지사항입니다6","공지사항6 내용입니다."));
+        items.add(new Notice(7,"공지사항입니다7","공지사항7 내용입니다."));
+        items.add(new Notice(8,"공지사항입니다8","공지사항8 내용입니다."));
+        items.add(new Notice(9,"공지사항입니다9","공지사항9 내용입니다."));
+        items.add(new Notice(10,"공지사항입니다10","공지사항10 내용입니다."));
+        items.add(new Notice(11,"공지사항입니다11","공지사항11 내용입니다."));
+        items.add(new Notice(12,"공지사항입니다12","공지사항12 내용입니다."));
+        items.add(new Notice(13,"공지사항입니다13","공지사항13 내용입니다."));
+        items.add(new Notice(14,"공지사항입니다14","공지사항14 내용입니다."));
+        items.add(new Notice(15,"공지사항입니다15","공지사항15 내용입니다."));
+
+        mAdapter = new NoticeAdapter(recyclerView, items, getActivity(), new NoticeAdapter.OnNoticeSelectedListener() {
+            @Override
+            public void onSelect(Notice contest) {
+                Toast.makeText(getActivity(),contest.getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        recyclerView.setAdapter(mAdapter);
         return rootView;
-    }
-    private static class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {
-        private static final int UNSELECTED = -1;
-
-        private RecyclerView recyclerView;
-        private int selectedItem = UNSELECTED;
-
-        public SimpleAdapter(RecyclerView recyclerView) {
-            this.recyclerView = recyclerView;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recycler_item_notice, parent, false);
-            return new ViewHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.bind(position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return 100;
-        }
-
-        public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnFocusChangeListener {
-
-            private ExpandableLinearLayout expandableLayout;
-            private TextView expandButton;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-
-                expandableLayout = (ExpandableLinearLayout) itemView.findViewById(R.id.expandable_layout);
-                expandButton = (TextView) itemView.findViewById(R.id.expand_button);
-
-                expandButton.setOnClickListener(this);
-                expandButton.setFocusableInTouchMode(true);
-                expandButton.setOnFocusChangeListener(this);
-            }
-
-            public void bind(int position) {
-                expandButton.setText(position + ". Click to expand");
-            }
-
-            @Override
-            public void onClick(View view) {
-                if (expandButton.isFocused()) {
-                    expandButton.clearFocus();
-                } else {
-                    expandButton.requestFocus();
-                }
-            }
-
-            @Override
-            public void onFocusChange(View view, boolean focused) {
-                if (focused) {
-                    expandableLayout.expand();
-                } else {
-                    expandableLayout.collapse();
-                }
-            }
-        }
     }
 }
