@@ -6,9 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Mathpresso3 on 2015-09-04.
- */
+
 
 public abstract class CustomAdapter <T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
