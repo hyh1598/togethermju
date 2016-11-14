@@ -20,6 +20,9 @@ public class TempActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    public void clickDonghyukButton(View view) {
+        startActivity(new Intent(this, StartMainActivity.class));
     }
 }

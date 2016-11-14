@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_phone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.mathpresso.togethermju.Register.PhoneRegisterActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="25dp">
+
+        <EditText
+            android:layout_margin="10dp"
+            android:inputType="phone"
+            android:digits="0123456789"
+            android:id="@+id/auth_number"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_margin="10dp"
+            android:onClick="clickAuthButton"
+            android:id="@+id/auth_button"
+            android:text="인증"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:background="@drawable/radius_button_green"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:onClick="clickBackButton"
+            android:text="이전"
+            android:background="@drawable/radius_button_gray"
+            android:id="@+id/back_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:onClick="clickNextButton"
+            android:text="다음"
+            android:background="@drawable/radius_button_blue"
+            android:id="@+id/register_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+</LinearLayout>

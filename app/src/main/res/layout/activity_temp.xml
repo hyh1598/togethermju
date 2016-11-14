@@ -27,4 +27,12 @@
         android:id="@+id/btnMain"
         android:layout_gravity="center_horizontal" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="donghyukactivity"
+        android:id="@+id/donghyuk_button"
+        android:layout_gravity="center_horizontal"
+        android:onClick="clickDonghyukButton"/>
+
 </LinearLayout>
