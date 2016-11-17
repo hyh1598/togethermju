@@ -16,8 +16,7 @@ public class TempActivity extends AppCompatActivity {
         btnGotoMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TempActivity.this,MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(TempActivity.this,MainActivity.class));
             }
         });
     }

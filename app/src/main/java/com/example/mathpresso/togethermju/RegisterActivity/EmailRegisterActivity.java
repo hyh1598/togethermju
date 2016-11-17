@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju.Register;
+package com.example.mathpresso.togethermju.RegisterActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.LoginActivity;
 import com.example.mathpresso.togethermju.R;
-import com.example.mathpresso.togethermju.Register.DetailRegisterActivity;
 
 public class EmailRegisterActivity extends AppCompatActivity {
     @Override
@@ -36,13 +35,11 @@ public class EmailRegisterActivity extends AppCompatActivity {
         } else if ((editCheckUserPasswordText.getText().toString()).equals("")) {
             Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else if (editUserPasswordText.getText().toString().equals(editCheckUserPasswordText.getText().toString())) {
-            startActivity(new Intent(this, DetailRegisterActivity.class));
-        } else if ((editUserPasswordText.getText().toString()) != (editCheckUserPasswordText.getText().toString())) {
-            Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-        } else {
             String userEmail = editUserEmailText.getText().toString();
             String userPassword = editUserPasswordText.getText().toString();
             startActivity(new Intent(this, DetailRegisterActivity.class));
+        } else if ((editUserPasswordText.getText().toString()) != (editCheckUserPasswordText.getText().toString())) {
+            Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 }

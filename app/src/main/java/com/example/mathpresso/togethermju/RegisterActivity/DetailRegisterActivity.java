@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju.Register;
+package com.example.mathpresso.togethermju.RegisterActivity;
 
 import android.content.Intent;
 import android.os.Bundle;

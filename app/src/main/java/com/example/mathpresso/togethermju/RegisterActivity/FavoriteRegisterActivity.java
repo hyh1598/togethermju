@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju.Register;
+package com.example.mathpresso.togethermju.RegisterActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.LoginActivity;
 import com.example.mathpresso.togethermju.R;
-import com.example.mathpresso.togethermju.Register.DetailRegisterActivity;
 
 import java.util.ArrayList;
 

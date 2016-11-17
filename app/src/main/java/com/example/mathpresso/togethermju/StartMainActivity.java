@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.mathpresso.togethermju.Register.PhoneRegisterActivity;
+import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
 
 public class StartMainActivity extends AppCompatActivity {
 
@@ -21,6 +21,6 @@ public class StartMainActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
     public void clickRegisterButton(View view) {
-        startActivity(new Intent(this, PhoneRegisterActivity.class));
+        startActivity(new Intent(this, EmailRegisterActivity.class));
     }
 }

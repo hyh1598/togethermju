@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.example.mathpresso.togethermju.Register.FavoriteRegisterActivity">
+    tools:context="com.example.mathpresso.togethermju.RegisterActivity.FavoriteRegisterActivity">
 
     <TextView
         android:textSize="25dp"
@@ -57,6 +57,7 @@
                 android:layout_margin="5dp"/>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
