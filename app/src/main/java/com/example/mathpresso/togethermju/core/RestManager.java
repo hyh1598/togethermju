@@ -1,5 +1,6 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.core;
 
+import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.rest.NoticeService;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.core;
 
 import android.app.Application;
 

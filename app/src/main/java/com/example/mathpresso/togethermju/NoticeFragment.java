@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
+import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
