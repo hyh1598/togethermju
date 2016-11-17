@@ -8,7 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import com.example.mathpresso.togethermju.ApplicationController;
+import com.example.mathpresso.togethermju.NetworkService;
 import com.example.mathpresso.togethermju.R;
+
+import static com.example.mathpresso.togethermju.ApplicationController.applicationController;
+import static com.example.mathpresso.togethermju.ApplicationController.user;
+import static com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity.user;
 
 public class DetailRegisterActivity extends AppCompatActivity {
     @Override
@@ -17,6 +23,9 @@ public class DetailRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_register);
 
         getIntent();
+
+        applicationController = ApplicationController.getInstance();
+        applicationController.buildNetworkService("ip address", "port number");
 
         Spinner majorSpinner = (Spinner) findViewById(R.id.major_spinner);
         Spinner yearSpinner = (Spinner) findViewById(R.id.year_spinner);
@@ -58,17 +67,23 @@ public class DetailRegisterActivity extends AppCompatActivity {
         RadioButton maleButton = (RadioButton) findViewById(R.id.male_radio_button);
         RadioButton femaleButton = (RadioButton) findViewById(R.id.female_radio_button);
 
-        String gender;
-        String major = majorSpinner.getSelectedItem().toString();
-        int year = Integer.parseInt(yearSpinner.getSelectedItem().toString());
-        int month = Integer.parseInt(monthSpinner.getSelectedItem().toString());
-        int day = Integer.parseInt(daySpinner.getSelectedItem().toString());
+        String userGender;
+        String userMajor = majorSpinner.getSelectedItem().toString();
+        int userYear = Integer.parseInt(yearSpinner.getSelectedItem().toString());
+        int userMonth = Integer.parseInt(monthSpinner.getSelectedItem().toString());
+        int userDay = Integer.parseInt(daySpinner.getSelectedItem().toString());
 
         if ((maleButton.isChecked() == true)) {
-            gender = "남자";
+            userGender = "남자";
         } else {
-            gender = "여자";
+            userGender = "여자";
         }
+
+        user.setUserMajor(userMajor);
+        user.setUserYear(userYear);
+        user.setUserMonth(userMonth);
+        user.setUserDay(userDay);
+        user.setUserGender(userGender);
 
         startActivity(new Intent(this, FavoriteRegisterActivity.class));
     }

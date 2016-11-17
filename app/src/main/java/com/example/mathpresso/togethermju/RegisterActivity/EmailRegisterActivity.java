@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju.RegisterActivity;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mathpresso.togethermju.ApplicationController;
 import com.example.mathpresso.togethermju.LoginActivity;
+import com.example.mathpresso.togethermju.NetworkService;
 import com.example.mathpresso.togethermju.R;
+import com.example.mathpresso.togethermju.User;
+
+import static com.example.mathpresso.togethermju.ApplicationController.applicationController;
+import static com.example.mathpresso.togethermju.ApplicationController.user;
 
 public class EmailRegisterActivity extends AppCompatActivity {
     @Override
@@ -17,6 +24,9 @@ public class EmailRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_email_register);
 
         getIntent();
+
+        applicationController = ApplicationController.getInstance();
+        applicationController.buildNetworkService("ip address", "port number");
     }
 
     public void clickBackButton(View view) {
@@ -37,6 +47,10 @@ public class EmailRegisterActivity extends AppCompatActivity {
         } else if (editUserPasswordText.getText().toString().equals(editCheckUserPasswordText.getText().toString())) {
             String userEmail = editUserEmailText.getText().toString();
             String userPassword = editUserPasswordText.getText().toString();
+
+            user.setUserEmail(userEmail);
+            user.setUserPassword(userPassword);
+
             startActivity(new Intent(this, DetailRegisterActivity.class));
         } else if ((editUserPasswordText.getText().toString()) != (editCheckUserPasswordText.getText().toString())) {
             Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
