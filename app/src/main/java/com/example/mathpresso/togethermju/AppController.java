@@ -10,8 +10,15 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
  */
 public class AppController extends Application {
     private static AppController mInstance;
+    private RestManager mRestManager;
     private Retrofit mRetrofit;
-    private String baseUrl = "우리 서버주소";
+    private String baseUrl = "http://125.130.223.88:8000/mju/";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mInstance = this;
+    }
 
     public static synchronized AppController getInstance() {
         return mInstance;
@@ -24,4 +31,11 @@ public class AppController extends Application {
 
     return mRetrofit;
     }
+    public RestManager getRestManager() {
+        if (mRestManager == null) {
+            mRestManager = new RestManager();
+        }
+        return mRestManager;
+    }
+
 }
