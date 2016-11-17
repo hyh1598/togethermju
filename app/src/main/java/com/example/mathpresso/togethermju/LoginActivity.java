@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.Register.PhoneRegisterActivity;
+import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -20,16 +20,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void clickRegisterButton(View view) {
-        startActivity(new Intent(this, PhoneRegisterActivity.class));
+        startActivity(new Intent(this, EmailRegisterActivity.class));
     }
 
     public void clickLoginButton(View view) {
         EditText editUserEmailText = (EditText) findViewById(R.id.user_email);
         EditText editUserPasswordText = (EditText) findViewById(R.id.user_password);
 
-        if ((editUserEmailText.getText().toString()).equals("")) {
+        if (editUserEmailText.getText().toString().equals("")) {
             Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
-        } else if ((editUserPasswordText.getText().toString()).equals("")) {
+        } else if (editUserPasswordText.getText().toString().equals("")) {
             Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else {
             String userEmail = editUserEmailText.getText().toString();

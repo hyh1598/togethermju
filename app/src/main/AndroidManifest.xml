@@ -4,7 +4,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
-
     <application
         android:name=".core.AppController"
         android:allowBackup="true"
@@ -21,13 +20,11 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".TempActivity" />
-        <activity android:name=".Register.EmailRegisterActivity" />
+        <activity android:name=".RegisterActivity.EmailRegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Register.DetailRegisterActivity" />
-        <activity android:name=".Register.PhoneRegisterActivity" />
-        <activity android:name=".Register.FavoriteRegisterActivity" />
+        <activity android:name=".RegisterActivity.DetailRegisterActivity" />
+        <activity android:name=".RegisterActivity.FavoriteRegisterActivity" />
         <activity android:name=".StartMainActivity" />
-        <activity android:name=".Register.AuthPhoneRegisterActivity"></activity>
     </application>
 
 </manifest>

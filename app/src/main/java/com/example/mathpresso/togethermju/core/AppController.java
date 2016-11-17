@@ -2,6 +2,8 @@ package com.example.mathpresso.togethermju.core;
 
 import android.app.Application;
 
+import com.example.mathpresso.togethermju.model.User;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
@@ -13,6 +15,8 @@ public class AppController extends Application {
     private RestManager mRestManager;
     private Retrofit mRetrofit;
     private String baseUrl = "http://125.130.223.88:8000/mju/";
+    public static User user = new User();
+
 
     @Override
     public void onCreate() {
