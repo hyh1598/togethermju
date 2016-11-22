@@ -34,6 +34,10 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             String userEmail = editUserEmailText.getText().toString();
             String userPassword = editUserPasswordText.getText().toString();
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            finish();
         }
     }
 }
