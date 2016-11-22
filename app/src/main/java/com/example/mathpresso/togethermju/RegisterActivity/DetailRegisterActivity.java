@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.model.User;
@@ -68,19 +69,29 @@ public class DetailRegisterActivity extends AppCompatActivity {
 
         if ((maleButton.isChecked() == true)) {
             userGender = "남자";
-        } else {
+
+            User user = new User();
+            user.setUserMajor(userMajor);
+            user.setUserYear(userYear);
+            user.setUserMonth(userMonth);
+            user.setUserDay(userDay);
+            user.setUserGender(userGender);
+
+            startActivity(new Intent(this, FavoriteRegisterActivity.class));
+        } else if (femaleButton.isChecked() == true) {
             userGender = "여자";
+
+            User user = new User();
+            user.setUserMajor(userMajor);
+            user.setUserYear(userYear);
+            user.setUserMonth(userMonth);
+            user.setUserDay(userDay);
+            user.setUserGender(userGender);
+
+            startActivity(new Intent(this, FavoriteRegisterActivity.class));
+        } else {
+            Toast.makeText(this, "성별을 선택하세요.", Toast.LENGTH_SHORT).show();
         }
-
-
-        User user = new User();
-        user.setUserMajor(userMajor);
-        user.setUserYear(userYear);
-        user.setUserMonth(userMonth);
-        user.setUserDay(userDay);
-        user.setUserGender(userGender);
-
-        startActivity(new Intent(this, FavoriteRegisterActivity.class));
     }
 
 }

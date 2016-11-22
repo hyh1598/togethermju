@@ -20,9 +20,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class FavoriteRegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class FavoriteRegisterActivity extends AppCompatActivity implements View.OnClickListener {
     //FIXME user
     User user = new User();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,13 +54,14 @@ public class FavoriteRegisterActivity extends AppCompatActivity implements View.
             }
         });
     }
+
     public void clickBackButton(View view) {
         startActivity(new Intent(this, DetailRegisterActivity.class));
     }
 
-// register를 누를때마다 check?-> add되기때문에 데이터가 버튼을 누를때마다 들어갈거같아요. 그 처리도 필요할거같아요!
+    // register를 누를때마다 check?-> add되기때문에 데이터가 버튼을 누를때마다 들어갈거같아요. 그 처리도 필요할거같아요!
 // 버튼 눌렀을때 user에 addFavoritelist하면 좋을거같아요!
-//    @Override
+//  @Override
     public void onClick(View v) {
 //        switch (v.getId()){
 //            case R.id.support_checkbox:
@@ -73,7 +75,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity implements View.
 //            case R.id.contest_checkbox:
 //                break;
 //
-        }
+    }
 //    }
 
     public void clickRegisterButton(View view) {
@@ -84,83 +86,93 @@ public class FavoriteRegisterActivity extends AppCompatActivity implements View.
 
         ArrayList<String> checkList = new ArrayList<String>();
 
-        if ((support_checkbox.isChecked() == true)) {
+        if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
+                && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((volunteer_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
+                && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((study_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
+                && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("스터디");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((contest_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
+                && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
             checkList.add("공모전");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((support_checkbox.isChecked() == true) && (volunteer_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
+                && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("봉사활동");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((support_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
+                && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("스터디");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((support_checkbox.isChecked() == true) && (contest_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
+                && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("공모전");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)) {
-            checkList.add("봉사활동");
-            checkList.add("스터디");
-
-            user.setUserFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
-        } else if ((volunteer_checkbox.isChecked() == true) && (contest_checkbox.isChecked() == true)) {
-            checkList.add("봉사활동");
-            checkList.add("공모전");
-
-            user.setUserFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
-        } else if ((study_checkbox.isChecked() == true) && contest_checkbox.isChecked() == true) {
-            checkList.add("스터디");
-            checkList.add("공모전");
-
-            user.setUserFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
-        } else if ((support_checkbox.isChecked() == true) && (volunteer_checkbox.isChecked() == true)
-                && (study_checkbox.isChecked() == true)) {
-            checkList.add("서포터즈");
+        } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
+                && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
             checkList.add("스터디");
 
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((support_checkbox.isChecked() == true) && (volunteer_checkbox.isChecked() == true)
-                && (contest_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
+                && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
+            checkList.add("봉사활동");
+            checkList.add("공모전");
+
+            user.setUserFavorite(checkList);
+            postUser();
+            startActivity(new Intent(this, LoginActivity.class));
+        } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
+                && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
+            checkList.add("스터디");
+            checkList.add("공모전");
+
+            user.setUserFavorite(checkList);
+            postUser();
+            startActivity(new Intent(this, LoginActivity.class));
+        } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
+                && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
+            checkList.add("서포터즈");
+            checkList.add("봉사활동");
+            checkList.add("스터디");
+
+            user.setUserFavorite(checkList);
+            postUser();
+            startActivity(new Intent(this, LoginActivity.class));
+        } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
+                && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("봉사활동");
             checkList.add("공모전");
@@ -168,8 +180,8 @@ public class FavoriteRegisterActivity extends AppCompatActivity implements View.
             user.setUserFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if ((support_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
-                && (contest_checkbox.isChecked() == true)) {
+        } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
+                && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("스터디");
             checkList.add("공모전");
@@ -178,7 +190,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity implements View.
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
-                && (contest_checkbox.isChecked() == true)) {
+                && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
             checkList.add("스터디");
             checkList.add("공모전");
