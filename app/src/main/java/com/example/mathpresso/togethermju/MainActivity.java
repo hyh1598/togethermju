@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initializeLayout();
+
+    }
+
+    private void initializeLayout(){
         mNavigationView = (NavigationView)findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     @Override
