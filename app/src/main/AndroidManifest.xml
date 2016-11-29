@@ -26,6 +26,7 @@
         <activity android:name=".RegisterActivity.FavoriteRegisterActivity" />
         <activity android:name=".StartMainActivity" />
         <activity android:name=".NoticeDetailsActivity"></activity>
+        <activity android:name=".RegisterActivity.GroupResiterActivity"></activity>
     </application>
 
 </manifest>

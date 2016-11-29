@@ -41,9 +41,9 @@ public class NoticeDetailsActivity extends AppCompatActivity{
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
-        ListView listView = (ListView) findViewById(android.R.id.list);
+        //ListView listView = (ListView) findViewById(android.R.id.list);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.attachToListView(listView);
+        fab.attachToListView(listview);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
