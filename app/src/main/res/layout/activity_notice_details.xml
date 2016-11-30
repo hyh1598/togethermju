@@ -10,14 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
 
         <include layout="@layout/toolbar" />
 
         <LinearLayout
             android:id="@+id/viewA"
+            android:padding="13dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <ScrollView
@@ -30,8 +33,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
+                    android:layout_marginTop="10dp"
                     android:maxWidth="300dp"
-                    android:paddingLeft="20dp"
                     android:text="default"
                     android:textColor="@color/Black" />
             </ScrollView>
@@ -40,7 +43,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="63dp"
             android:layout_gravity="right"
             android:background="@color/GreyLight"
             android:gravity="right"
@@ -83,6 +86,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/listContainer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -103,13 +107,14 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
+        android:layout_gravity="top|center_horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp"
         android:adjustViewBounds="true"
         android:onClick="addgroup"
         android:scaleType="centerCrop"
-        android:src="@drawable/add"
-        app:layout_anchor="@id/viewA"
-        app:layout_anchorGravity="right|bottom" />
+        android:src="@drawable/ic_add_white_18dp"
+        android:padding="10dp"
+        app:layout_anchor="@+id/viewA"
+        app:layout_anchorGravity="bottom|right" />
 </android.support.design.widget.CoordinatorLayout>
