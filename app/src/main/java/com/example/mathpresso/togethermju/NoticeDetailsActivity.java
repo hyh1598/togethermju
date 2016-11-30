@@ -63,7 +63,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         textViewContent.setText(content.trim());
         String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
 
-        AppController.getInstance().getRestManager().getNoticeService().watchNotice("hardho@naver.com", notice.getNoticeSeq())
+        AppController.getInstance().getRestManager().getNoticeService().checkWatch("hardho@naver.com", notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
