@@ -35,9 +35,11 @@ public class GroupResiterActivity extends AppCompatActivity {
         personnelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         personnelSpinner.setAdapter(personnelAdapter);
         int personnel = Integer.parseInt(personnelSpinner.getSelectedItem().toString());
+        String gt = title.getText().toString();
+        String gp = purpose.getText().toString();
+        String gc = content.getText().toString();
 
-
-        Group group = new Group();
+        Group group = new Group(null,null,null,gt,gp,gc,personnel);
 
         cancel.setOnClickListener(new View.OnClickListener(){
 
