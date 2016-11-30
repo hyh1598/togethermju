@@ -31,13 +31,6 @@ public class GroupFragment extends Fragment {
 
         //add mock data
         ArrayList<Group> items = new ArrayList<>();
-        items.add(new Group(1,"해외 봉사활동 그룹","해외 봉사활동 그룹"));
-        items.add(new Group(2,"해외 봉사활동 그룹","해외 봉사활동 그룹"));
-        items.add(new Group(3,"해외 봉사활동 그룹","해외 봉사활동 그룹"));
-        items.add(new Group(4,"해외 봉사활동 그룹","해외 봉사활동 그룹"));
-        items.add(new Group(5,"해외 봉사활동 그룹","해외 봉사활동 그룹"));
-        items.add(new Group(6,"해외 봉사활동 그룹","해외 봉사활동 그룹"));
-        items.add(new Group(7,"해외 봉사활동 그룹","해외 봉사활동 그룹"));
 
         mAdapter = new GroupAdapter(recyclerView, items, getActivity(), new GroupAdapter.OnGroupSelectedListener() {
             @Override

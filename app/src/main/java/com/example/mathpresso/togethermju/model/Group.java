@@ -29,7 +29,7 @@ public class Group {
     public Group() {
     }
 
-    public Group(Integer id, String name, String introduce) {
+    public Group(Integer id, String name, String introduce,String title, String purpose, String content, int personnel) {
         this.name = name;
         this.id = id;
         //this.profile = profile;

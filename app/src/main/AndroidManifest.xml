@@ -29,8 +29,12 @@
         <activity android:name=".RegisterActivity.DetailRegisterActivity" />
         <activity android:name=".RegisterActivity.FavoriteRegisterActivity" />
         <activity android:name=".StartMainActivity" />
-        <activity android:name=".NoticeDetailsActivity"></activity>
-        <activity android:name=".RegisterActivity.GroupResiterActivity"></activity>
+        <activity android:name=".NoticeDetailsActivity" />
+        <activity android:name=".RegisterActivity.GroupResiterActivity" />
+        <activity
+            android:name=".GoupDetailsActivity"
+            android:label="@string/title_activity_goup_details"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
