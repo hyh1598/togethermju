@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
@@ -34,11 +35,13 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_notice, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         imgvFilter = (ImageView) rootView.findViewById(R.id.imgvFilter);
         txtvType = (TextView) rootView.findViewById(R.id.txtvType);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
@@ -126,7 +129,7 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
             case R.id.imgvFilter:
                 showNoticeFilterDialog();
                 break;
-
         }
     }
+
 }

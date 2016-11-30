@@ -12,6 +12,14 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/user_name"
+            android:hint="이름을 입력하세요."
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="#747474"/>
+
+        <EditText
             android:inputType="textEmailAddress"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@."
             android:id="@+id/user_email"

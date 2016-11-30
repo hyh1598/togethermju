@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.R;
-import com.example.mathpresso.togethermju.model.User;
+
+import static com.example.mathpresso.togethermju.core.AppController.user;
 
 public class DetailRegisterActivity extends AppCompatActivity {
     @Override
@@ -30,7 +32,6 @@ public class DetailRegisterActivity extends AppCompatActivity {
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         majorSpinner.setAdapter(majorAdapter);
 
-        // majorSpinner.getSelectedItem().toString() 이용
         ArrayAdapter yearAdapter = ArrayAdapter.createFromResource(this, R.array.year,
                 android.R.layout.simple_spinner_item);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -60,27 +61,31 @@ public class DetailRegisterActivity extends AppCompatActivity {
         RadioButton maleButton = (RadioButton) findViewById(R.id.male_radio_button);
         RadioButton femaleButton = (RadioButton) findViewById(R.id.female_radio_button);
 
-        String userGender;
-        String userMajor = majorSpinner.getSelectedItem().toString();
-        int userYear = Integer.parseInt(yearSpinner.getSelectedItem().toString());
-        int userMonth = Integer.parseInt(monthSpinner.getSelectedItem().toString());
-        int userDay = Integer.parseInt(daySpinner.getSelectedItem().toString());
+        String gender;
+        String major = majorSpinner.getSelectedItem().toString();
+        String birth = yearSpinner.getSelectedItem().toString() + "." +
+                monthSpinner.getSelectedItem().toString() + "." +
+                daySpinner.getSelectedItem().toString();
 
-        if ((maleButton.isChecked() == true)) {
-            userGender = "남자";
+        if ((maleButton.isChecked() == true && femaleButton.isChecked() == false)) {
+            gender = "남자";
+
+            user.setMajor(major);
+            user.setBirth(birth);
+            user.setGender(gender);
+
+            startActivity(new Intent(this, FavoriteRegisterActivity.class));
+        } else if (femaleButton.isChecked() == true && maleButton.isChecked() == false) {
+            gender = "여자";
+
+            user.setMajor(major);
+            user.setBirth(birth);
+            user.setGender(gender);
+
+            startActivity(new Intent(this, FavoriteRegisterActivity.class));
         } else {
-            userGender = "여자";
+            Toast.makeText(this, "성별을 선택하세요.", Toast.LENGTH_SHORT).show();
         }
-
-
-        User user = new User();
-        user.setUserMajor(userMajor);
-        user.setUserYear(userYear);
-        user.setUserMonth(userMonth);
-        user.setUserDay(userDay);
-        user.setUserGender(userGender);
-
-        startActivity(new Intent(this, FavoriteRegisterActivity.class));
     }
 
 }

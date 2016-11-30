@@ -1,17 +1,28 @@
 package com.example.mathpresso.togethermju;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
+import com.example.mathpresso.togethermju.model.User;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.example.mathpresso.togethermju.core.AppController;
 
-public class LoginActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import static com.example.mathpresso.togethermju.core.AppController.user;
+
+
+public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +47,39 @@ public class LoginActivity extends AppCompatActivity {
             String userEmail = editUserEmailText.getText().toString();
             String userPassword = editUserPasswordText.getText().toString();
             Intent intent = new Intent(this,MainActivity.class);
+
+            userAuth(userEmail, userPassword);
+
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
             AppController.getInstance().setString("email",userEmail);
             finish();
         }
+    }
+
+    public void userAuth(String email, String password) {
+        Call<User> call = AppController.getInstance().getRestManager().getUserService().getUserAuth(email, password);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccess()) {
+                    AppController.user = response.body();
+                    Toast.makeText(getBaseContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show();
+                    Log.i("MY NAME", "MY NAME: " + user.getName());
+                    Log.i("MY EMAIL", "MY EMAIL: " + user.getEmail());
+                    Log.i("MY MAJOR", "MY MAJOR: " + user.getMajor());
+
+                } else {
+                    int statusCode = response.code();
+                    Log.i("MY TAG", "응답 코드: " + statusCode);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.i("MY TAG", "서버 onFailure 내용: " + t.getMessage());
+            }
+        });
     }
 }
