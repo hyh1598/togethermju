@@ -1,10 +1,12 @@
 package com.example.mathpresso.togethermju;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     private TextView txtvTitle;
     private TextView textViewContent;
     private LinearLayout btnWatch;
+
     private TextView txtvWatch;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         textViewContent = (TextView) findViewById(R.id.notice_detail_content);
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
+
+
 
 
         btnWatch.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +115,9 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
         //adapter.addItem(ContextCompat.getDrawable(this, ));
 
+    }
+    public void btnHomepage(View view){
+        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.mju.ac.kr")));
     }
 
     private void postWatchNotice(Notice notice) {
