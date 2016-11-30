@@ -24,15 +24,16 @@ public class NoticeFilterDialog extends Dialog implements View.OnClickListener {
     RelativeLayout btnVoluntary;
     RelativeLayout btnScholarship;
 
-    public static final int FILTER_ALL = 101;
-    public static final int FILTER_WORK = 102;
-    public static final int FILTER_CONTEST = 103;
-    public static final int FILTER_VOLUNTARY = 104;
-    public static final int FILTER_SCHOLARSHIP = 105;
+    //1: 취업 2:공모전 3:봉사 4:장학금 none : 그외 공지사항
+    public static final String FILTER_ALL = "none";
+    public static final String FILTER_WORK = "1";
+    public static final String FILTER_CONTEST = "2";
+    public static final String FILTER_VOLUNTARY = "3";
+    public static final String FILTER_SCHOLARSHIP = "3";
 
 
     interface OnSelectItemListener {
-        void OnClick(int type);
+        void OnClick(String type);
     }
 
     public NoticeFilterDialog(Context context, OnSelectItemListener listener) {

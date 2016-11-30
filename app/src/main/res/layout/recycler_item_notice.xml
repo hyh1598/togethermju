@@ -4,8 +4,8 @@
     android:id="@+id/expandable_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
     app:el_duration="300"
     app:el_expanded="false">
 
@@ -22,10 +22,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#f9ece9e9"
+        android:background="#f7f6f6"
         android:clipToPadding="false"
-        android:textColor="#fff"
         android:elevation="4dp"
+        android:textColor="#fff"
         app:layout_expandable="true">
 
         <TextView
@@ -33,18 +33,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"/>
-        <Button
+            android:layout_marginTop="10dp" />
+
+        <TextView
             android:id="@+id/btnGoToActv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="자세히 보기"
-            android:textSize="10sp"
-            />
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
     </RelativeLayout>
 
 </net.cachapa.expandablelayout.ExpandableLinearLayout>

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
+import com.example.mathpresso.togethermju.adapter.WatchedNoticeAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.example.mathpresso.togethermju.model.NoticeHelper;
@@ -29,7 +30,7 @@ import retrofit2.Response;
  */
 public class FavoriteFragment extends Fragment {
 
-    NoticeAdapter mAdapter;
+    WatchedNoticeAdapter mAdapter;
 
     @Nullable
     @Override
@@ -39,7 +40,7 @@ public class FavoriteFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        mAdapter = new NoticeAdapter(recyclerView, null, getActivity(), new NoticeAdapter.OnNoticeSelectedListener() {
+        mAdapter = new WatchedNoticeAdapter(recyclerView, null, getActivity(), new WatchedNoticeAdapter.OnNoticeSelectedListener() {
             @Override
             public void onSelect(Notice contest) {
                 Toast.makeText(getActivity(), contest.getTitle(), Toast.LENGTH_SHORT).show();

@@ -65,7 +65,7 @@ public class NoticeAdapter extends CustomAdapter<Notice, NoticeAdapter.ViewHolde
         private ExpandableLinearLayout expandableLayout;
         private TextView expandButton;
         private TextView txtvContent;
-        private Button btnGoToActv;
+        private TextView btnGoToActv;
 
 
         public ViewHolder(View itemView) {
@@ -74,7 +74,7 @@ public class NoticeAdapter extends CustomAdapter<Notice, NoticeAdapter.ViewHolde
             expandableLayout = (ExpandableLinearLayout) itemView.findViewById(R.id.expandable_layout);
             expandButton = (TextView) itemView.findViewById(R.id.expand_button);
             txtvContent = (TextView) itemView.findViewById(R.id.txtvContent);
-            btnGoToActv = (Button) itemView.findViewById(R.id.btnGoToActv);
+            btnGoToActv = (TextView) itemView.findViewById(R.id.btnGoToActv);
 
             expandButton.setOnClickListener(this);
             expandButton.setFocusableInTouchMode(true);

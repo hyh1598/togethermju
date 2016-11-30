@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">myongether</string>
+    <string name="app_name">myongetogether</string>
 
     <!-- Toast Message -->
     <string name="toast_message_failed_load_data">데이터를 불러올 수 없습니다.</string>
