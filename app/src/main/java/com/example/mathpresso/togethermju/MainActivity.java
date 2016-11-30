@@ -15,7 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.mathpresso.togethermju.core.AppController;
+import com.google.android.gms.vision.text.Text;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final String[] TAB_TITLES = {
@@ -35,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         initializeLayout();
-
     }
 
     private void initializeLayout(){
@@ -47,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         View view = LayoutInflater.from(this).inflate(R.layout.drawer_header, null);
+
+        TextView emailTextView = (TextView)view.findViewById(R.id.email_text_view);
+        TextView nameTextView = (TextView)view.findViewById(R.id.name_text_view);
+
+        emailTextView.setText("이메일: " + AppController.user.getEmail());
+        nameTextView.setText("이름: " + AppController.user.getName());
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);

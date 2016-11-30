@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class User {
 
-    public static final String PROJECT_NUMER = "743118472391";
+    public static final String PROJECT_NUMBER = "743118472391";
     String rid;
     String email;
     String password;
@@ -25,7 +25,8 @@ public class User {
     public String getName() {
         return this.name;
     }
-    public String setRID(String rid) {
+
+    public String setRid(String rid) {
         this.rid = rid;
         return this.rid;
     }

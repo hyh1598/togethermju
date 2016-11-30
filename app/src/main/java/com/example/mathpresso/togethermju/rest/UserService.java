@@ -15,11 +15,15 @@ import retrofit2.http.Query;
 
 public interface UserService {
     //FIXME /noticelist
-    @GET("useradd/")
+    @GET("useradd")
     Call<User> getUserInformation(@Query("email")String Email,
                                  @Query("name")String Name,
                                  @Query("rid")String RID,
                                  @Query("birth")String Birth,
                                  @Query("major")String Major,
                                  @Query("password")String Password);
+
+    @GET("userverify")
+    Call<User> getUserAuth(@Query("email")String Email,
+                           @Query("password")String password);
 }

@@ -24,18 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.mathpresso.togethermju.core.AppController.user;
+
 
 public class FavoriteRegisterActivity extends AppCompatActivity {
-    GoogleCloudMessaging gcm;
-    private GoogleApiClient mGoogleApiClient;
-
-    //FIXME user
-    User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_register);
 
@@ -51,9 +46,11 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccess()) {
 
+                    Log.d("jsondata",String.valueOf(response.message()));
                     Toast.makeText(getBaseContext(), "가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     int statusCode = response.code();
+                    Log.d("jsondata",String.valueOf(response.body()));
                     Log.i("MY TAG", "응답 코드: " + statusCode);
                 }
             }
@@ -61,7 +58,6 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.i("MY TAG", "서버 onFailure 내용: " + t.getMessage());
-
             }
         });
     }
@@ -77,7 +73,6 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         CheckBox contest_checkbox = (CheckBox) findViewById(R.id.contest_checkbox);
 
         ArrayList<String> checkList = new ArrayList<String>();
-        new RegisterTask().execute(null, null, null);
 
         if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
@@ -204,46 +199,5 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "관심사를 선택해주세요.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    class RegisterTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected void onPreExecute() {}
-
-        @Override
-        protected String doInBackground(Void... params) {
-            String string;
-
-            try {
-                if (gcm == null) gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-                user.setRID(gcm.register(User.PROJECT_NUMER));
-                Log.i("haha", "ID: " + user.getRid());
-                string = "DEVICE REGISTERED, REGISTER ID IS\n" + user.getRid();
-            } catch (IOException e) {
-                string = "ERROR" + e.getMessage();
-            }
-            return string;
-        }
-
-        @Override
-        protected void onPostExecute(String msg) {}
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
-        mGoogleApiClient.connect();
-    }
-    @Override
-    protected void onStop() {
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.disconnect();
-        }
-        super.onStop();
     }
 }

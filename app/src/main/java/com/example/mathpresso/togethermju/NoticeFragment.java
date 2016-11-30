@@ -37,7 +37,9 @@ public class NoticeFragment extends Fragment implements View.OnClickListener{
     NoticeAdapter mAdapter;
     ImageView imgvFilter;
     @Nullable
+    /*
     @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_notice, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -61,9 +63,9 @@ public class NoticeFragment extends Fragment implements View.OnClickListener{
 
         loadNotices();
         return rootView;
+
     }
-
-
+*/
 
     private void loadNotices() {
         AppController.getInstance().getRestManager().getNoticeService().getNotices()
