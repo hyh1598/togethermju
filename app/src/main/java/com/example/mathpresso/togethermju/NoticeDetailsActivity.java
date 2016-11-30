@@ -53,6 +53,7 @@ public class NoticeDetailsActivity extends AppCompatActivity{
             public void onClick(View view) {
                 if(tb.isChecked()){
                     tb.setTextColor(Color.BLUE);
+
                     //서버로 watch +1
                 }else{
                     tb.setTextColor(Color.RED);
