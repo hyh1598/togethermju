@@ -32,7 +32,7 @@ public class GroupFragment extends Fragment {
         //add mock data
         ArrayList<Group> items = new ArrayList<>();
 
-        mAdapter = new GroupAdapter(recyclerView, items, getActivity(), new GroupAdapter.OnGroupSelectedListener() {
+        mAdapter = new GroupAdapter(items, getActivity(), new GroupAdapter.OnGroupSelectedListener() {
             @Override
             public void onSelect(Group group) {
                 Toast.makeText(getActivity(),group.getName(),Toast.LENGTH_SHORT).show();

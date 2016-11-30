@@ -3,19 +3,24 @@ package com.example.mathpresso.togethermju;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.RegisterActivity.GroupResiterActivity;
+import com.example.mathpresso.togethermju.adapter.GroupAdapter;
 import com.example.mathpresso.togethermju.adapter.ListViewAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
+import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.melnykov.fab.FloatingActionButton;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +33,9 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     private TextView textViewContent;
     private LinearLayout btnWatch;
     private TextView txtvWatch;
+
+    GroupAdapter mAdapter;
+    RecyclerView recyclerView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +52,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         textViewContent = (TextView) findViewById(R.id.notice_detail_content);
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
-
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         btnWatch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,19 +94,28 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         // Adapter 생성
         adapter = new ListViewAdapter();
 
+        mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
+            @Override
+            public void onSelect(Group group) {
 
-        // 리스트뷰 참조 및 Adapter달기
-        listview = (ListView) findViewById(R.id.listview);
-        listview.setAdapter(adapter);
+            }
+        });
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(mAdapter);
+
+//        // 리스트뷰 참조 및 Adapter달기
+//        listview = (ListView) findViewById(R.id.listview);
+//        listview.setAdapter(adapter);
         //ListView listView = (ListView) findViewById(android.R.id.list);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.attachToListView(listview);
+//        fab.attachToListView(listview);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
 
                 // 액티비티 전환 코드
                 Intent intent = new Intent(getApplicationContext(), GroupResiterActivity.class);
@@ -107,9 +124,30 @@ public class NoticeDetailsActivity extends AppCompatActivity {
             }
         });
 
+        loadNoticeGroupList(notice.getNoticeSeq());
+
 
         //adapter.addItem(ContextCompat.getDrawable(this, ));
 
+    }
+
+    private void loadNoticeGroupList(String id) {
+        //FIXME id값으로 바꿔야함
+        AppController.getInstance().getRestManager().getGroupService().getNoticeGroup("65532578")
+                .enqueue(new Callback<List<Group>>() {
+                    @Override
+                    public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
+                        if (response.isSuccess()) {
+                            mAdapter.clear();
+                            mAdapter.add(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Group>> call, Throwable t) {
+
+                    }
+                });
     }
 
     private void postWatchNotice(Notice notice) {
