@@ -3,6 +3,8 @@ package com.example.mathpresso.togethermju;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -46,15 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             String userEmail = editUserEmailText.getText().toString();
             String userPassword = editUserPasswordText.getText().toString();
-            Intent intent = new Intent(this,MainActivity.class);
 
             userAuth(userEmail, userPassword);
 
-            startActivity(intent);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-
-            AppController.getInstance().setString("email",userEmail);
-            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -66,10 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccess()) {
                     AppController.user = response.body();
                     Toast.makeText(getBaseContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show();
-                    Log.i("MY NAME", "MY NAME: " + user.getName());
-                    Log.i("MY EMAIL", "MY EMAIL: " + user.getEmail());
-                    Log.i("MY MAJOR", "MY MAJOR: " + user.getMajor());
-
                 } else {
                     int statusCode = response.code();
                     Log.i("MY TAG", "응답 코드: " + statusCode);

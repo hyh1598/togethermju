@@ -7,7 +7,7 @@
     android:layout_marginTop="30dp">
 
     <ImageView
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
         android:background="#FFFFFF"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -37,6 +37,4 @@
             android:textStyle="bold"
             android:textSize="13sp" />
     </LinearLayout>
-
-
 </LinearLayout>

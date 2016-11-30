@@ -47,12 +47,9 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccess()) {
-
-                    Log.d("jsondata",String.valueOf(response.message()));
                     Toast.makeText(getBaseContext(), "가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     int statusCode = response.code();
-                    Log.d("jsondata",String.valueOf(response.body()));
                     Log.i("MY TAG", "응답 코드: " + statusCode);
                 }
             }

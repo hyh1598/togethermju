@@ -15,7 +15,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +28,9 @@
         <activity android:name=".RegisterActivity.DetailRegisterActivity" />
         <activity android:name=".RegisterActivity.FavoriteRegisterActivity" />
         <activity android:name=".StartMainActivity" />
-        <activity android:name=".NoticeDetailsActivity"></activity>
-        <activity android:name=".RegisterActivity.GroupResiterActivity"></activity>
+        <activity android:name=".NoticeDetailsActivity" />
+        <activity android:name=".RegisterActivity.GroupResiterActivity" />
+        <activity android:name=".UserEditActivity"></activity>
     </application>
 
 </manifest>

@@ -26,4 +26,11 @@ public interface UserService {
     @GET("userverify")
     Call<User> getUserAuth(@Query("email")String Email,
                            @Query("password")String password);
+
+    @GET("useredit")
+    Call<User> editUserInformation(@Query("email")String Email,
+                                  @Query("name")String Name,
+                                  @Query("birth")String Birth,
+                                  @Query("major")String Major,
+                                  @Query("password")String Password);
 }

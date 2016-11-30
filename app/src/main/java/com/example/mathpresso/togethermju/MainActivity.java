@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -73,8 +74,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_item_setting:
-                Toast.makeText(this,"move to setting activity",Toast.LENGTH_SHORT).show();
+            case R.id.menu_setting:
+                break;
+            case R.id.menu_edit:
+                startActivity(new Intent(this, UserEditActivity.class));
                 break;
         }
         return false;
