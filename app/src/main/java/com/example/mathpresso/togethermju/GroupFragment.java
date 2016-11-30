@@ -19,6 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by choijinjoo on 2016. 11. 9..
  */
+
 public class GroupFragment extends Fragment {
     GroupAdapter mAdapter;
     @Nullable

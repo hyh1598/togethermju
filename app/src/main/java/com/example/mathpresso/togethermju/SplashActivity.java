@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.example.mathpresso.togethermju.core.AppController;
 
 public class SplashActivity extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, StartMainActivity.class);
                     startActivity(intent);
                     finish();
                 }

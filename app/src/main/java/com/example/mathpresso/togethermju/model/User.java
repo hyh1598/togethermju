@@ -1,97 +1,89 @@
 package com.example.mathpresso.togethermju.model;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
-
 import java.util.ArrayList;
 
 /**
  * Created by donghyuk on 2016. 11. 17..
  */
-@DatabaseTable(tableName = "user")
 public class User {
-    @DatabaseField
-    String userEmail;
-    String userPassword;
-    String userGender;
-    int userYear;
-    int userMonth;
-    int userDay;
-    String userMajor;
-    ArrayList<String> userFavorite;
+    String rid;
+    String email;
+    String password;
+    String gender;
+    String birth;
+    String major;
+    String name;
+    ArrayList<String> interest;
 
-    public User() {
+    public String setName(String name) {
+        this.name = name;
+        return this.name;
     }
 
-    public String setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-        return this.userEmail;
+    public String getName() {
+        return this.name;
     }
 
-    public String getUserEmail() {
-        return this.userEmail;
+    public String setRid(String rid) {
+        this.rid = rid;
+        return this.rid;
     }
 
-    public String setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-        return this.userPassword;
+    public String getRid() {
+        return this.rid;
     }
 
-    public String getUserPassword() {
-        return this.userPassword;
+    public String setEmail(String email) {
+        this.email = email;
+        return this.email;
     }
 
-    public String setUserGender(String userSex) {
-        this.userGender = userSex;
-        return this.userGender;
+    public String getEmail() {
+        return this.email;
     }
 
-    public String getUserGender() {
-        return this.userGender;
+    public String setPassword(String password) {
+        this.password = password;
+        return this.password;
     }
 
-    public int setUserYear(int userYear) {
-        this.userYear = userYear;
-        return this.userYear;
+    public String getPassword() {
+        return this.password;
     }
 
-    public int getUserYear() {
-        return this.userYear;
+    public String setGender(String gender) {
+        this.gender = this.gender;
+        return this.gender;
     }
 
-    public int setUserMonth(int userMonth) {
-        this.userMonth = userMonth;
-        return this.userMonth;
+    public String getGender() {
+        return this.gender;
     }
 
-    public int getUserMonth() {
-        return this.userMonth;
+    public String setBirth(String birth) {
+        this.birth = birth;
+        return this.birth;
     }
 
-    public int setUserDay(int userDay) {
-        this.userDay = userDay;
-        return this.userDay;
+    public String getBirth() {
+        return this.birth;
     }
 
-    public int getUserDay() {
-        return this.userDay;
+    public String setMajor(String major) {
+        this.major = major;
+        return this.major;
     }
 
-    public String setUserMajor(String userMajor) {
-        this.userMajor = userMajor;
-        return this.userMajor;
+    public String getMajor() {
+        return this.major;
     }
 
-    public String getUserMajor() {
-        return this.userMajor;
+    public ArrayList<String> setFavorite(ArrayList<String> interest) {
+        this.interest = interest;
+        return this.interest;
     }
 
-    public ArrayList<String> setUserFavorite(ArrayList<String> userFavorite) {
-        this.userFavorite = userFavorite;
-        return this.userFavorite;
-    }
-
-    public ArrayList<String> getUserFavorite() {
-        return this.userFavorite;
+    public ArrayList<String> getFavorite() {
+        return this.interest;
     }
 }

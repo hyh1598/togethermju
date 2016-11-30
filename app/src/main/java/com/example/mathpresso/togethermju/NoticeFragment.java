@@ -10,16 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
-import com.example.mathpresso.togethermju.adapter.WatchedNoticeAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
-import com.example.mathpresso.togethermju.model.NoticeHelper;
-import com.j256.ormlite.stmt.query.Not;
-
 
 import java.util.List;
 
@@ -34,13 +31,17 @@ import retrofit2.Response;
 public class NoticeFragment extends Fragment implements View.OnClickListener {
     NoticeAdapter mAdapter;
     ImageView imgvFilter;
+    TextView txtvType;
 
     @Nullable
     @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_notice, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         imgvFilter = (ImageView) rootView.findViewById(R.id.imgvFilter);
+        txtvType = (TextView) rootView.findViewById(R.id.txtvType);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
@@ -50,7 +51,7 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), notice.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), NoticeDetailsActivity.class);
 
-                intent.putExtra("notice",notice);
+                intent.putExtra("notice", notice);
                 startActivity(intent);
             }
         });
@@ -101,6 +102,23 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
 
                             }
                         });
+                switch (type) {
+                    case NoticeFilterDialog.FILTER_ALL:
+                        txtvType.setText("전체보기");
+                        break;
+                    case NoticeFilterDialog.FILTER_CONTEST:
+                        txtvType.setText("공모전");
+                        break;
+                    case NoticeFilterDialog.FILTER_SCHOLARSHIP:
+                        txtvType.setText("장학금");
+                        break;
+                    case NoticeFilterDialog.FILTER_VOLUNTARY:
+                        txtvType.setText("봉사활동");
+                        break;
+                    case NoticeFilterDialog.FILTER_WORK:
+                        txtvType.setText("취업");
+                        break;
+                }
             }
         }).show();
     }
@@ -111,7 +129,7 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
             case R.id.imgvFilter:
                 showNoticeFilterDialog();
                 break;
-
         }
     }
+
 }

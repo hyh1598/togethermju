@@ -17,7 +17,6 @@ public class AppController extends Application {
     private DatabaseManager mDatabaseManager;
     private SharedPreferences sharedPref;
     private Retrofit mRetrofit;
-
     public static User user = new User();
 
     private static final String baseUrl = "http://125.130.223.88:8000/mju/";

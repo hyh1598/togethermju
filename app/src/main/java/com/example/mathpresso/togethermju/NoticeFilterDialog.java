@@ -29,7 +29,7 @@ public class NoticeFilterDialog extends Dialog implements View.OnClickListener {
     public static final String FILTER_WORK = "1";
     public static final String FILTER_CONTEST = "2";
     public static final String FILTER_VOLUNTARY = "3";
-    public static final String FILTER_SCHOLARSHIP = "3";
+    public static final String FILTER_SCHOLARSHIP = "4";
 
 
     interface OnSelectItemListener {

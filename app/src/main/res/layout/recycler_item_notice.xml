@@ -12,12 +12,12 @@
     <TextView
         android:id="@+id/expand_button"
         android:layout_width="match_parent"
-        android:textSize="12sp"
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_background"
         android:elevation="6dp"
         android:foreground="?selectableItemBackground"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textSize="12sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,8 +32,9 @@
             android:id="@+id/txtvContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/btnGoToActv"
@@ -44,9 +45,9 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:text="자세히 보기"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </net.cachapa.expandablelayout.ExpandableLinearLayout>
