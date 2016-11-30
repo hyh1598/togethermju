@@ -67,4 +67,9 @@ public class AppController extends Application {
     public String getStringValue(String key, String defaultValue) {
         return sharedPref.getString(key, defaultValue);
     }
+    public void clearLocalStore(){
+        SharedPreferences.Editor spEditor = sharedPref.edit();
+        spEditor.remove("email");
+        spEditor.commit();
+    }
 }

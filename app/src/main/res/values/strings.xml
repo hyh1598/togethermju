@@ -5,6 +5,7 @@
     <string name="toast_message_failed_load_data">데이터를 불러올 수 없습니다.</string>
     <!-- Menu item -->
     <string name="menu_item_setting">설정</string>
+    <string name="menu_item_logout">로그아웃</string>
     <!-- drawer string -->
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>

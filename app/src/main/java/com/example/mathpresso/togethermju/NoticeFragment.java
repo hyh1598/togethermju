@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
+import com.example.mathpresso.togethermju.adapter.WatchedNoticeAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.example.mathpresso.togethermju.model.NoticeHelper;
@@ -30,7 +31,7 @@ import retrofit2.Response;
  * Created by choijinjoo on 2016. 11. 9..
  */
 public class NoticeFragment extends Fragment implements View.OnClickListener{
-    NoticeAdapter mAdapter;
+    WatchedNoticeAdapter mAdapter;
     ImageView imgvFilter;
     @Nullable
     @Override
@@ -40,7 +41,7 @@ public class NoticeFragment extends Fragment implements View.OnClickListener{
         imgvFilter = (ImageView)rootView.findViewById(R.id.imgvFilter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mAdapter = new NoticeAdapter(recyclerView, null, getActivity(), new NoticeAdapter.OnNoticeSelectedListener() {
+        mAdapter = new WatchedNoticeAdapter(recyclerView, null, getActivity(), new WatchedNoticeAdapter.OnNoticeSelectedListener() {
             @Override
             public void onSelect(Notice contest) {
                 Toast.makeText(getActivity(), contest.getTitle(), Toast.LENGTH_SHORT).show();
