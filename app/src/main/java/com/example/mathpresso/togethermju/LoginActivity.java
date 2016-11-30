@@ -10,17 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
-import com.example.mathpresso.togethermju.model.User;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.location.LocationServices;
+import com.example.mathpresso.togethermju.core.AppController;
 
-import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
-    private GoogleApiClient mGoogleApiClient;
-    GoogleCloudMessaging gcm;
-
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
 
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+            AppController.getInstance().setString("email",userEmail);
             finish();
         }
     }

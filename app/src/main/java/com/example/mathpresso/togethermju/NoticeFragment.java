@@ -9,12 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.AdapterView;
+
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
+import com.example.mathpresso.togethermju.model.NoticeHelper;
 
 
 import java.util.List;
@@ -27,14 +33,15 @@ import retrofit2.Response;
 /**
  * Created by choijinjoo on 2016. 11. 9..
  */
-public class NoticeFragment extends Fragment {
+public class NoticeFragment extends Fragment implements View.OnClickListener{
     NoticeAdapter mAdapter;
-
+    ImageView imgvFilter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_notice, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        //imgvFilter = (ImageView)rootView.findViewById(R.id.imgvFilter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
@@ -49,6 +56,8 @@ public class NoticeFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(mAdapter);
+
+        imgvFilter.setOnClickListener(this);
 
         loadNotices();
         return rootView;
@@ -65,13 +74,23 @@ public class NoticeFragment extends Fragment {
 
                             mAdapter.clear();
                             mAdapter.add(response.body());
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<Notice>> call, Throwable t) {
-                        Toast.makeText(getContext(), R.string.toast_message_failed_load_data, Toast.LENGTH_SHORT).show();
+
                     }
                 });
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+          //  case R.id.imgvFilter:
+              //  break;
+        }
+    }
+
 }

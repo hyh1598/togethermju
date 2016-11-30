@@ -5,86 +5,86 @@ import java.util.ArrayList;
 /**
  * Created by donghyuk on 2016. 11. 17..
  */
-
 public class User {
-    public static final String PROJECT_NUMER = "743118472391";
-    String RID;
-    String Email;
-    String Password;
-    String Gender;
-    String Birth;
-    String Major;
-    String Name;
-    ArrayList<String> Interest;
 
-    public String setName(String Name) {
-        this.Name = Name;
-        return this.Name;
+    public static final String PROJECT_NUMER = "743118472391";
+    String rid;
+    String email;
+    String password;
+    String gender;
+    String birth;
+    String major;
+    String name;
+    ArrayList<String> interest;
+
+    public String setName(String name) {
+        this.name = name;
+        return this.name;
     }
 
     public String getName() {
-        return this.Name;
+        return this.name;
     }
-    public String setRID(String RID) {
-        this.RID = RID;
-        return this.RID;
-    }
-
-    public String getRID() {
-        return this.RID;
+    public String setRID(String rid) {
+        this.rid = rid;
+        return this.rid;
     }
 
-    public String setEmail(String Email) {
-        this.Email = Email;
-        return this.Email;
+    public String getRid() {
+        return this.rid;
+    }
+
+    public String setEmail(String email) {
+        this.email = email;
+        return this.email;
     }
 
     public String getEmail() {
-        return this.Email;
+        return this.email;
     }
 
-    public String setPassword(String Password) {
-        this.Password = Password;
-        return this.Password;
+    public String setPassword(String password) {
+        this.password = password;
+        return this.password;
     }
 
     public String getPassword() {
-        return this.Password;
+        return this.password;
     }
 
     public String setGender(String gender) {
-        this.Gender = Gender;
-        return this.Gender;
+        this.gender = this.gender;
+        return this.gender;
     }
 
     public String getGender() {
-        return this.Gender;
+        return this.gender;
     }
 
-    public String setBirth(String Birth) {
-        this.Birth = Birth;
-        return this.Birth;
+    public String setBirth(String birth) {
+        this.birth = birth;
+        return this.birth;
     }
 
     public String getBirth() {
-        return this.Birth;
+        return this.birth;
     }
 
-    public String setMajor(String Major) {
-        this.Major = Major;
-        return this.Major;
+    public String setMajor(String major) {
+        this.major = major;
+        return this.major;
     }
 
     public String getMajor() {
-        return this.Major;
+        return this.major;
     }
 
-    public ArrayList<String> setFavorite(ArrayList<String> Interest) {
-        this.Interest = Interest;
-        return this.Interest;
+    public ArrayList<String> setFavorite(ArrayList<String> interest) {
+        this.interest = interest;
+        return this.interest;
     }
 
     public ArrayList<String> getFavorite() {
-        return this.Interest;
+        return this.interest;
     }
 }

@@ -61,26 +61,26 @@ public class DetailRegisterActivity extends AppCompatActivity {
         RadioButton maleButton = (RadioButton) findViewById(R.id.male_radio_button);
         RadioButton femaleButton = (RadioButton) findViewById(R.id.female_radio_button);
 
-        String Gender;
-        String Major = majorSpinner.getSelectedItem().toString();
-        String Birth = yearSpinner.getSelectedItem().toString() + "." +
+        String gender;
+        String major = majorSpinner.getSelectedItem().toString();
+        String birth = yearSpinner.getSelectedItem().toString() + "." +
                 monthSpinner.getSelectedItem().toString() + "." +
                 daySpinner.getSelectedItem().toString();
 
         if ((maleButton.isChecked() == true && femaleButton.isChecked() == false)) {
-            Gender = "남자";
+            gender = "남자";
 
-            user.setMajor(Major);
-            user.setBirth(Birth);
-            user.setGender(Gender);
+            user.setMajor(major);
+            user.setBirth(birth);
+            user.setGender(gender);
 
             startActivity(new Intent(this, FavoriteRegisterActivity.class));
         } else if (femaleButton.isChecked() == true && maleButton.isChecked() == false) {
-            Gender = "여자";
+            gender = "여자";
 
-            user.setMajor(Major);
-            user.setBirth(Birth);
-            user.setGender(Gender);
+            user.setMajor(major);
+            user.setBirth(birth);
+            user.setGender(gender);
 
             startActivity(new Intent(this, FavoriteRegisterActivity.class));
         } else {

@@ -44,7 +44,8 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
 
 
     public void postUser() {
-        Call<User> call = AppController.getInstance().getRestManager().getNetworkService().post_user(user);
+        Call<User> call = AppController.getInstance().getRestManager().getUserService().getUserInformation(user.getEmail(),
+                user.getName(), user.getRid(), user.getBirth(), user.getMajor(), user.getPassword());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -216,8 +217,8 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             try {
                 if (gcm == null) gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
                 user.setRID(gcm.register(User.PROJECT_NUMER));
-                Log.i("haha", "ID: " + user.getRID());
-                string = "DEVICE REGISTERED, REGISTER ID IS\n" + user.getRID();
+                Log.i("haha", "ID: " + user.getRid());
+                string = "DEVICE REGISTERED, REGISTER ID IS\n" + user.getRid();
             } catch (IOException e) {
                 string = "ERROR" + e.getMessage();
             }

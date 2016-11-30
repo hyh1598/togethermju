@@ -42,13 +42,13 @@ public class EmailRegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else if (editUserPasswordText.getText().toString().equals(editCheckUserPasswordText.getText().toString())) {
             //FIXME user data
-            String Email = editUserEmailText.getText().toString();
-            String Password = editUserPasswordText.getText().toString();
-            String Name = editUserNameText.getText().toString();
+            String email = editUserEmailText.getText().toString();
+            String password = editUserPasswordText.getText().toString();
+            String name = editUserNameText.getText().toString();
 
-            user.setName(Name);
-            user.setEmail(Email);
-            user.setPassword(Password);
+            user.setName(name);
+            user.setEmail(email);
+            user.setPassword(password);
 
             startActivity(new Intent(this, DetailRegisterActivity.class));
         } else if ((editUserPasswordText.getText().toString()) != (editCheckUserPasswordText.getText().toString())) {
