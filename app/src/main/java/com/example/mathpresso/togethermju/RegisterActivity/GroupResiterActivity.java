@@ -1,12 +1,19 @@
 package com.example.mathpresso.togethermju.RegisterActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.mathpresso.togethermju.R;
+import com.example.mathpresso.togethermju.model.Group;
+
+import static com.example.mathpresso.togethermju.R.id.back_button;
+import static com.example.mathpresso.togethermju.R.id.btn_cancel;
 
 public class GroupResiterActivity extends AppCompatActivity {
 
@@ -19,9 +26,33 @@ public class GroupResiterActivity extends AppCompatActivity {
 
         Spinner personnelSpinner = (Spinner) findViewById(R.id.personnel_spinner);
         EditText title = (EditText) findViewById(R.id.input_title);
-        EditText pupose = (EditText) findViewById(R.id.input_purpose);
+        EditText purpose = (EditText) findViewById(R.id.input_purpose);
         EditText content = (EditText) findViewById(R.id.input_content);
         Button finish = (Button) findViewById(R.id.btn_finish);
-        Button cancel = (Button) findViewById(R.id.btn_cancel);
+        Button cancel = (Button) findViewById(btn_cancel);
+        ArrayAdapter personnelAdapter = ArrayAdapter.createFromResource(this, R.array.personnel,
+                android.R.layout.simple_spinner_item);
+        personnelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        personnelSpinner.setAdapter(personnelAdapter);
+        int personnel = Integer.parseInt(personnelSpinner.getSelectedItem().toString());
+
+
+        Group group = new Group();
+
+        cancel.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        finish.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+
+            }
+        });
     }
 }

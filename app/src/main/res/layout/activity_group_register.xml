@@ -48,7 +48,7 @@
                 android:id="@+id/input_purpose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:hint="purpose" />
         </android.support.design.widget.TextInputLayout>
 
@@ -61,7 +61,7 @@
                 android:id="@+id/input_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:hint="content" />
         </android.support.design.widget.TextInputLayout>
         <TextView
