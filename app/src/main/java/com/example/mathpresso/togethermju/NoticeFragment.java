@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import android.widget.Toast;
-
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
@@ -48,9 +46,7 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
         mAdapter = new NoticeAdapter(recyclerView, null, getActivity(), new NoticeAdapter.OnNoticeSelectedListener() {
             @Override
             public void onSelect(Notice notice) {
-                Toast.makeText(getActivity(), notice.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), NoticeDetailsActivity.class);
-
                 intent.putExtra("notice", notice);
                 startActivity(intent);
             }

@@ -2,8 +2,9 @@ package com.example.mathpresso.togethermju;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,15 +14,22 @@ import android.widget.ToggleButton;
 
 import com.example.mathpresso.togethermju.RegisterActivity.GroupResiterActivity;
 import com.example.mathpresso.togethermju.adapter.ListViewAdapter;
+import com.example.mathpresso.togethermju.core.AppController;
+import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.melnykov.fab.FloatingActionButton;
 
-public class NoticeDetailsActivity extends AppCompatActivity{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class NoticeDetailsActivity extends AppCompatActivity {
     ListView listview;
     ListViewAdapter adapter;
     private TextView textViewTitle;
     private TextView textViewContent;
     private Button watch;
+    ToggleButton tb;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,16 +38,56 @@ public class NoticeDetailsActivity extends AppCompatActivity{
 
 
         Intent intent = getIntent();
-        Notice notice = (Notice) intent.getSerializableExtra("notice");
+        final Notice notice = (Notice) intent.getSerializableExtra("notice");
         String title = notice.getTitle();
         String content = notice.getContent();
 
         textViewTitle = (TextView) findViewById(R.id.notice_detail_title);
         textViewContent = (TextView) findViewById(R.id.notice_detail_content);
         watch = (Button) findViewById(R.id.watch);
+        tb = (ToggleButton) this.findViewById(R.id.watch);
+
+        tb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tb.isChecked()) {
+                    tb.setTextColor(Color.BLUE);
+                    postWatchNotice(notice);
+                    //서버로 watch +1
+                } else {
+                    tb.setTextColor(Color.RED);
+                    postWatchNotice(notice);
+                    //서버로 watch값 -1
+                }
+            }
+        });
+
         textViewTitle.setText(title);
         textViewContent.setText(content);
-        final ToggleButton tb = (ToggleButton)this.findViewById(R.id.watch);
+        String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
+
+        AppController.getInstance().getRestManager().getNoticeService().watchNotice("hardho@naver.com", notice.getNoticeSeq())
+                .enqueue(new Callback<DefaultResponse>() {
+                    @Override
+                    public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+                        if (response.isSuccess()) {
+                            if (response.body().getResult().equals("watch")) {
+                                tb.setSelected(true);
+                                tb.setText("WATCH");
+
+
+                            } else {
+                                tb.setSelected(false);
+                                tb.setText("UNWATCH");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                        Log.d("watch",t.toString());
+                    }
+                });
         // Adapter 생성
         adapter = new ListViewAdapter();
 
@@ -48,19 +96,7 @@ public class NoticeDetailsActivity extends AppCompatActivity{
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
         //ListView listView = (ListView) findViewById(android.R.id.list);
-        tb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(tb.isChecked()){
-                    tb.setTextColor(Color.BLUE);
 
-                    //서버로 watch +1
-                }else{
-                    tb.setTextColor(Color.RED);
-                    //서버로 watch값 -1
-                }
-            }
-        });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.attachToListView(listview);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,5 +115,25 @@ public class NoticeDetailsActivity extends AppCompatActivity{
 
         //adapter.addItem(ContextCompat.getDrawable(this, ));
 
+    }
+    private void postWatchNotice(Notice notice){
+        AppController.getInstance().getRestManager().getNoticeService().watchNotice("hardho@naver.com", notice.getNoticeSeq())
+            .enqueue(new Callback<DefaultResponse>() {
+                @Override
+                public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+                    if(response.isSuccess()){
+                        if(response.body().getResult().equals("watch")){
+                            tb.setSelected(true);
+                        }else{
+                            tb.setSelected(false);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DefaultResponse> call, Throwable t) {
+
+                }
+            });
     }
 }

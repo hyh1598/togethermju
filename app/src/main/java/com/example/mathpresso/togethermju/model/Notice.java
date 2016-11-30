@@ -14,7 +14,7 @@ import java.io.Serializable;
 @DatabaseTable(tableName = "notice")
 public class Notice implements Serializable {
     @DatabaseField
-    private int id;
+    private String noticeSeq;
     @DatabaseField
     private String tag;
     @DatabaseField
@@ -25,16 +25,21 @@ public class Notice implements Serializable {
     public Notice() {
     }
 
-    public int getId() {
-        return id;
+    public String getNoticeSeq() {
+        return noticeSeq;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNoticeSeq(String noticeSeq) {
+        this.noticeSeq = noticeSeq;
     }
-    public String getTag() { return tag; }
 
-    public void setTag(String tag) { this.tag = tag; }
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public String getTitle() {
         return title;
