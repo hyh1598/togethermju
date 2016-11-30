@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mathpresso.togethermju">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
@@ -24,6 +25,8 @@
         <activity android:name=".RegisterActivity.DetailRegisterActivity" />
         <activity android:name=".RegisterActivity.FavoriteRegisterActivity" />
         <activity android:name=".StartMainActivity" />
+        <activity android:name=".NoticeDetailsActivity"></activity>
+        <activity android:name=".RegisterActivity.GroupResiterActivity"></activity>
     </application>
 
 </manifest>

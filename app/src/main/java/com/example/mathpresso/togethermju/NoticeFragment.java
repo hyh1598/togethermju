@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,10 +43,15 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
         imgvFilter = (ImageView) rootView.findViewById(R.id.imgvFilter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
         mAdapter = new NoticeAdapter(recyclerView, null, getActivity(), new NoticeAdapter.OnNoticeSelectedListener() {
             @Override
-            public void onSelect(Notice contest) {
-                Toast.makeText(getActivity(), contest.getTitle(), Toast.LENGTH_SHORT).show();
+            public void onSelect(Notice notice) {
+                Toast.makeText(getActivity(), notice.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), NoticeDetailsActivity.class);
+
+                intent.putExtra("notice",notice);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(mAdapter);
@@ -62,6 +68,7 @@ public class NoticeFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(Call<List<Notice>> call, Response<List<Notice>> response) {
                         if (response.isSuccess()) {
+
                             mAdapter.clear();
                             mAdapter.add(response.body());
 
