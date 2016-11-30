@@ -10,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
-import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
 import com.example.mathpresso.togethermju.adapter.WatchedNoticeAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.example.mathpresso.togethermju.model.NoticeHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -53,8 +50,9 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void loadWatchedNotice() {
-        String email = AppController.getInstance().getStringValue("email", "");
-        AppController.getInstance().getRestManager().getNoticeService().getWatchednotices(email)
+        // test data "hardho@naver.com"
+        String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
+        AppController.getInstance().getRestManager().getNoticeService().getWatchednotices("hardho@naver.com")
                 .enqueue(new Callback<List<Notice>>() {
                     @Override
                     public void onResponse(Call<List<Notice>> call, Response<List<Notice>> response) {
