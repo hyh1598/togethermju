@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.edit;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.mathpresso.togethermju.MainActivity;
+import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;
 
@@ -38,6 +40,12 @@ public class UserEditActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.user_name);
         editText.setText(user.getName());
 
+        if (user.getGender().equals("남자")) {
+            maleButton.setChecked(true);
+        } else if (user.getGender().equals("여자")) {
+            femaleButton.setChecked(true);
+        }
+
         String userYear;
         String userMonth;
         String userDay;
@@ -63,7 +71,7 @@ public class UserEditActivity extends AppCompatActivity {
         daySpinner.setAdapter(dayAdapter);
     }
 
-    public void clickBackButton(View view) {
+    public void clickCancelButton(View view) {
         startActivity(new Intent(this, MainActivity.class));
     }
     public void clickEditButton(View view) {
@@ -72,7 +80,7 @@ public class UserEditActivity extends AppCompatActivity {
 
     public void editUser() {
         Call<User> call = AppController.getInstance().getRestManager().getUserService().editUserInformation(user.getEmail(),
-                user.getName(), user.getBirth(), user.getMajor(), user.getPassword());
+                user.getName(), user.getBirth(), user.getMajor(), user.getGender());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

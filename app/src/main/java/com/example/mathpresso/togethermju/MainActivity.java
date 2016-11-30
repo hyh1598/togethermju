@@ -17,10 +17,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.core.AppController;
-import com.google.android.gms.vision.text.Text;
+import com.example.mathpresso.togethermju.edit.InterestEditActivity;
+import com.example.mathpresso.togethermju.edit.PasswordEditActivity;
+import com.example.mathpresso.togethermju.edit.UserEditActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final String[] TAB_TITLES = {
@@ -78,6 +79,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.menu_edit:
                 startActivity(new Intent(this, UserEditActivity.class));
+                break;
+            case R.id.menu_edit_password:
+                startActivity(new Intent(this, PasswordEditActivity.class));
+                break;
+            case R.id.menu_edit_interest:
+                startActivity(new Intent(this, InterestEditActivity.class));
                 break;
         }
         return false;

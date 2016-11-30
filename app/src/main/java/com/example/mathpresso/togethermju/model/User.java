@@ -52,7 +52,7 @@ public class User {
     }
 
     public String setGender(String gender) {
-        this.gender = this.gender;
+        this.gender = gender;
         return this.gender;
     }
 

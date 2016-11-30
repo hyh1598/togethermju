@@ -30,7 +30,9 @@
         <activity android:name=".StartMainActivity" />
         <activity android:name=".NoticeDetailsActivity" />
         <activity android:name=".RegisterActivity.GroupResiterActivity" />
-        <activity android:name=".UserEditActivity"></activity>
+        <activity android:name=".edit.UserEditActivity" />
+        <activity android:name=".edit.PasswordEditActivity" />
+        <activity android:name=".edit.InterestEditActivity"></activity>
     </application>
 
 </manifest>
