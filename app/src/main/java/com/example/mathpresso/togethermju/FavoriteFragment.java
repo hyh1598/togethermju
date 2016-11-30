@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.WatchedNoticeAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
@@ -39,8 +39,10 @@ public class FavoriteFragment extends Fragment {
 
         mAdapter = new WatchedNoticeAdapter(recyclerView, null, getActivity(), new WatchedNoticeAdapter.OnNoticeSelectedListener() {
             @Override
-            public void onSelect(Notice contest) {
-                Toast.makeText(getActivity(), contest.getTitle(), Toast.LENGTH_SHORT).show();
+            public void onSelect(Notice notice) {
+                Intent intent = new Intent(getContext(),NoticeDetailsActivity.class);
+                intent.putExtra("notice",notice);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(mAdapter);

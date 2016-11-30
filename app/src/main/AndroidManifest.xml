@@ -32,7 +32,7 @@
         <activity android:name=".NoticeDetailsActivity" />
         <activity android:name=".RegisterActivity.GroupResiterActivity" />
         <activity
-            android:name=".GoupDetailsActivity"
+            android:name=".GroupDetailsActivity"
             android:label="@string/title_activity_goup_details"
             android:theme="@style/AppTheme"></activity>
     </application>

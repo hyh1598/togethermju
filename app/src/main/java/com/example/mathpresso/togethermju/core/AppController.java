@@ -1,9 +1,11 @@
 package com.example.mathpresso.togethermju.core;
 
-import android.app.Application;
 import android.content.SharedPreferences;
+import android.support.multidex.MultiDexApplication;
 
 import com.example.mathpresso.togethermju.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -11,7 +13,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 /**
  * Created by choijinjoo on 2016. 10. 25..
  */
-public class AppController extends Application {
+public class AppController extends MultiDexApplication {
     private static AppController mInstance;
     private RestManager mRestManager;
     private DatabaseManager mDatabaseManager;
@@ -26,7 +28,7 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        sharedPref = getSharedPreferences(SP_NAME,0);
+        sharedPref = getSharedPreferences(SP_NAME, 0);
 
     }
 
@@ -35,9 +37,12 @@ public class AppController extends Application {
     }
 
     public Retrofit getRetrofit() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+        JacksonConverterFactory jacksonConverterFactory = JacksonConverterFactory.create(objectMapper);
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(jacksonConverterFactory)
                 .build();
 
         return mRetrofit;
@@ -66,7 +71,8 @@ public class AppController extends Application {
     public String getStringValue(String key, String defaultValue) {
         return sharedPref.getString(key, defaultValue);
     }
-    public void clearLocalStore(){
+
+    public void clearLocalStore() {
         SharedPreferences.Editor spEditor = sharedPref.edit();
         spEditor.remove("email");
         spEditor.commit();

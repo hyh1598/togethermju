@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mathpresso.togethermju.R;
@@ -15,6 +14,8 @@ import com.example.mathpresso.togethermju.model.Notice;
 import net.cachapa.expandablelayout.ExpandableLinearLayout;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
 public class WatchedNoticeAdapter extends CustomAdapter<Notice, WatchedNoticeAdapter.ViewHolder> {
     private static final int UNSELECTED = -1;
@@ -45,8 +46,36 @@ public class WatchedNoticeAdapter extends CustomAdapter<Notice, WatchedNoticeAda
         final Notice item = mItems.get(position);
         holder.bind(position);
         holder.expandButton.setText(item.getTitle());
-        holder.txtvContent.setText(item.getContent());
+        String content ="";
+        try {
+            StringTokenizer tokenizer = new StringTokenizer(item.getContent(), "\n\n");
+            String next = tokenizer.nextToken();
+            if (next != null) {
+                next = tokenizer.nextToken();
+                if (next != null) {
+                    if (next.trim().length() < 25) {
+                        content = next.trim();
+                    } else {
+                        content = next.trim().substring(0, 25);
+                    }
+                }
+            } else {
+                if (next.trim().length() < 25) {
+                    content = next.trim();
+                } else {
+                    content = next.trim().substring(0, 25);
+                }
+            }
+        }catch(NoSuchElementException e){
+
+        }
+        holder.txtvContent.setText(content.trim() + "...");
         holder.btnGoToActv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSelect(item);
+            }
+        });        holder.btnGoToActv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onSelect(item);
