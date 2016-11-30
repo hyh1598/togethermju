@@ -3,7 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
-
+//    dexOptions{
+//        javaMaxHeapSize "2g"
+//    }
     defaultConfig {
         applicationId "com.example.mathpresso.togethermju"
         minSdkVersion 15
