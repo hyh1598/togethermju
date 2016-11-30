@@ -20,5 +20,6 @@ public interface NoticeService {
     @GET("noticeview/")
     Call<List<Notice>> getNotices(@Query("type")String type);
 
-    @POST
+    
+
 }
