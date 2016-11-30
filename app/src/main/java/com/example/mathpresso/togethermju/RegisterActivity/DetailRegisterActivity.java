@@ -31,7 +31,6 @@ public class DetailRegisterActivity extends AppCompatActivity {
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         majorSpinner.setAdapter(majorAdapter);
 
-        // majorSpinner.getSelectedItem().toString() 이용
         ArrayAdapter yearAdapter = ArrayAdapter.createFromResource(this, R.array.year,
                 android.R.layout.simple_spinner_item);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,7 +66,7 @@ public class DetailRegisterActivity extends AppCompatActivity {
         int userMonth = Integer.parseInt(monthSpinner.getSelectedItem().toString());
         int userDay = Integer.parseInt(daySpinner.getSelectedItem().toString());
 
-        if ((maleButton.isChecked() == true)) {
+        if ((maleButton.isChecked() == true && femaleButton.isChecked() == false)) {
             userGender = "남자";
 
             User user = new User();
@@ -78,7 +77,7 @@ public class DetailRegisterActivity extends AppCompatActivity {
             user.setUserGender(userGender);
 
             startActivity(new Intent(this, FavoriteRegisterActivity.class));
-        } else if (femaleButton.isChecked() == true) {
+        } else if (femaleButton.isChecked() == true && maleButton.isChecked() == false) {
             userGender = "여자";
 
             User user = new User();

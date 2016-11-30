@@ -1,10 +1,13 @@
 package com.example.mathpresso.togethermju;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
@@ -26,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     public void clickLoginButton(View view) {
         EditText editUserEmailText = (EditText) findViewById(R.id.user_email);
         EditText editUserPasswordText = (EditText) findViewById(R.id.user_password);
+        ProgressTask progressTask = new ProgressTask();
 
         if (editUserEmailText.getText().toString().equals("")) {
             Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -35,9 +39,38 @@ public class LoginActivity extends AppCompatActivity {
             String userEmail = editUserEmailText.getText().toString();
             String userPassword = editUserPasswordText.getText().toString();
             Intent intent = new Intent(this,MainActivity.class);
+
+            progressTask.execute();
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             finish();
+        }
+    }
+
+    private class Progresstask extends AsyncTask<Void, Void, Void> {
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        @Override
+        protected void onPreExecute() {
+            progressBar.se
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            try {
+                for (int i = 0; i < 5; i++) {
+                    //asyncDialog.setProgress(i * 30);
+                    Thread.sleep(500);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            progressBar.dis
+            super.onPostExecute(result);
         }
     }
 }

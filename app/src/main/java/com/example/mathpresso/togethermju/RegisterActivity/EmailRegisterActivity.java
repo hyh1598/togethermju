@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.example.mathpresso.togethermju.LoginActivity;
 import com.example.mathpresso.togethermju.R;
 
+import static com.example.mathpresso.togethermju.core.AppController.user;
+
 public class EmailRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +41,9 @@ public class EmailRegisterActivity extends AppCompatActivity {
             //FIXME user data
             String userEmail = editUserEmailText.getText().toString();
             String userPassword = editUserPasswordText.getText().toString();
-//
-//            user.setUserEmail(userEmail);
-//            user.setUserPassword(userPassword);
+
+            user.setUserEmail(userEmail);
+            user.setUserPassword(userPassword);
 
             startActivity(new Intent(this, DetailRegisterActivity.class));
         } else if ((editUserPasswordText.getText().toString()) != (editCheckUserPasswordText.getText().toString())) {

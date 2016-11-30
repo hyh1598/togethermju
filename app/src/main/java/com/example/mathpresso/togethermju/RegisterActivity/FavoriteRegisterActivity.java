@@ -20,7 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class FavoriteRegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class FavoriteRegisterActivity extends AppCompatActivity {
     //FIXME user
     User user = new User();
 
@@ -58,25 +58,6 @@ public class FavoriteRegisterActivity extends AppCompatActivity implements View.
     public void clickBackButton(View view) {
         startActivity(new Intent(this, DetailRegisterActivity.class));
     }
-
-    // register를 누를때마다 check?-> add되기때문에 데이터가 버튼을 누를때마다 들어갈거같아요. 그 처리도 필요할거같아요!
-// 버튼 눌렀을때 user에 addFavoritelist하면 좋을거같아요!
-//  @Override
-    public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.support_checkbox:
-//                // if checked -> add 서포터즈
-//                // if unchecked -> list에서 delete
-//                break;
-//            case R.id.volunteer_checkbox:
-//                break;
-//            case R.id.study_checkbox:
-//                break;
-//            case R.id.contest_checkbox:
-//                break;
-//
-    }
-//    }
 
     public void clickRegisterButton(View view) {
         CheckBox support_checkbox = (CheckBox) findViewById(R.id.support_checkbox);

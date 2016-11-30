@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                     return new FavoriteFragment();
                 case 2:
                     return new GroupFragment();
-
             }
 
             throw new IllegalStateException("There's no fragment for position " + position);
