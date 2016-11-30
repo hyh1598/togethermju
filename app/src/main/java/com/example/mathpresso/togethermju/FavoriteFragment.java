@@ -12,9 +12,16 @@ import android.widget.Toast;
 
 
 import com.example.mathpresso.togethermju.adapter.NoticeAdapter;
+import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Notice;
+import com.example.mathpresso.togethermju.model.NoticeHelper;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -35,11 +42,38 @@ public class FavoriteFragment extends Fragment {
         mAdapter = new NoticeAdapter(recyclerView, null, getActivity(), new NoticeAdapter.OnNoticeSelectedListener() {
             @Override
             public void onSelect(Notice contest) {
-                Toast.makeText(getActivity(),contest.getTitle(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), contest.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(mAdapter);
+
+        loadWatchedNotice();
         return rootView;
+    }
+
+    private void loadWatchedNotice() {
+        String email = AppController.getInstance().getStringValue("email", "");
+        AppController.getInstance().getRestManager().getNoticeService().getWatchednotices(email)
+                .enqueue(new Callback<List<Notice>>() {
+                    @Override
+                    public void onResponse(Call<List<Notice>> call, Response<List<Notice>> response) {
+                        if (response.isSuccess()) {
+                            mAdapter.clear();
+                            mAdapter.add(response.body());
+                            // watch한 notice는 db에 저장.
+                            NoticeHelper.getInstance().setNoticeList(response.body());
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Notice>> call, Throwable t) {
+                        // load를 실패하면 db에 저장된 watched notice를 띄워줌.
+                        List<Notice> noticeList = NoticeHelper.getInstance().getNoticeList();
+                        mAdapter.clear();
+                        mAdapter.add(noticeList);
+                    }
+                });
     }
 
 }

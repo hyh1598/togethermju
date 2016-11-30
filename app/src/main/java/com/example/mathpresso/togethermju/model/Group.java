@@ -1,15 +1,24 @@
 package com.example.mathpresso.togethermju.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by choijinjoo on 2016. 11. 17..
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@DatabaseTable(tableName = "group")
 public class Group {
+    @DatabaseField
     Integer id;
+    @DatabaseField
     String name;
+    @DatabaseField
     String introduce;
+
+    public Group() {
+    }
 
     public Group(Integer id, String name, String introduce) {
         this.name = name;

@@ -1,6 +1,8 @@
 package com.example.mathpresso.togethermju.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
@@ -9,12 +11,19 @@ import java.io.Serializable;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@DatabaseTable(tableName = "notice")
 public class Notice implements Serializable {
+    @DatabaseField
     private int id;
+    @DatabaseField
     private String tag;
+    @DatabaseField
     private String title;
+    @DatabaseField
     private String content;
 
+    public Notice() {
+    }
 
     public int getId() {
         return id;
