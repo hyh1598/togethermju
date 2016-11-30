@@ -28,6 +28,7 @@ public class GroupFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        //서버에  그룹정보 요청
         //add mock data
         ArrayList<Group> items = new ArrayList<>();
 

@@ -4,82 +4,27 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1">
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/viewA"
-
-            android:layout_weight="0.4">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:id="@+id/notice_detail_title"
-                android:text="default"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/Grey"
-                android:id="@+id/notice_detail_content"
-                android:textColor="@color/Black"
-                android:text="default"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="0.02"
-            android:background="@color/colorFocused"
-
-            android:layout_gravity="right"
-            android:gravity="right">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="62dp"
-                android:src="@drawable/attractive"
-                android:gravity="center"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:id="@+id/imageView" />
-
-            <ToggleButton
-                android:id="@+id/watch"
-                android:textOff="unwatch"
-                android:textOn="watch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:background="@color/Grey"
-                android:layout_gravity="center"
-                android:textColor="@color/Black"/>
-
-
-
-        </LinearLayout>
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Group"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:id="@+id/viewA"
 
-            android:layout_weight="0.5">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="List"/>
+            android:layout_weight="0.9">
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
