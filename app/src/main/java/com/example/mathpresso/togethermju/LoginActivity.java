@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
+import com.example.mathpresso.togethermju.core.AppController;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+            AppController.getInstance().setString("email",userEmail);
             finish();
         }
     }

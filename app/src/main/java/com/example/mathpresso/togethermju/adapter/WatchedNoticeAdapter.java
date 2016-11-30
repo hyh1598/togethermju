@@ -10,25 +10,24 @@ import android.widget.TextView;
 
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.base.CustomAdapter;
-import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.Notice;
 
 import net.cachapa.expandablelayout.ExpandableLinearLayout;
 
 import java.util.ArrayList;
 
-public class GroupAdapter extends CustomAdapter<Group, GroupAdapter.ViewHolder> {
+public class WatchedNoticeAdapter extends CustomAdapter<Notice, WatchedNoticeAdapter.ViewHolder> {
     private static final int UNSELECTED = -1;
-    OnGroupSelectedListener mListener;
+    OnNoticeSelectedListener mListener;
     Activity mActivity;
 
 
 
-    public interface OnGroupSelectedListener {
-        public void onSelect(Group group);
+    public interface OnNoticeSelectedListener {
+        public void onSelect(Notice notice);
     }
 
-    public GroupAdapter(RecyclerView recyclerView, ArrayList<Group> data, Activity context, OnGroupSelectedListener listener) {
+    public WatchedNoticeAdapter(RecyclerView recyclerView, ArrayList<Notice> data, Activity context, OnNoticeSelectedListener listener) {
         super(context, data);
         mListener = listener;
         mActivity = context;
@@ -43,10 +42,10 @@ public class GroupAdapter extends CustomAdapter<Group, GroupAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Group item = mItems.get(position);
+        final Notice item = mItems.get(position);
         holder.bind(position);
-        holder.expandButton.setText(item.getName());
-        holder.txtvContent.setText(item.getIntroduce());
+        holder.expandButton.setText(item.getTitle());
+        holder.txtvContent.setText(item.getContent());
         holder.btnGoToActv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

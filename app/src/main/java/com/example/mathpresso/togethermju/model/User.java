@@ -1,12 +1,16 @@
 package com.example.mathpresso.togethermju.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.ArrayList;
 
 /**
  * Created by donghyuk on 2016. 11. 17..
  */
-
+@DatabaseTable(tableName = "user")
 public class User {
+    @DatabaseField
     String userEmail;
     String userPassword;
     String userGender;
@@ -15,6 +19,9 @@ public class User {
     int userDay;
     String userMajor;
     ArrayList<String> userFavorite;
+
+    public User() {
+    }
 
     public String setUserEmail(String userEmail) {
         this.userEmail = userEmail;

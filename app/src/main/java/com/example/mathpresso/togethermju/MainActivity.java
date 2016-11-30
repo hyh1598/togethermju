@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,7 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import com.example.mathpresso.togethermju.core.AppController;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String[] TAB_TITLES = {
             "NOTICE",
             "FAVORITE",
@@ -38,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void initializeLayout(){
-        mNavigationView = (NavigationView)findViewById(R.id.navigation_view);
+    private void initializeLayout() {
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View view = LayoutInflater.from(this).inflate(R.layout.drawer_header, null);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -63,12 +66,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_item_setting:
-                Toast.makeText(this,"move to setting activity",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "move to setting activity", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_item_logout:
+                AppController.getInstance().clearLocalStore();
+                moveToLoginActivity();
                 break;
         }
         return false;
+    }
+
+    private void moveToLoginActivity() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private class simpleAdapter extends FragmentPagerAdapter {
