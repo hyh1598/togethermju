@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * Created by donghyuk on 2016. 11. 17..
  */
 public class User {
-
-    public static final String PROJECT_NUMBER = "743118472391";
     String rid;
     String email;
     String password;

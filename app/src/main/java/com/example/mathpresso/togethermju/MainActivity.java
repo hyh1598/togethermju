@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView emailTextView = (TextView)view.findViewById(R.id.email_text_view);
         TextView nameTextView = (TextView)view.findViewById(R.id.name_text_view);
 
-        emailTextView.setText("이메일: " + AppController.user.getEmail());
-        nameTextView.setText("이름: " + AppController.user.getName());
+        emailTextView.setText("이메일: \n" + AppController.user.getEmail());
+        nameTextView.setText("이름: \n" + AppController.user.getName());
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
