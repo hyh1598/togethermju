@@ -27,11 +27,14 @@ public class EmailRegisterActivity extends AppCompatActivity {
     }
 
     public void clickNextButton(View view) {
+        EditText editUserNameText = (EditText) findViewById(R.id.user_name);
         EditText editUserEmailText = (EditText) findViewById(R.id.user_email);
         EditText editUserPasswordText = (EditText) findViewById(R.id.user_password);
         EditText editCheckUserPasswordText = (EditText) findViewById(R.id.check_user_password);
 
-        if ((editUserEmailText.getText().toString()).equals("")) {
+        if ((editUserNameText.getText().toString()).equals("")) {
+            Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+        } else if ((editUserEmailText.getText().toString()).equals("")) {
             Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else if ((editUserPasswordText.getText().toString()).equals("")) {
             Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -39,11 +42,13 @@ public class EmailRegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else if (editUserPasswordText.getText().toString().equals(editCheckUserPasswordText.getText().toString())) {
             //FIXME user data
-            String userEmail = editUserEmailText.getText().toString();
-            String userPassword = editUserPasswordText.getText().toString();
+            String Email = editUserEmailText.getText().toString();
+            String Password = editUserPasswordText.getText().toString();
+            String Name = editUserNameText.getText().toString();
 
-            user.setUserEmail(userEmail);
-            user.setUserPassword(userPassword);
+            user.setName(Name);
+            user.setEmail(Email);
+            user.setPassword(Password);
 
             startActivity(new Intent(this, DetailRegisterActivity.class));
         } else if ((editUserPasswordText.getText().toString()) != (editCheckUserPasswordText.getText().toString())) {

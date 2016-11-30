@@ -10,7 +10,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.R;
-import com.example.mathpresso.togethermju.model.User;
+
+import static com.example.mathpresso.togethermju.core.AppController.user;
 
 public class DetailRegisterActivity extends AppCompatActivity {
     @Override
@@ -60,32 +61,26 @@ public class DetailRegisterActivity extends AppCompatActivity {
         RadioButton maleButton = (RadioButton) findViewById(R.id.male_radio_button);
         RadioButton femaleButton = (RadioButton) findViewById(R.id.female_radio_button);
 
-        String userGender;
-        String userMajor = majorSpinner.getSelectedItem().toString();
-        int userYear = Integer.parseInt(yearSpinner.getSelectedItem().toString());
-        int userMonth = Integer.parseInt(monthSpinner.getSelectedItem().toString());
-        int userDay = Integer.parseInt(daySpinner.getSelectedItem().toString());
+        String Gender;
+        String Major = majorSpinner.getSelectedItem().toString();
+        String Birth = yearSpinner.getSelectedItem().toString() + "." +
+                monthSpinner.getSelectedItem().toString() + "." +
+                daySpinner.getSelectedItem().toString();
 
         if ((maleButton.isChecked() == true && femaleButton.isChecked() == false)) {
-            userGender = "남자";
+            Gender = "남자";
 
-            User user = new User();
-            user.setUserMajor(userMajor);
-            user.setUserYear(userYear);
-            user.setUserMonth(userMonth);
-            user.setUserDay(userDay);
-            user.setUserGender(userGender);
+            user.setMajor(Major);
+            user.setBirth(Birth);
+            user.setGender(Gender);
 
             startActivity(new Intent(this, FavoriteRegisterActivity.class));
         } else if (femaleButton.isChecked() == true && maleButton.isChecked() == false) {
-            userGender = "여자";
+            Gender = "여자";
 
-            User user = new User();
-            user.setUserMajor(userMajor);
-            user.setUserYear(userYear);
-            user.setUserMonth(userMonth);
-            user.setUserDay(userDay);
-            user.setUserGender(userGender);
+            user.setMajor(Major);
+            user.setBirth(Birth);
+            user.setGender(Gender);
 
             startActivity(new Intent(this, FavoriteRegisterActivity.class));
         } else {

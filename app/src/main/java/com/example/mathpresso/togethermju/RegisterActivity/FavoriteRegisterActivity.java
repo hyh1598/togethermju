@@ -1,6 +1,7 @@
 package com.example.mathpresso.togethermju.RegisterActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,7 +13,11 @@ import com.example.mathpresso.togethermju.LoginActivity;
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -21,6 +26,9 @@ import retrofit2.Response;
 
 
 public class FavoriteRegisterActivity extends AppCompatActivity {
+    GoogleCloudMessaging gcm;
+    private GoogleApiClient mGoogleApiClient;
+
     //FIXME user
     User user = new User();
 
@@ -34,12 +42,14 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         getIntent();
     }
 
+
     public void postUser() {
         Call<User> call = AppController.getInstance().getRestManager().getNetworkService().post_user(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccess()) {
+
                     Toast.makeText(getBaseContext(), "가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     int statusCode = response.code();
@@ -66,33 +76,34 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         CheckBox contest_checkbox = (CheckBox) findViewById(R.id.contest_checkbox);
 
         ArrayList<String> checkList = new ArrayList<String>();
+        new RegisterTask().execute(null, null, null);
 
         if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("스터디");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
@@ -100,7 +111,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("서포터즈");
             checkList.add("봉사활동");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
@@ -108,7 +119,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("서포터즈");
             checkList.add("스터디");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
@@ -116,7 +127,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("서포터즈");
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
@@ -124,7 +135,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("봉사활동");
             checkList.add("스터디");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
@@ -132,7 +143,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("봉사활동");
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
@@ -140,7 +151,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
@@ -149,7 +160,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("봉사활동");
             checkList.add("스터디");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
@@ -158,7 +169,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("봉사활동");
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
@@ -167,7 +178,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
@@ -176,7 +187,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
@@ -186,11 +197,52 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
             checkList.add("공모전");
 
-            user.setUserFavorite(checkList);
+            user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
         } else {
             Toast.makeText(this, "관심사를 선택해주세요.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    class RegisterTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String string;
+
+            try {
+                if (gcm == null) gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+                user.setRID(gcm.register(User.PROJECT_NUMER));
+                Log.i("haha", "ID: " + user.getRID());
+                string = "DEVICE REGISTERED, REGISTER ID IS\n" + user.getRID();
+            } catch (IOException e) {
+                string = "ERROR" + e.getMessage();
+            }
+            return string;
+        }
+
+        @Override
+        protected void onPostExecute(String msg) {}
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+        mGoogleApiClient.connect();
+    }
+    @Override
+    protected void onStop() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
     }
 }

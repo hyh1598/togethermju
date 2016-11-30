@@ -15,8 +15,7 @@ public class AppController extends Application {
     private RestManager mRestManager;
     private Retrofit mRetrofit;
     private String baseUrl = "http://125.130.223.88:8000/mju/";
-    public static User user = new User();
-
+    public static User user =     new User();
 
     @Override
     public void onCreate() {

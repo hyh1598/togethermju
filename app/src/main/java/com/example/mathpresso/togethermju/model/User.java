@@ -7,84 +7,84 @@ import java.util.ArrayList;
  */
 
 public class User {
-    String userEmail;
-    String userPassword;
-    String userGender;
-    int userYear;
-    int userMonth;
-    int userDay;
-    String userMajor;
-    ArrayList<String> userFavorite;
+    public static final String PROJECT_NUMER = "743118472391";
+    String RID;
+    String Email;
+    String Password;
+    String Gender;
+    String Birth;
+    String Major;
+    String Name;
+    ArrayList<String> Interest;
 
-    public String setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-        return this.userEmail;
+    public String setName(String Name) {
+        this.Name = Name;
+        return this.Name;
     }
 
-    public String getUserEmail() {
-        return this.userEmail;
+    public String getName() {
+        return this.Name;
+    }
+    public String setRID(String RID) {
+        this.RID = RID;
+        return this.RID;
     }
 
-    public String setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-        return this.userPassword;
+    public String getRID() {
+        return this.RID;
     }
 
-    public String getUserPassword() {
-        return this.userPassword;
+    public String setEmail(String Email) {
+        this.Email = Email;
+        return this.Email;
     }
 
-    public String setUserGender(String userSex) {
-        this.userGender = userSex;
-        return this.userGender;
+    public String getEmail() {
+        return this.Email;
     }
 
-    public String getUserGender() {
-        return this.userGender;
+    public String setPassword(String Password) {
+        this.Password = Password;
+        return this.Password;
     }
 
-    public int setUserYear(int userYear) {
-        this.userYear = userYear;
-        return this.userYear;
+    public String getPassword() {
+        return this.Password;
     }
 
-    public int getUserYear() {
-        return this.userYear;
+    public String setGender(String gender) {
+        this.Gender = Gender;
+        return this.Gender;
     }
 
-    public int setUserMonth(int userMonth) {
-        this.userMonth = userMonth;
-        return this.userMonth;
+    public String getGender() {
+        return this.Gender;
     }
 
-    public int getUserMonth() {
-        return this.userMonth;
+    public String setBirth(String Birth) {
+        this.Birth = Birth;
+        return this.Birth;
     }
 
-    public int setUserDay(int userDay) {
-        this.userDay = userDay;
-        return this.userDay;
+    public String getBirth() {
+        return this.Birth;
     }
 
-    public int getUserDay() {
-        return this.userDay;
+    public String setMajor(String Major) {
+        this.Major = Major;
+        return this.Major;
     }
 
-    public String setUserMajor(String userMajor) {
-        this.userMajor = userMajor;
-        return this.userMajor;
+    public String getMajor() {
+        return this.Major;
     }
 
-    public String getUserMajor() {
-        return this.userMajor;
+    public ArrayList<String> setFavorite(ArrayList<String> Interest) {
+        this.Interest = Interest;
+        return this.Interest;
     }
 
-    public ArrayList<String> setUserFavorite(ArrayList<String> userFavorite) {
-        this.userFavorite = userFavorite;
-        return this.userFavorite;
-    }
-
-    public ArrayList<String> getUserFavorite() {
-        return this.userFavorite;
+    public ArrayList<String> getFavorite() {
+        return this.Interest;
     }
 }
