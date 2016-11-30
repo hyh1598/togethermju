@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -55,9 +56,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         TextView emailTextView = (TextView)view.findViewById(R.id.email_text_view);
         TextView nameTextView = (TextView)view.findViewById(R.id.name_text_view);
+        TextView majorTextView = (TextView)view.findViewById(R.id.major_text_view);
 
         emailTextView.setText("이메일: \n" + AppController.user.getEmail());
         nameTextView.setText("이름: \n" + AppController.user.getName());
+        majorTextView.setText("이름: \n" + AppController.user.getMajor());
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_setting:
+            case R.id.menu_notice:
                 break;
             case R.id.menu_edit:
                 startActivity(new Intent(this, UserEditActivity.class));
@@ -119,5 +122,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return TAB_TITLES[position];
         }
     }
-
 }

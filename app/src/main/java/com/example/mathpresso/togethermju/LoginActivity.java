@@ -61,8 +61,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccess()) {
                     AppController.user = response.body();
                     if (response.message().equals("OK")) {
-                        Toast.makeText(getBaseContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "로그인되었습니다", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    } else {
+                        Toast.makeText(getBaseContext(), "아이디와 비밀번호를 확인하세요", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     int statusCode = response.code();
@@ -72,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getBaseContext(), "아이디와 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "아이디와 비밀번호를 확인하세요", Toast.LENGTH_SHORT).show();
             }
         });
     }

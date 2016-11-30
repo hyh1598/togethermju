@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_setting"
-            android:title="설정" />
+            android:id="@+id/menu_notice"
+            android:title="공지사항" />
         <item
             android:id="@+id/menu_edit"
             android:title="개인정보 수정"/>
@@ -15,5 +15,10 @@
         <item
             android:id="@+id/menu_edit_interest"
             android:title="관심사 변경"/>
+
+        <item
+            android:id="@+id/logout_edit_interest"
+            android:title="로그아웃"
+            android:onClick="clickLogout"/>
     </group>
 </menu>
