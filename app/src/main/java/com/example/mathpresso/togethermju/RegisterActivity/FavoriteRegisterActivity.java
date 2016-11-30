@@ -214,7 +214,6 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
                     gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
                 }
                 user.setRid(gcm.register("241720710605"));
-                Log.i("HELLO, USER!", "REGISTER ID: " + user.getRid());
                 string = "REGISTER ID IS\n" + user.getRid();
             } catch (IOException e) {
                 string = "ERROR IN REGISTERING" +e.getMessage();

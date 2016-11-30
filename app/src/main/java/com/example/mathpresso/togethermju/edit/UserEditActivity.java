@@ -46,10 +46,6 @@ public class UserEditActivity extends AppCompatActivity {
             femaleButton.setChecked(true);
         }
 
-        String userYear;
-        String userMonth;
-        String userDay;
-
         ArrayAdapter majorAdapter = ArrayAdapter.createFromResource(this, R.array.major,
                 android.R.layout.simple_spinner_item);
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -50,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             String userPassword = editUserPasswordText.getText().toString();
 
             userAuth(userEmail, userPassword);
-
-            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -62,7 +60,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccess()) {
                     AppController.user = response.body();
-                    Toast.makeText(getBaseContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show();
+                    if (response.message().equals("OK")) {
+                        Toast.makeText(getBaseContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
                 } else {
                     int statusCode = response.code();
                     Log.i("MY TAG", "응답 코드: " + statusCode);
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.i("MY TAG", "서버 onFailure 내용: " + t.getMessage());
+                Toast.makeText(getBaseContext(), "아이디와 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
             }
         });
     }
