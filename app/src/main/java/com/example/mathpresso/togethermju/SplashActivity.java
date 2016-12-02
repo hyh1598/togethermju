@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.mathpresso.togethermju.core.AppController;
 
@@ -21,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 String email = AppController.getInstance().getStringValue("email", "");
-                Log.d("email",email);
+
 //                Checking Login Startte
                 if (email.length() > 0) {
                     //if device have Login info  ---> Start MainActivity(for Notices view)

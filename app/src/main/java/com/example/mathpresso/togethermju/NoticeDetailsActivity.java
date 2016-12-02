@@ -41,8 +41,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         notice = (Notice) intent.getSerializableExtra("notice");
         String title = notice.getTitle();
         String content = notice.getContent();
-        Log.i("board",notice.getBoard());
-        Log.i("seq",notice.getNoticeSeq());
+
         txtvTitle = (TextView) findViewById(R.id.txtvTitle);
         textViewContent = (TextView) findViewById(R.id.notice_detail_content);
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
