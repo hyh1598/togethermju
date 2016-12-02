@@ -79,4 +79,34 @@ public class AppController extends MultiDexApplication {
         spEditor.remove("name");
         spEditor.commit();
     }
+    public static boolean UpdateUserinfo(AppController appController){
+        User userinfo= new User();
+
+        String email = appController.getStringValue("email","");//email을 통해 검증
+        if(email.equals(""))
+            return false;
+        userinfo.setEmail(email);
+        userinfo.setName(appController.getStringValue("name",""));
+        userinfo.setMajor(appController.getStringValue("major",""));
+        userinfo.setRid(appController.getStringValue("rid",""));
+        AppController.user = userinfo;
+        return true;
+    }
+    public static void setUserinfo(AppController appController){
+        /*data base 에 유저정보 저장*/
+        appController.setString("name",user.getName());
+        appController.setString("rid",user.getRid());
+        appController.setString("email",user.getEmail());
+        appController.setString("major",user.getEmail());
+            /*
+           String rid;
+            String email;
+            String password;
+            String gender;
+            String birth;
+            String major;
+            String name;
+            */
+    }
+
 }

@@ -70,14 +70,12 @@ public class LoginActivity extends AppCompatActivity {
                 //Login Success
                 if (response.isSuccess()) {
                     User user = response.body();
-                    //현재 로그인한 유저정보 등록
+                    //current Loging Userinfo store
                     AppController.user = user;
 
-                    //After first Login ,  auto Login
-                    //DB에 유저 정보 저장이 필요할 경우 여기에 추가
-                    AppController.getInstance().setString("email",user.getEmail());
-                    AppController.getInstance().setString("rid",user.getRid());
-                    AppController.getInstance().setString("name",user.getName());
+                    //Userinfo store in DB, for auto login
+                    AppController.setUserinfo(AppController.getInstance());
+
 
                     Toast.makeText(getBaseContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show();
 

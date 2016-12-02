@@ -39,6 +39,8 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     GroupAdapter mAdapter;
     RecyclerView recyclerView;
 
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_details);
