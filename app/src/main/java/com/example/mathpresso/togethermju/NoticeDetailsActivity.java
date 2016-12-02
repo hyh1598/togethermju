@@ -24,7 +24,6 @@ public class NoticeDetailsActivity extends AppCompatActivity{
         setContentView(R.layout.activity_notice_details);
         getIntent();
 
-
         Intent intent = getIntent();
         Notice notice = (Notice) intent.getSerializableExtra("notice");
         String title = notice.getTitle();
@@ -56,9 +55,6 @@ public class NoticeDetailsActivity extends AppCompatActivity{
                 finish();
             }
         });
-
-
         //adapter.addItem(ContextCompat.getDrawable(this, ));
-
     }
 }
