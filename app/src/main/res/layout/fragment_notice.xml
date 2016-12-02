@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#faf7f7"
+            android:background="@color/background"
             android:orientation="horizontal">
 
             <TextView
@@ -31,8 +31,7 @@
                 android:layout_width="70dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_filter" />
         </RelativeLayout>
 

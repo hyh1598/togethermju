@@ -4,20 +4,24 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.RegisterActivity.GroupResiterActivity;
+import com.example.mathpresso.togethermju.adapter.GroupAdapter;
 import com.example.mathpresso.togethermju.adapter.ListViewAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
+import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.melnykov.fab.FloatingActionButton;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,8 +33,11 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     private TextView txtvTitle;
     private TextView textViewContent;
     private LinearLayout btnWatch;
-
+    private Notice notice;
     private TextView txtvWatch;
+
+    GroupAdapter mAdapter;
+    RecyclerView recyclerView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +46,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final Notice notice = (Notice) intent.getSerializableExtra("notice");
+        notice = (Notice) intent.getSerializableExtra("notice");
         String title = notice.getTitle();
         String content = notice.getContent();
 
@@ -47,9 +54,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         textViewContent = (TextView) findViewById(R.id.notice_detail_content);
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
-
-
-
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         btnWatch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,17 +71,14 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
         txtvTitle.setText(title);
         textViewContent.setText(content.trim());
-        String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
 
-        AppController.getInstance().getRestManager().getNoticeService().checkWatch("hardho@naver.com", notice.getNoticeSeq())
+        AppController.getInstance().getRestManager().getNoticeService().checkWatch(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                         if (response.isSuccess()) {
                             if (response.body().getResult().equals("watch")) {
                                 initWatchBtn(true);
-
-
                             } else {
                                 initWatchBtn(false);
                             }
@@ -92,18 +94,29 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         adapter = new ListViewAdapter();
 
 
-        // 리스트뷰 참조 및 Adapter달기
-        listview = (ListView) findViewById(R.id.listview);
-        listview.setAdapter(adapter);
+        mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
+            @Override
+            public void onSelect(Group group) {
+
+            }
+        });
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(mAdapter);
+
+//        // 리스트뷰 참조 및 Adapter달기
+//        listview = (ListView) findViewById(R.id.listview);
+//        listview.setAdapter(adapter);
+
         //ListView listView = (ListView) findViewById(android.R.id.list);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.attachToListView(listview);
+//        fab.attachToListView(listview);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
 
                 // 액티비티 전환 코드
                 Intent intent = new Intent(getApplicationContext(), GroupResiterActivity.class);
@@ -112,16 +125,35 @@ public class NoticeDetailsActivity extends AppCompatActivity {
             }
         });
 
+        loadNoticeGroupList(notice.getNoticeSeq());
+
 
         //adapter.addItem(ContextCompat.getDrawable(this, ));
 
     }
-    public void btnHomepage(View view){
-        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.mju.ac.kr")));
+
+
+    private void loadNoticeGroupList(String id) {
+        //FIXME id값으로 바꿔야함
+        AppController.getInstance().getRestManager().getGroupService().getNoticeGroup("65532578")
+                .enqueue(new Callback<List<Group>>() {
+                    @Override
+                    public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
+                        if (response.isSuccess()) {
+                            mAdapter.clear();
+                            mAdapter.add(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Group>> call, Throwable t) {
+
+                    }
+                });
     }
 
     private void postWatchNotice(Notice notice) {
-        AppController.getInstance().getRestManager().getNoticeService().watchNotice("hardho@naver.com", notice.getNoticeSeq())
+        AppController.getInstance().getRestManager().getNoticeService().watchNotice(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
@@ -147,5 +179,13 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         } else {
             txtvWatch.setText("UNWATCH");
         }
+    }
+    //LINK 해당 게시물로
+    public void btnHomePage(View view){
+        String board = notice.getBoard();
+        String seq = notice.getNoticeSeq();
+        //http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?spage=1&boardId=11294&boardSeq=60873592
+        startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?boardId="+board+"&boardSeq="+seq)));
     }
 }

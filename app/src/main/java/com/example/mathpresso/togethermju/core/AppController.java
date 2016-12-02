@@ -75,6 +75,8 @@ public class AppController extends MultiDexApplication {
     public void clearLocalStore() {
         SharedPreferences.Editor spEditor = sharedPref.edit();
         spEditor.remove("email");
+        spEditor.remove("rid");
+        spEditor.remove("name");
         spEditor.commit();
     }
 }

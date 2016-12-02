@@ -6,18 +6,38 @@
     android:layout_height="wrap_content"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
+    android:padding="5dp"
     app:el_duration="300"
     app:el_expanded="false">
 
-    <TextView
-        android:id="@+id/expand_button"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_background"
-        android:elevation="6dp"
         android:foreground="?selectableItemBackground"
-        android:padding="16dp"
-        android:textSize="12sp" />
+        android:elevation="1dp">
+
+        <ImageView
+            android:id="@+id/imgvArrow"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_arrow_down" />
+
+        <TextView
+            android:id="@+id/expand_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/imgvArrow"
+            android:elevation="6dp"
+            android:padding="16dp"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
