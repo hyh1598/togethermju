@@ -106,14 +106,14 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
 
-//        // 리스트뷰 참조 및 Adapter달기
-//        listview = (ListView) findViewById(R.id.listview);
+        // 리스트뷰 참조 및 Adapter달기
+       // listview = (ListView) findViewById(R.id.listview);
 //        listview.setAdapter(adapter);
 
-        //ListView listView = (ListView) findViewById(android.R.id.list);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.attachToListView(listview);
+       fab.attachToRecyclerView(recyclerView);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override

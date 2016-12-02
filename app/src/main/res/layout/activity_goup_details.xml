@@ -33,16 +33,5 @@
             </ListView>
         </LinearLayout>
     </LinearLayout>
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/add"
-        app:layout_anchor="@id/viewA"
-        app:layout_anchorGravity="right|bottom"
 
-        android:scaleType="centerCrop"
-        android:onClick="addgroup"
-        android:adjustViewBounds="true"
-        android:layout_gravity="top" />
 </android.support.design.widget.CoordinatorLayout>

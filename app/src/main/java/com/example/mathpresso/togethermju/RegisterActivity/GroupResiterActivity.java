@@ -45,14 +45,16 @@ public class GroupResiterActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
+                onBackPressed();
             }
         });
+
         finish.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
+                // 서버로 그룹객체 리스트 보내기 id값?
+
 
             }
         });

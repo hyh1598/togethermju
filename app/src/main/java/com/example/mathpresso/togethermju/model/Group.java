@@ -6,12 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by choijinjoo on 2016. 11. 17..
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @DatabaseTable(tableName = "group")
-public class Group {
+public class Group implements Serializable{
     @DatabaseField
     Integer id;
     @DatabaseField

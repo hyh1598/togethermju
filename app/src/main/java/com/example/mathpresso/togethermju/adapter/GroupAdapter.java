@@ -1,6 +1,7 @@
 package com.example.mathpresso.togethermju.adapter;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,12 @@ public class GroupAdapter extends CustomAdapter<Group, GroupAdapter.ViewHolder> 
     private static final int UNSELECTED = -1;
     OnGroupSelectedListener mListener;
     Activity mActivity;
+
+    public GroupAdapter(RecyclerView recyclerView, ArrayList<Group> data, Activity context, OnGroupSelectedListener listener) {
+        super(context, data);
+        mListener = listener;
+        mActivity = context;
+    }
 
 
     public interface OnGroupSelectedListener {

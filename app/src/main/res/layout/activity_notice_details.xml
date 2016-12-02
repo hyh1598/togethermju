@@ -11,15 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
         android:adjustViewBounds="true"
-        android:onClick="addgroup"
         android:padding="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_add_white_18dp"
         app:layout_anchor="@+id/recycler_view"
-        app:layout_anchorGravity="bottom|right" />
+        app:layout_anchorGravity="center|end" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -94,6 +91,7 @@
                         android:onClick="btnHomePage"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/btnWatch"
                     android:layout_width="110dp"
@@ -134,7 +132,8 @@
                 android:id="@+id/listContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
 
                 <android.support.v7.widget.RecyclerView
