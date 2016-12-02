@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
 
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //drawer Layout
         View view = LayoutInflater.from(this).inflate(R.layout.drawer_header, null);
 
         TextView emailTextView = (TextView)view.findViewById(R.id.email_text_view);

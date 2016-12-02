@@ -57,12 +57,13 @@
                 android:layout_marginRight="10dp"
                 android:elevation="2dp"
                 android:gravity="center">
+
                 <Button
-                    android:background="@drawable/myongji1"
                     android:id="@+id/btnmju"
+                    android:text="링크"
                     android:layout_width="100dp"
                     android:layout_height="36dp"
-                    android:onClick="homepage"/>
+                    android:onClick="btnHomePage"/>
                 </LinearLayout>
 
             <LinearLayout

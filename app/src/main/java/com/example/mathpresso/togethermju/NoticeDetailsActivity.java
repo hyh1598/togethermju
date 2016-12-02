@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     private TextView txtvTitle;
     private TextView textViewContent;
     private LinearLayout btnWatch;
-
+    private Notice notice;
     private TextView txtvWatch;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +38,15 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final Notice notice = (Notice) intent.getSerializableExtra("notice");
+        notice = (Notice) intent.getSerializableExtra("notice");
         String title = notice.getTitle();
         String content = notice.getContent();
-
+        Log.i("board",notice.getBoard());
+        Log.i("seq",notice.getNoticeSeq());
         txtvTitle = (TextView) findViewById(R.id.txtvTitle);
         textViewContent = (TextView) findViewById(R.id.notice_detail_content);
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
-
-
 
 
         btnWatch.setOnClickListener(new View.OnClickListener() {
@@ -66,17 +64,15 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
         txtvTitle.setText(title);
         textViewContent.setText(content.trim());
-        String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
+//        String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
 
-        AppController.getInstance().getRestManager().getNoticeService().checkWatch("hardho@naver.com", notice.getNoticeSeq())
+        AppController.getInstance().getRestManager().getNoticeService().checkWatch(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                         if (response.isSuccess()) {
                             if (response.body().getResult().equals("watch")) {
                                 initWatchBtn(true);
-
-
                             } else {
                                 initWatchBtn(false);
                             }
@@ -90,7 +86,6 @@ public class NoticeDetailsActivity extends AppCompatActivity {
                 });
         // Adapter 생성
         adapter = new ListViewAdapter();
-
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview);
@@ -116,12 +111,10 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         //adapter.addItem(ContextCompat.getDrawable(this, ));
 
     }
-    public void btnHomepage(View view){
-        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.mju.ac.kr")));
-    }
+
 
     private void postWatchNotice(Notice notice) {
-        AppController.getInstance().getRestManager().getNoticeService().watchNotice("hardho@naver.com", notice.getNoticeSeq())
+        AppController.getInstance().getRestManager().getNoticeService().watchNotice(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
@@ -147,5 +140,13 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         } else {
             txtvWatch.setText("UNWATCH");
         }
+    }
+    //LINK 해당 게시물로
+    public void btnHomePage(View view){
+        String board = notice.getBoard();
+        String seq = notice.getNoticeSeq();
+        //http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?spage=1&boardId=11294&boardSeq=60873592
+        startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?boardId="+board+"&boardSeq="+seq)));
     }
 }
