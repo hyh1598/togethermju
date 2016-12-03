@@ -1,12 +1,11 @@
 package com.example.mathpresso.togethermju.model;
 
-import android.media.Image;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by choijinjoo on 2016. 11. 17..
@@ -14,90 +13,68 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @DatabaseTable(tableName = "group")
 public class Group implements Serializable{
+
     @DatabaseField
-    Integer id;
+    String id;
     @DatabaseField
     String name;
     @DatabaseField
     String introduce;
-   // Image profile;
+    @DatabaseField
+    String notice;
+    @DatabaseField
+    ArrayList<String> students;
 
-
-    String title;
-    String purpose;
-    String content;
-    int personnel;
-
-    public Group() {
-    }
-
-    public Group(Integer id, String name, String introduce,String title, String purpose, String content, int personnel) {
-        this.name = name;
+    public void setId(String id) {
         this.id = id;
-        //this.profile = profile;
-        this.introduce = introduce;
-        this.title = title;
-        this.purpose = purpose;
-        this.content = content;
-        this.personnel = personnel;
-    }
-
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getIntroduce() {
-        return introduce;
     }
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce;
     }
 
-
-    public String getName() {
-        return name;
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getPersonnel() {
-        return personnel;
+    public void setStudents(ArrayList<String> students) {
+        this.students = students;
     }
 
-    public void setPersonnel(int personnel) {
-        this.personnel = personnel;
+
+
+    public Group() {
     }
 
-    public String getTitle() {
-        return title;
+    public String getId() {
+        return id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getIntroduce() {
+        return introduce;
     }
 
-    public String getPurpose() {
-        return purpose;
+    public String getNotice() {
+        return notice;
     }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
+    public String getName() {
+        return name;
     }
 
-    public String getContent() {
-        return content;
+    public ArrayList<String> getStudents() {
+        return students;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+
+
+
+
+
+
+
 }

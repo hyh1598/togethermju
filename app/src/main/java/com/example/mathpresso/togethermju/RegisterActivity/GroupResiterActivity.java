@@ -1,6 +1,5 @@
 package com.example.mathpresso.togethermju.RegisterActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,9 +9,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.mathpresso.togethermju.R;
-import com.example.mathpresso.togethermju.model.Group;
 
-import static com.example.mathpresso.togethermju.R.id.back_button;
 import static com.example.mathpresso.togethermju.R.id.btn_cancel;
 
 public class GroupResiterActivity extends AppCompatActivity {
@@ -39,7 +36,7 @@ public class GroupResiterActivity extends AppCompatActivity {
         String gp = purpose.getText().toString();
         String gc = content.getText().toString();
 
-        Group group = new Group(null,null,null,gt,gp,gc,personnel);
+//        Group group = new Group(null,null,null,gt,gp,gc,personnel);
 
         cancel.setOnClickListener(new View.OnClickListener(){
 

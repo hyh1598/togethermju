@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.mathpresso.togethermju.RegisterActivity.GroupResiterActivity;
 import com.example.mathpresso.togethermju.adapter.GroupAdapter;
-import com.example.mathpresso.togethermju.adapter.ListViewAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Group;
@@ -29,7 +28,7 @@ import retrofit2.Response;
 
 public class NoticeDetailsActivity extends AppCompatActivity {
     ListView listview;
-    ListViewAdapter adapter;
+//    ListViewAdapter adapter;
     private TextView txtvTitle;
     private TextView textViewContent;
     private LinearLayout btnWatch;
@@ -93,7 +92,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
                     }
                 });
         // Adapter 생성
-        adapter = new ListViewAdapter();
+//        adapter = new ListViewAdapter();
 
 
         mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
@@ -137,7 +136,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
     private void loadNoticeGroupList(String id) {
         //FIXME id값으로 바꿔야함
-        AppController.getInstance().getRestManager().getGroupService().getNoticeGroup("65532578")
+        AppController.getInstance().getRestManager().getGroupService().getNoticeGroup(notice.getNoticeSeq())
                 .enqueue(new Callback<List<Group>>() {
                     @Override
                     public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
@@ -177,9 +176,9 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
     private void initWatchBtn(boolean watch) {
         if (watch) {
-            txtvWatch.setText("WATCH");
-        } else {
             txtvWatch.setText("UNWATCH");
+        } else {
+            txtvWatch.setText("WATCH");
         }
     }
     //LINK 해당 게시물로

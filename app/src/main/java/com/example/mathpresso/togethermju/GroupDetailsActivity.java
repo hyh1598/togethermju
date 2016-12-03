@@ -16,8 +16,7 @@ public class GroupDetailsActivity extends AppCompatActivity {
         getIntent();
         Intent intent = getIntent();
         group = (Group) intent.getSerializableExtra("group");
-        String title = group.getTitle();
-        String content = group.getContent();
+
 
     }
 

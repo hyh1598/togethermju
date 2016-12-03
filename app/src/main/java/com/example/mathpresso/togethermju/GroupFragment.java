@@ -6,18 +6,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.GroupAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.Group;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,26 +49,35 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
         mAdapter = new GroupAdapter(recyclerView, null, getActivity(), new GroupAdapter.OnGroupSelectedListener() {
             @Override
             public void onSelect(Group group) {
-
+                //when Group Item Clicked, go to GroupDetailActivity.class
                 Intent intent = new Intent(getActivity(), GroupDetailsActivity.class);
-                intent.putExtra("group", group);
+                intent.putExtra("group", group);//send selected Group object.
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(mAdapter);
         imgvFilter.setOnClickListener(this);
-        // default : 내그룹
-        loadJoinGroupList(GroupFilterDialog.FILTER_MINE);
+        loadJoinGroupList();
         return rootView;
     }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgvFilter:
+                showGroupFilterDialog();
+                break;
+        }
+    }
 
-    private void loadJoinGroupList(String email) {
+    private void loadJoinGroupList() {
         //FIXME id값으로 바꿔야함
-        AppController.getInstance().getRestManager().getGroupService().getJoinGroup(email)
+        AppController.getInstance().getRestManager().getGroupService().getJoinGroup(AppController.user.getEmail())
                 .enqueue(new Callback<List<Group>>() {
                     @Override
                     public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
                         if (response.isSuccess()) {
+                            List<Group> groupList = response.body();
+                            Log.d("MYGROUP_TEST",String.valueOf(groupList.size()));
                             mAdapter.clear();
                             mAdapter.add(response.body());
                         }
@@ -82,14 +90,7 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
                 });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.imgvFilter:
-                showGroupFilterDialog();
-                break;
-        }
-    }
+
 
     private void showGroupFilterDialog() {
         GroupFilterDialog.init(getActivity(), new GroupFilterDialog.OnSelectItemListener() {

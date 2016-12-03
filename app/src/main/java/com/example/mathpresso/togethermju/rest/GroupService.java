@@ -16,7 +16,7 @@ public interface GroupService {
     @GET("groupview/")
     Call<List<Group>> getNoticeGroup(@Query("id")String id);
 
-    @GET("")
+    @GET("mygroupview/")
     Call<List<Group>> getJoinGroup(@Query("email")String email);
 
 

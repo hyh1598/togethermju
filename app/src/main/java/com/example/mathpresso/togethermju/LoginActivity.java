@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i("MY NAME", "MY NAME: " + user.getName());
                     Log.i("MY EMAIL", "MY EMAIL: " + user.getEmail());
                     Log.i("MY MAJOR", "MY MAJOR: " + user.getMajor());
-                    
+
                     progress.dismiss();//PROGRESS DIAGRAM 실행 종료
                     startMainActivity();
 
