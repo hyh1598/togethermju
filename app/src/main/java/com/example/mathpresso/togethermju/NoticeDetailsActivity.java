@@ -9,10 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.mathpresso.togethermju.RegisterActivity.GroupResiterActivity;
+import com.example.mathpresso.togethermju.RegisterActivity.GroupRegisterActivity;
 import com.example.mathpresso.togethermju.adapter.GroupAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
@@ -27,8 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NoticeDetailsActivity extends AppCompatActivity {
-    ListView listview;
-//    ListViewAdapter adapter;
+
     private TextView txtvTitle;
     private TextView textViewContent;
     private LinearLayout btnWatch;
@@ -38,7 +36,11 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     GroupAdapter mAdapter;
     RecyclerView recyclerView;
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadNoticeGroupList(notice.getNoticeSeq());
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,19 +119,13 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
-
-                // 액티비티 전환 코드
-                Intent intent = new Intent(getApplicationContext(), GroupResiterActivity.class);
+                //Group 등록 화면 전환
+                Intent intent = new Intent(getApplicationContext(), GroupRegisterActivity.class);
+                intent.putExtra("notice_seq",notice.getNoticeSeq());
                 startActivity(intent);
 
             }
         });
-
-        loadNoticeGroupList(notice.getNoticeSeq());
-
-
-        //adapter.addItem(ContextCompat.getDrawable(this, ));
 
     }
 
