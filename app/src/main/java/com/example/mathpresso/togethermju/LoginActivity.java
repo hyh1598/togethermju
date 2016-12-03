@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText editUserPasswordText ;
     String userEmail;//userEmail
     String userPassword;//userPassword
+
+    ProgressDialog progress;//wating progress diagram
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,13 @@ public class LoginActivity extends AppCompatActivity {
             //User Auth
             userAuth(userEmail, userPassword);
             //Wait
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
+// To dismiss the dialog
+
 
         }
     }
@@ -71,8 +82,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccess()) {
                     User user = response.body();
                     //current Loging Userinfo store
-                    AppController.user = user;
 
+                    if(user.getName()==null || user.getEmail() ==null){
+                        progress.dismiss();//PROGRESS DIAGRAM 실행 종료
+                        Toast.makeText(getBaseContext(), "Email과 Password를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
+                    //Current UserInfo
+                    AppController.user = user;
                     //Userinfo store in DB, for auto login
                     AppController.setUserinfo(AppController.getInstance());
 
@@ -82,13 +99,17 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i("MY NAME", "MY NAME: " + user.getName());
                     Log.i("MY EMAIL", "MY EMAIL: " + user.getEmail());
                     Log.i("MY MAJOR", "MY MAJOR: " + user.getMajor());
-
+                    
+                    progress.dismiss();//PROGRESS DIAGRAM 실행 종료
                     startMainActivity();
+
+
 
                 } else {
                     //Login problem
                     int statusCode = response.code();
                     Log.i("MY TAG", "응답 코드: " + statusCode);
+                    progress.dismiss();//PROGRESS DIAGRAM 실행 종료
                 }
             }
 
@@ -96,7 +117,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 Log.i("MY TAG", "서버 onFailure 내용: " + t.getMessage());
                 //Login problem
-                Toast.makeText(getApplicationContext(),"Login failure",Toast.LENGTH_LONG).show();
+                progress.dismiss();//PROGRESS DIAGRAM 실행 종료
+                Toast.makeText(getApplicationContext(),"Login failure : Server Problem",Toast.LENGTH_LONG).show();
 
             }
         });

@@ -77,6 +77,7 @@ public class AppController extends MultiDexApplication {
         spEditor.remove("email");
         spEditor.remove("rid");
         spEditor.remove("name");
+        spEditor.remove("major");
         spEditor.commit();
     }
     public static boolean UpdateUserinfo(AppController appController){
