@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,6 @@ public class GroupFragment extends Fragment {
         txtvType = (TextView) rootView.findViewById(R.id.txtvType);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
         //add mock data
 
 
@@ -68,16 +67,15 @@ public class GroupFragment extends Fragment {
                     @Override
                     public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
                         if (response.isSuccess()) {
-                            List<Group> groupList = response.body();
-
                             mAdapter.clear();
                             mAdapter.add(response.body());
                         }
+
                     }
 
                     @Override
                     public void onFailure(Call<List<Group>> call, Throwable t) {
-
+                        Log.d("ServerFailure",t.getMessage());
                     }
                 });
     }
