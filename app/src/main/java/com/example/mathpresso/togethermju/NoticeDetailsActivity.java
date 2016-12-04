@@ -47,7 +47,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notice_details);
         getIntent();
 
-
+        //GET Selected Notice info
         Intent intent = getIntent();
         notice = (Notice) intent.getSerializableExtra("notice");
         String title = notice.getTitle();
@@ -58,7 +58,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
+    //Watch Button Setting Listener
         btnWatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +74,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
         txtvTitle.setText(title);
         textViewContent.setText(content.trim());
-
+    //Watch State Button initialization
         AppController.getInstance().getRestManager().getNoticeService().checkWatch(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
@@ -93,10 +93,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
                         Log.d("watch", t.toString());
                     }
                 });
-        // Adapter 생성
-//        adapter = new ListViewAdapter();
-
-
+        //Group List Adapter.
         mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
             @Override
             public void onSelect(Group group) {
@@ -107,12 +104,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
 
-        // 리스트뷰 참조 및 Adapter달기
-       // listview = (ListView) findViewById(R.id.listview);
-//        listview.setAdapter(adapter);
-
-
-
+        //Group Add Button.
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
        fab.attachToRecyclerView(recyclerView);
         fab.setOnClickListener(new View.OnClickListener() {

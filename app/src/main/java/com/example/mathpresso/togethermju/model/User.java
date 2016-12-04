@@ -19,7 +19,14 @@ public class User {
     String major;
     String name;
     ArrayList<String> interest;
-
+    public User(){
+        
+    }
+    public User(String name, String email,String major){
+        this.name = name;
+        this.email = email;
+        this.major = major;
+    }
     public String setName(String name) {
         this.name = name;
         return this.name;

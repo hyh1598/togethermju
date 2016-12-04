@@ -11,7 +11,12 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.CustomAndroidGridViewAdapter;
+import com.example.mathpresso.togethermju.adapter.HorizontalListViewAdapter;
+import com.example.mathpresso.togethermju.listview.HorizontalListView;
 import com.example.mathpresso.togethermju.model.Group;
+import com.example.mathpresso.togethermju.model.User;
+
+import java.util.ArrayList;
 
 public class GroupDetailsActivity extends AppCompatActivity {
     private Group group;
@@ -19,30 +24,12 @@ public class GroupDetailsActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayoutAndroid;
     CoordinatorLayout rootLayoutAndroid;
     GridView gridView;
-    CustomAndroidGridViewAdapter mAdapter;//GridViewAdapter
-    public static String[] gridViewStrings = {
-            "Android",
-            "Java",
-            "GridView",
-            "ListView",
-            "Adapter",
-            "Custom GridView",
-            "Material",
-            "XML",
-            "Code",
+    CustomAndroidGridViewAdapter gridViewAdapter;//GridViewAdapter
+    HorizontalListViewAdapter horizontalListViewAdapter;
 
-    };
-    public static int[] gridViewImages = {
-            R.drawable.myongji1,
-            R.drawable.myongji1,
-            R.drawable.myongji1,
-            R.drawable.myongji1,
-            R.drawable.myongji1,
-            R.drawable.myongji1,
-            R.drawable.myongji1,
-            R.drawable.myongji1,
-            R.drawable.myongji1
-    };
+    //test data
+    public ArrayList<User> userlist = new ArrayList<User>();
+    public ArrayList<User> Recommand_userlist = new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,19 +39,44 @@ public class GroupDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         group = (Group) intent.getSerializableExtra("group");
 
+        Recommand_userlist.add(new User("손지호","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("최진주","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("성목경","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("이동혁","hardho@naver.com","컴퓨터공학과"));
+        //test data insert
+        userlist.add(new User("TEST1","TEST@mju","TEST"));
+        userlist.add(new User("TEST2","TEST@mju","TEST"));
+        userlist.add(new User("TEST3","TEST@mju","TEST"));
+        userlist.add(new User("TEST4","TEST@mju","TEST"));
+        userlist.add(new User("TEST5","TEST@mju","TEST"));
+
+        //Horizontal List View Binding
+        HorizontalListView recommand_listview = (HorizontalListView) findViewById(R.id.RecommandListView);
+        horizontalListViewAdapter = new HorizontalListViewAdapter(getApplicationContext(), Recommand_userlist, new HorizontalListViewAdapter.OnRecommandUserSelectedListener() {
+            @Override
+            public void onSelect(User user) {
+                Toast.makeText(getApplicationContext(),user.getName(),Toast.LENGTH_LONG).show();
+            }
+        });
+        recommand_listview.setAdapter(horizontalListViewAdapter);
+
+
+        //Toolbal Set for showing Group Name
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         gridView = (GridView) findViewById(R.id.grid);
-        mAdapter = new CustomAndroidGridViewAdapter(this, gridViewStrings, gridViewImages, new CustomAndroidGridViewAdapter.OnUserSelectedListener() {
+        gridViewAdapter = new CustomAndroidGridViewAdapter(this, userlist, new CustomAndroidGridViewAdapter.OnUserSelectedListener() {
             @Override
-            public void onSelect(String s) {
-                Toast.makeText(getApplicationContext(),"s 를 선택",Toast.LENGTH_LONG);
+            public void onSelect(User user) {
+                Toast.makeText(getApplicationContext(),user.getName()+"를 선택",Toast.LENGTH_LONG).show();
                 Log.d("ItemClick","CLICK");
             }
         });
-        gridView.setAdapter(mAdapter);
+        gridView.setAdapter(gridViewAdapter);
         //Toolbar 초기화
         initInstances();
+        //uploadGroupMember();
+        //Loading...
     }
     private void initInstances() {
         rootLayoutAndroid = (CoordinatorLayout) findViewById(R.id.android_coordinator_layout);
