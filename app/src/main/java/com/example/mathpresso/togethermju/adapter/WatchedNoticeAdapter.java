@@ -75,12 +75,8 @@ public class WatchedNoticeAdapter extends CustomAdapter<Notice, WatchedNoticeAda
             public void onClick(View view) {
                 mListener.onSelect(item);
             }
-        });        holder.btnGoToActv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onSelect(item);
-            }
         });
+
 
     }
 

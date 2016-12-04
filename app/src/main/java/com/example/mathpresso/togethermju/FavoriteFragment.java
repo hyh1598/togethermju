@@ -52,8 +52,8 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void loadWatchedNotice() {
-        // test data "hardho@naver.com"
-        String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
+
+
         AppController.getInstance().getRestManager().getNoticeService().getWatchednotices("hardho@naver.com")
                 .enqueue(new Callback<List<Notice>>() {
                     @Override
