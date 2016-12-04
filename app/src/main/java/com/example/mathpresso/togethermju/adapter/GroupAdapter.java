@@ -1,18 +1,16 @@
 package com.example.mathpresso.togethermju.adapter;
 
 import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.base.CustomAdapter;
 import com.example.mathpresso.togethermju.model.Group;
-
-import net.cachapa.expandablelayout.ExpandableLinearLayout;
 
 import java.util.ArrayList;
 
@@ -48,8 +46,14 @@ public class GroupAdapter extends CustomAdapter<Group, GroupAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Group item = mItems.get(position);
-        holder.txtvName.setText(item.getName());
 
+        holder.txtvName.setText(item.getName());
+        holder.groupItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSelect(item);
+            }
+        });
 
     }
 
@@ -60,17 +64,15 @@ public class GroupAdapter extends CustomAdapter<Group, GroupAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ExpandableLinearLayout expandableLayout;
-        private TextView expandButton;
+
         private TextView txtvName;
-        private TextView btnGoToActv;
+        private LinearLayout groupItem;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
+            groupItem = (LinearLayout) itemView.findViewById(R.id.groupItem);
             txtvName = (TextView) itemView.findViewById(R.id.txtvName);
         }
-
-
     }
 }

@@ -1,18 +1,17 @@
 package com.example.mathpresso.togethermju;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.CustomAndroidGridViewAdapter;
 import com.example.mathpresso.togethermju.model.Group;
-
-import java.util.ArrayList;
 
 public class GroupDetailsActivity extends AppCompatActivity {
     private Group group;
@@ -20,8 +19,7 @@ public class GroupDetailsActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayoutAndroid;
     CoordinatorLayout rootLayoutAndroid;
     GridView gridView;
-    Context context;
-    ArrayList arrayList;
+    CustomAndroidGridViewAdapter mAdapter;//GridViewAdapter
     public static String[] gridViewStrings = {
             "Android",
             "Java",
@@ -57,17 +55,28 @@ public class GroupDetailsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         gridView = (GridView) findViewById(R.id.grid);
-        gridView.setAdapter(new CustomAndroidGridViewAdapter(this, gridViewStrings, gridViewImages));
-
+        mAdapter = new CustomAndroidGridViewAdapter(this, gridViewStrings, gridViewImages, new CustomAndroidGridViewAdapter.OnUserSelectedListener() {
+            @Override
+            public void onSelect(String s) {
+                Toast.makeText(getApplicationContext(),"s 를 선택",Toast.LENGTH_LONG);
+                Log.d("ItemClick","CLICK");
+            }
+        });
+        gridView.setAdapter(mAdapter);
+        //Toolbar 초기화
         initInstances();
-
-
     }
     private void initInstances() {
         rootLayoutAndroid = (CoordinatorLayout) findViewById(R.id.android_coordinator_layout);
         collapsingToolbarLayoutAndroid = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_android_layout);
-        collapsingToolbarLayoutAndroid.setTitle("Material Grid");
+        //Group Name Binding
+        collapsingToolbarLayoutAndroid.setTitle(group.getName());
     }
+    private void uploadGroupMember(){
+
+
+    }
+
 
 
 }
