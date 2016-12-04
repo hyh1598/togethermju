@@ -1,10 +1,15 @@
 package com.example.mathpresso.togethermju.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.ArrayList;
 
 /**
  * Created by donghyuk on 2016. 11. 17..
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@DatabaseTable(tableName = "user")
 public class User {
     String rid;
     String email;
@@ -14,7 +19,14 @@ public class User {
     String major;
     String name;
     ArrayList<String> interest;
+    public User(){
 
+    }
+    public User(String name, String email,String major){
+        this.name = name;
+        this.email = email;
+        this.major = major;
+    }
     public String setName(String name) {
         this.name = name;
         return this.name;

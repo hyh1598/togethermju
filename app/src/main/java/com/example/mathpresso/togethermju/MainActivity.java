@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,14 +32,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView mNavigationView;
+    TextView emailTextView ;
+    TextView nameTextView ;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //User정보확인 없을 경우 , Login다시요청
+        if(!AppController.UpdateUserinfo(AppController.getInstance())){
+            //로그아웃
+            AppController.getInstance().clearLocalStore();
+            moveToLoginActivity();
+        }else{
+            Log.d("MAIN:NAME",AppController.user.getName());
+            Log.d("MAIN:EMAIL",AppController.user.getEmail());
+            Log.d("MAIN:RID",AppController.user.getRid());
+            emailTextView.setText("이메일: \n" + AppController.user.getEmail());
+            nameTextView.setText("이름: \n" + AppController.user.getName());
+        }
 
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initializeLayout();
+
     }
 
     private void initializeLayout() {
@@ -47,17 +66,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
 
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //drawer Layout
         View view = LayoutInflater.from(this).inflate(R.layout.drawer_header, null);
 
-        TextView emailTextView = (TextView)view.findViewById(R.id.email_text_view);
-        TextView nameTextView = (TextView)view.findViewById(R.id.name_text_view);
+        emailTextView = (TextView)view.findViewById(R.id.email_text_view);
+        nameTextView = (TextView)view.findViewById(R.id.name_text_view);
 
-        emailTextView.setText("이메일: \n" + AppController.user.getEmail());
-        nameTextView.setText("이름: \n" + AppController.user.getName());
+
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);

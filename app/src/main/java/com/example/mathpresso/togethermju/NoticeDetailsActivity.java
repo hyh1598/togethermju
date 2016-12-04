@@ -1,6 +1,7 @@
 package com.example.mathpresso.togethermju;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,12 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.mathpresso.togethermju.RegisterActivity.GroupResiterActivity;
+import com.example.mathpresso.togethermju.RegisterActivity.GroupRegisterActivity;
 import com.example.mathpresso.togethermju.adapter.GroupAdapter;
-import com.example.mathpresso.togethermju.adapter.ListViewAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Group;
@@ -27,24 +26,30 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NoticeDetailsActivity extends AppCompatActivity {
-    ListView listview;
-    ListViewAdapter adapter;
+
     private TextView txtvTitle;
     private TextView textViewContent;
     private LinearLayout btnWatch;
+    private Notice notice;
     private TextView txtvWatch;
 
     GroupAdapter mAdapter;
     RecyclerView recyclerView;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadNoticeGroupList(notice.getNoticeSeq());
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_details);
         getIntent();
 
-
+        //GET Selected Notice info
         Intent intent = getIntent();
-        final Notice notice = (Notice) intent.getSerializableExtra("notice");
+        notice = (Notice) intent.getSerializableExtra("notice");
         String title = notice.getTitle();
         String content = notice.getContent();
 
@@ -53,7 +58,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
+    //Watch Button Setting Listener
         btnWatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,17 +74,14 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
         txtvTitle.setText(title);
         textViewContent.setText(content.trim());
-        String email = AppController.getInstance().getStringValue("email", "hardho@naver.com");
-
-        AppController.getInstance().getRestManager().getNoticeService().checkWatch("hardho@naver.com", notice.getNoticeSeq())
+    //Watch State Button initialization
+        AppController.getInstance().getRestManager().getNoticeService().checkWatch(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                         if (response.isSuccess()) {
                             if (response.body().getResult().equals("watch")) {
                                 initWatchBtn(true);
-
-
                             } else {
                                 initWatchBtn(false);
                             }
@@ -91,9 +93,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
                         Log.d("watch", t.toString());
                     }
                 });
-        // Adapter 생성
-        adapter = new ListViewAdapter();
-
+        //Group List Adapter.
         mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
             @Override
             public void onSelect(Group group) {
@@ -104,36 +104,27 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
 
-//        // 리스트뷰 참조 및 Adapter달기
-//        listview = (ListView) findViewById(R.id.listview);
-//        listview.setAdapter(adapter);
-        //ListView listView = (ListView) findViewById(android.R.id.list);
-
+        //Group Add Button.
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.attachToListView(listview);
+       fab.attachToRecyclerView(recyclerView);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
-
-                // 액티비티 전환 코드
-                Intent intent = new Intent(getApplicationContext(), GroupResiterActivity.class);
+                //Group 등록 화면 전환
+                Intent intent = new Intent(getApplicationContext(), GroupRegisterActivity.class);
+                intent.putExtra("notice_seq",notice.getNoticeSeq());
                 startActivity(intent);
 
             }
         });
 
-        loadNoticeGroupList(notice.getNoticeSeq());
-
-
-        //adapter.addItem(ContextCompat.getDrawable(this, ));
-
     }
+
 
     private void loadNoticeGroupList(String id) {
         //FIXME id값으로 바꿔야함
-        AppController.getInstance().getRestManager().getGroupService().getNoticeGroup("65532578")
+        AppController.getInstance().getRestManager().getGroupService().getNoticeGroup(notice.getNoticeSeq())
                 .enqueue(new Callback<List<Group>>() {
                     @Override
                     public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
@@ -151,7 +142,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     }
 
     private void postWatchNotice(Notice notice) {
-        AppController.getInstance().getRestManager().getNoticeService().watchNotice("hardho@naver.com", notice.getNoticeSeq())
+        AppController.getInstance().getRestManager().getNoticeService().watchNotice(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
@@ -173,9 +164,17 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
     private void initWatchBtn(boolean watch) {
         if (watch) {
-            txtvWatch.setText("WATCH");
-        } else {
             txtvWatch.setText("UNWATCH");
+        } else {
+            txtvWatch.setText("WATCH");
         }
+    }
+    //LINK 해당 게시물로
+    public void btnHomePage(View view){
+        String board = notice.getBoard();
+        String seq = notice.getNoticeSeq();
+        //http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?spage=1&boardId=11294&boardSeq=60873592
+        startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?boardId="+board+"&boardSeq="+seq)));
     }
 }

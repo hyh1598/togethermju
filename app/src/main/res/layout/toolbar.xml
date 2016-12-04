@@ -25,7 +25,9 @@
                 android:maxWidth="300dp"
                 android:singleLine="true"
                 android:textColor="@color/white" />
+
         </RelativeLayout>
+
 
     </android.support.v7.widget.Toolbar>
 

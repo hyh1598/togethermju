@@ -1,103 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/android_coordinator_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1">
-        <LinearLayout
+        android:id="@+id/appbar_layout"
+        android:layout_height="@dimen/app_bar_height"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_android_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/viewA"
-
-            android:layout_weight="0.4">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:id="@+id/notice_detail_title"
-                android:text="default"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/Grey"
-                android:id="@+id/notice_detail_content"
-                android:textColor="@color/Black"
-                android:text="default"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="0.02"
-            android:background="@color/colorFocused"
-
-            android:layout_gravity="right"
-            android:gravity="right">
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="@dimen/expanded_toolbar_title_margin_start"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:layout_gravity="center"
-                android:layout_width="62dp"
-                android:src="@drawable/attractive"
-                android:gravity="center"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:id="@+id/imageView" />
-
-            <ToggleButton
-                android:id="@+id/watch"
-                android:textOff="unwatch"
-                android:textOn="watch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:background="@color/Grey"
-                android:layout_gravity="center"
-                android:textColor="@color/Black"/>
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            android:layout_weight="0.5">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="List"/>
-            <ListView
+                android:id="@+id/image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/listview"
-                >
-            </ListView>
-        </LinearLayout>
-    </LinearLayout>
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/add"
-        app:layout_anchor="@id/viewA"
-        app:layout_anchorGravity="right|bottom"
+                android:scaleType="centerInside"
+                android:src="@drawable/boy"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
 
-        android:scaleType="centerCrop"
-        android:onClick="addgroup"
-        android:adjustViewBounds="true"
-        android:layout_gravity="top" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:id="@+id/nestedscrollview"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!--middle bar-->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:background="@color/colorFocused"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+<!--Horizonview 추천 User 리스트 보여주기-->
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="친구 추천"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <com.example.mathpresso.togethermju.listview.HorizontalListView
+                    android:id="@+id/RecommandListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/colorFocused"
+                    />
+            </LinearLayout>
+            <GridView
+                android:id="@+id/grid"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:columnWidth="100dp"
+                android:gravity="center"
+                android:listSelector="#00000000"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>
