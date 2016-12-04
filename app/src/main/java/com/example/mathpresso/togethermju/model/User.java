@@ -20,7 +20,7 @@ public class User {
     String name;
     ArrayList<String> interest;
     public User(){
-        
+
     }
     public User(String name, String email,String major){
         this.name = name;

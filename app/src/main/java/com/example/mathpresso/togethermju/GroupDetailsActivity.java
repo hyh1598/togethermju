@@ -43,6 +43,11 @@ public class GroupDetailsActivity extends AppCompatActivity {
         Recommand_userlist.add(new User("최진주","hardho@naver.com","컴퓨터공학과"));
         Recommand_userlist.add(new User("성목경","hardho@naver.com","컴퓨터공학과"));
         Recommand_userlist.add(new User("이동혁","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
+        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
         //test data insert
         userlist.add(new User("TEST1","TEST@mju","TEST"));
         userlist.add(new User("TEST2","TEST@mju","TEST"));
@@ -55,7 +60,7 @@ public class GroupDetailsActivity extends AppCompatActivity {
         horizontalListViewAdapter = new HorizontalListViewAdapter(getApplicationContext(), Recommand_userlist, new HorizontalListViewAdapter.OnRecommandUserSelectedListener() {
             @Override
             public void onSelect(User user) {
-                Toast.makeText(getApplicationContext(),user.getName(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),user.getName(),Toast.LENGTH_SHORT).show();
             }
         });
         recommand_listview.setAdapter(horizontalListViewAdapter);
@@ -68,7 +73,7 @@ public class GroupDetailsActivity extends AppCompatActivity {
         gridViewAdapter = new CustomAndroidGridViewAdapter(this, userlist, new CustomAndroidGridViewAdapter.OnUserSelectedListener() {
             @Override
             public void onSelect(User user) {
-                Toast.makeText(getApplicationContext(),user.getName()+"를 선택",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),user.getName()+"를 선택",Toast.LENGTH_SHORT).show();
                 Log.d("ItemClick","CLICK");
             }
         });
@@ -84,12 +89,15 @@ public class GroupDetailsActivity extends AppCompatActivity {
         //Group Name Binding
         collapsingToolbarLayoutAndroid.setTitle(group.getName());
     }
-    private void uploadGroupMember(){
 
-
+    //Group MemberUploading
+    private void uploadGroupMember() {
     }
 
+    //Recommand User Uploading
+    private void  uploadRecommandUser(){
 
+    }
 
 }
 
