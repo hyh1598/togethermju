@@ -7,8 +7,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -46,14 +44,6 @@ public class GroupDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_details);
         Intent intent = getIntent();
         group = (Group) intent.getSerializableExtra("group");
-
-        Button attend = (Button)findViewById(R.id.attend_btn);
-        attend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         //Toolbar 초기화
         initToolbar();

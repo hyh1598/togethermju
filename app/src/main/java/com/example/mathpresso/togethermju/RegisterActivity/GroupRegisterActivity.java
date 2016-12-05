@@ -69,11 +69,15 @@ public class GroupRegisterActivity extends AppCompatActivity {
                 buffdata.setIntroduce(newGroup_purpose.getText().toString());
                 buffdata.setNotice(Notice_seq);
                 uploadGroupData(buffdata);
-
-
+                progress = new ProgressDialog(GroupRegisterActivity.this);
+                progress.setTitle("Loading");
+                progress.setMessage("Wait while loading...");
+                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                progress.show();
 
             }
         });
+
     }
     //Group data 등록 요청
     public void uploadGroupData(Group groupdata){
@@ -88,6 +92,7 @@ public class GroupRegisterActivity extends AppCompatActivity {
                             Log.d("GROUP_UPLOAD",result.getResult());
                             if(result.getResult().toString().equals("success")){
                                 //성공시 이전 화면으로
+                                progress.dismiss();//PROGRESS DIAGRAM 실행 종료
                                 finish();
                             }
                         }else{
