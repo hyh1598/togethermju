@@ -12,6 +12,7 @@ import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mk on 2016-12-04.
@@ -39,6 +40,15 @@ public class CustomAndroidGridViewAdapter extends BaseAdapter {
     public interface OnUserSelectedListener {
         public void onSelect(User user);
     }
+    public void add(List<User> ulist){
+        userlist.addAll(ulist);
+        notifyDataSetChanged();
+    }
+    public void clear(){
+        userlist.clear();
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getCount() {

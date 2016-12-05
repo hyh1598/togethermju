@@ -31,8 +31,11 @@ public class GroupFragment extends Fragment {
     GroupAdapter mAdapter;
 
     TextView txtvType;
+
+
     @Nullable
     @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_group, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);

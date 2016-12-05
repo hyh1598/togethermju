@@ -10,6 +10,7 @@ import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sonjiho on 2016. 12. 5..
@@ -29,6 +30,14 @@ public class HorizontalListViewAdapter extends BaseAdapter {
 
     public interface OnRecommandUserSelectedListener {
         public void onSelect(User user);
+    }
+    public void add(List<User> ulist){
+        userList.addAll(ulist);
+        notifyDataSetChanged();
+    }
+    public void clear(){
+        userList.clear();
+        notifyDataSetChanged();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.mathpresso.togethermju.rest;
 
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Group;
+import com.example.mathpresso.togethermju.model.User;
 
 import java.util.List;
 
@@ -26,5 +27,12 @@ public interface GroupService {
                                    @Query("introduce")String introduce,
                                    @Query("email")String email
                          );
+    @GET("getmembers/")
+    Call<List<User>> getGroupMember(@Query("gid")String gid);
 
+    @GET("getrecommands/")
+    Call<List<User>> getRecommandMember(@Query("id")String id);
+
+    @GET("attendgroup/")
+    Call<DefaultResponse> attendgroup(@Query("email")String email,@Query("gid")String id);
 }

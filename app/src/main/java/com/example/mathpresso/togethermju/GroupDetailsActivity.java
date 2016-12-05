@@ -7,16 +7,24 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.CustomAndroidGridViewAdapter;
 import com.example.mathpresso.togethermju.adapter.HorizontalListViewAdapter;
+import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.listview.HorizontalListView;
 import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GroupDetailsActivity extends AppCompatActivity {
     private Group group;
@@ -31,6 +39,7 @@ public class GroupDetailsActivity extends AppCompatActivity {
     public ArrayList<User> userlist = new ArrayList<User>();
     public ArrayList<User> Recommand_userlist = new ArrayList<User>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,25 +47,16 @@ public class GroupDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         group = (Group) intent.getSerializableExtra("group");
 
+        Button attend = (Button)findViewById(R.id.attend_btn);
+        attend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         //Toolbar 초기화
         initToolbar();
-
-
-        Recommand_userlist.add(new User("손지호","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("최진주","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("성목경","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("이동혁","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
-        Recommand_userlist.add(new User("범위테스트","hardho@naver.com","컴퓨터공학과"));
-        //test data insert
-        userlist.add(new User("TEST1","TEST@mju","TEST"));
-        userlist.add(new User("TEST2","TEST@mju","TEST"));
-        userlist.add(new User("TEST3","TEST@mju","TEST"));
-        userlist.add(new User("TEST4","TEST@mju","TEST"));
-        userlist.add(new User("TEST5","TEST@mju","TEST"));
 
         //Horizontal List View Binding
         HorizontalListView recommand_listview = (HorizontalListView) findViewById(R.id.RecommandListView);
@@ -78,7 +78,8 @@ public class GroupDetailsActivity extends AppCompatActivity {
         });
         gridView.setAdapter(gridViewAdapter);
 
-        //uploadGroupMember();
+        uploadGroupMember();
+        uploadRecommandUser();
         //Loading...
     }
     private void initToolbar() {
@@ -93,11 +94,42 @@ public class GroupDetailsActivity extends AppCompatActivity {
 
     //Group MemberUploading
     private void uploadGroupMember() {
+        AppController.getInstance().getRestManager().getGroupService().getGroupMember(group.getId())
+                .enqueue(new Callback<List<User>>() {
+                    @Override
+                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                        if (response.isSuccess()) {
+                            Log.d("uploadGroupMember","SUCCESS!!");
+                            gridViewAdapter.clear();
+                            gridViewAdapter.add(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<User>> call, Throwable t) {
+                        Log.d("uploadGroupMember","Server Problem");
+                    }
+                });
     }
 
     //Recommand User Uploading
     private void  uploadRecommandUser(){
+        AppController.getInstance().getRestManager().getGroupService().getRecommandMember(group.getNotice())
+                .enqueue(new Callback<List<User>>() {
+                    @Override
+                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                        if (response.isSuccess()) {
+                            Log.d("uploadRecommandsMember","SUCCESS!!");
+                            horizontalListViewAdapter.clear();
+                            horizontalListViewAdapter.add(response.body());
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<List<User>> call, Throwable t) {
+                        Log.d("uploadRecommandsMember","Server Problem");
+                    }
+                });
     }
 
 }

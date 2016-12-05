@@ -167,8 +167,10 @@ public class NoticeDetailsActivity extends AppCompatActivity {
     private void initWatchBtn(boolean watch) {
         if (watch) {
             txtvWatch.setText("UNWATCH");
+
         } else {
             txtvWatch.setText("WATCH");
+
         }
     }
 

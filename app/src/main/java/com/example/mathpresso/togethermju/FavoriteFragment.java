@@ -29,6 +29,7 @@ public class FavoriteFragment extends Fragment {
 
     WatchedNoticeAdapter mAdapter;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
