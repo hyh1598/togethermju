@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.R;
@@ -39,6 +40,9 @@ public class GroupRegisterActivity extends AppCompatActivity {
 
         Button finish = (Button) findViewById(R.id.btn_finish);
         Button cancel = (Button) findViewById(btn_cancel);
+        TextView txtvTitle = (TextView)findViewById(R.id.txtvTitle);
+
+        txtvTitle.setText("그룹만들기");
 
         cancel.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -58,7 +58,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-    //Watch Button Setting Listener
+        //Watch Button Setting Listener
         btnWatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +74,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
         txtvTitle.setText(title);
         textViewContent.setText(content.trim());
-    //Watch State Button initialization
+        //Watch State Button initialization
         AppController.getInstance().getRestManager().getNoticeService().checkWatch(AppController.user.getEmail(), notice.getNoticeSeq())
                 .enqueue(new Callback<DefaultResponse>() {
                     @Override
@@ -97,7 +97,9 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
             @Override
             public void onSelect(Group group) {
-
+                Intent intent = new Intent(NoticeDetailsActivity.this,GroupDetailsActivity.class);
+                intent.putExtra("group",group);
+                startActivity(intent);
             }
         });
 
@@ -106,14 +108,14 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
         //Group Add Button.
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-       fab.attachToRecyclerView(recyclerView);
+        fab.attachToRecyclerView(recyclerView);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 //Group 등록 화면 전환
                 Intent intent = new Intent(getApplicationContext(), GroupRegisterActivity.class);
-                intent.putExtra("notice_seq",notice.getNoticeSeq());
+                intent.putExtra("notice_seq", notice.getNoticeSeq());
                 startActivity(intent);
 
             }
@@ -169,12 +171,13 @@ public class NoticeDetailsActivity extends AppCompatActivity {
             txtvWatch.setText("WATCH");
         }
     }
+
     //LINK 해당 게시물로
-    public void btnHomePage(View view){
+    public void btnHomePage(View view) {
         String board = notice.getBoard();
         String seq = notice.getNoticeSeq();
         //http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?spage=1&boardId=11294&boardSeq=60873592
         startActivity(new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?boardId="+board+"&boardSeq="+seq)));
+                Uri.parse("http://www.mju.ac.kr/mbs/mjukr/jsp/board/view.jsp?boardId=" + board + "&boardSeq=" + seq)));
     }
 }

@@ -34,10 +34,13 @@ public class GroupDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goup_details);
-        getIntent();
+        setContentView(R.layout.activity_group_details);
         Intent intent = getIntent();
         group = (Group) intent.getSerializableExtra("group");
+
+        //Toolbar 초기화
+        initToolbar();
+
 
         Recommand_userlist.add(new User("손지호","hardho@naver.com","컴퓨터공학과"));
         Recommand_userlist.add(new User("최진주","hardho@naver.com","컴퓨터공학과"));
@@ -65,10 +68,6 @@ public class GroupDetailsActivity extends AppCompatActivity {
         });
         recommand_listview.setAdapter(horizontalListViewAdapter);
 
-
-        //Toolbal Set for showing Group Name
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         gridView = (GridView) findViewById(R.id.grid);
         gridViewAdapter = new CustomAndroidGridViewAdapter(this, userlist, new CustomAndroidGridViewAdapter.OnUserSelectedListener() {
             @Override
@@ -78,12 +77,14 @@ public class GroupDetailsActivity extends AppCompatActivity {
             }
         });
         gridView.setAdapter(gridViewAdapter);
-        //Toolbar 초기화
-        initInstances();
+
         //uploadGroupMember();
         //Loading...
     }
-    private void initInstances() {
+    private void initToolbar() {
+        //Toolbal Set for showing Group Name
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         rootLayoutAndroid = (CoordinatorLayout) findViewById(R.id.android_coordinator_layout);
         collapsingToolbarLayoutAndroid = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_android_layout);
         //Group Name Binding

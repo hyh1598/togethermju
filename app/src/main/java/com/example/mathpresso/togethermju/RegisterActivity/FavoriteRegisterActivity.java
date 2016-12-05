@@ -200,6 +200,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             user.setFavorite(checkList);
             postUser();
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         } else {
             Toast.makeText(this, "관심사를 선택해주세요.", Toast.LENGTH_SHORT).show();
         }
