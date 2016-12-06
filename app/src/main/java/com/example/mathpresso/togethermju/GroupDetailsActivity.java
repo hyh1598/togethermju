@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.GridView;
@@ -12,9 +14,12 @@ import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.CustomAndroidGridViewAdapter;
 import com.example.mathpresso.togethermju.adapter.HorizontalListViewAdapter;
+import com.example.mathpresso.togethermju.adapter.ReplyListViewAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.listview.HorizontalListView;
 import com.example.mathpresso.togethermju.model.Group;
+import com.example.mathpresso.togethermju.model.Notice;
+import com.example.mathpresso.togethermju.model.Reply;
 import com.example.mathpresso.togethermju.model.User;
 
 import java.util.ArrayList;
@@ -29,12 +34,18 @@ public class GroupDetailsActivity extends AppCompatActivity {
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayoutAndroid;
     CoordinatorLayout rootLayoutAndroid;
+    HorizontalListViewAdapter horizontalListViewAdapter;
+    ReplyListViewAdapter replyListViewAdapter;
+    RecyclerView recyclerView;
+    //Group member Activity 로 옮길 예정 grid view
     GridView gridView;
     CustomAndroidGridViewAdapter gridViewAdapter;//GridViewAdapter
-    HorizontalListViewAdapter horizontalListViewAdapter;
+
+
 
     //test data
     public ArrayList<User> userlist = new ArrayList<User>();
+    public ArrayList<Reply> replylist = new ArrayList<Reply>();
     public ArrayList<User> Recommand_userlist = new ArrayList<User>();
 
 
@@ -48,29 +59,49 @@ public class GroupDetailsActivity extends AppCompatActivity {
         //Toolbar 초기화
         initToolbar();
 
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글1"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글2"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+        replylist.add(new Reply("손지호","2016-12-6","테스트 댓글3"));
+
+
+
+
+
         //Horizontal List View Binding
-        HorizontalListView recommand_listview = (HorizontalListView) findViewById(R.id.RecommandListView);
-        horizontalListViewAdapter = new HorizontalListViewAdapter(getApplicationContext(), Recommand_userlist, new HorizontalListViewAdapter.OnRecommandUserSelectedListener() {
+        HorizontalListView member_listview = (HorizontalListView) findViewById(R.id.MemberListView);
+        horizontalListViewAdapter = new HorizontalListViewAdapter(getApplicationContext(), userlist, new HorizontalListViewAdapter.OnRecommandUserSelectedListener() {
             @Override
             public void onSelect(User user) {
                 Toast.makeText(getApplicationContext(),user.getName(),Toast.LENGTH_SHORT).show();
             }
         });
-        recommand_listview.setAdapter(horizontalListViewAdapter);
+        member_listview.setAdapter(horizontalListViewAdapter);
 
-        gridView = (GridView) findViewById(R.id.grid);
-        gridViewAdapter = new CustomAndroidGridViewAdapter(this, userlist, new CustomAndroidGridViewAdapter.OnUserSelectedListener() {
+        replyListViewAdapter = new ReplyListViewAdapter(replylist, this, new ReplyListViewAdapter.OnReplySelectedListener() {
             @Override
-            public void onSelect(User user) {
-                Toast.makeText(getApplicationContext(),user.getName()+"를 선택",Toast.LENGTH_SHORT).show();
-                Log.d("ItemClick","CLICK");
+            public void onSelect(Notice notice) {
+                Toast.makeText(GroupDetailsActivity.this,"reply click",Toast.LENGTH_SHORT).show();
             }
         });
-        gridView.setAdapter(gridViewAdapter);
+
+        recyclerView =(RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(replyListViewAdapter);
 
         uploadGroupMember();
-        uploadRecommandUser();
-        //Loading...
+        //loadreplys();
+
     }
     private void initToolbar() {
         //Toolbal Set for showing Group Name
@@ -81,7 +112,21 @@ public class GroupDetailsActivity extends AppCompatActivity {
         //Group Name Binding
         collapsingToolbarLayoutAndroid.setTitle(group.getName());
     }
+    private void loadreplys(){
+        AppController.getInstance().getRestManager().getGroupService().getReplylist(group.getId()).enqueue(new Callback<List<Reply>>() {
+            @Override
+            public void onResponse(Call<List<Reply>> call, Response<List<Reply>> response) {
+                if(response.isSuccess()){
 
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Reply>> call, Throwable t) {
+
+            }
+        });
+    }
     //Group MemberUploading
     private void uploadGroupMember() {
         AppController.getInstance().getRestManager().getGroupService().getGroupMember(group.getId())
@@ -90,8 +135,8 @@ public class GroupDetailsActivity extends AppCompatActivity {
                     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                         if (response.isSuccess()) {
                             Log.d("uploadGroupMember","SUCCESS!!");
-                            gridViewAdapter.clear();
-                            gridViewAdapter.add(response.body());
+                            horizontalListViewAdapter.clear();
+                            horizontalListViewAdapter.add(response.body());
                         }
                     }
 
@@ -103,24 +148,24 @@ public class GroupDetailsActivity extends AppCompatActivity {
     }
 
     //Recommand User Uploading
-    private void  uploadRecommandUser(){
-        AppController.getInstance().getRestManager().getGroupService().getRecommandMember(group.getNotice())
-                .enqueue(new Callback<List<User>>() {
-                    @Override
-                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                        if (response.isSuccess()) {
-                            Log.d("uploadRecommandsMember","SUCCESS!!");
-                            horizontalListViewAdapter.clear();
-                            horizontalListViewAdapter.add(response.body());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<User>> call, Throwable t) {
-                        Log.d("uploadRecommandsMember","Server Problem");
-                    }
-                });
-    }
+//    private void  uploadRecommandUser(){
+//        AppController.getInstance().getRestManager().getGroupService().getRecommandMember(group.getNotice())
+//                .enqueue(new Callback<List<User>>() {
+//                    @Override
+//                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+//                        if (response.isSuccess()) {
+//                            Log.d("uploadRecommandsMember","SUCCESS!!");
+//                            horizontalListViewAdapter.clear();
+//                            horizontalListViewAdapter.add(response.body());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<List<User>> call, Throwable t) {
+//                        Log.d("uploadRecommandsMember","Server Problem");
+//                    }
+//                });
+//    }
 
 }
 

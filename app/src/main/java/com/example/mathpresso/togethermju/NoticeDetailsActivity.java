@@ -57,6 +57,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         textViewContent = (TextView) findViewById(R.id.notice_detail_content);
         btnWatch = (LinearLayout) this.findViewById(R.id.btnWatch);
         txtvWatch = (TextView) findViewById(R.id.txtvWatch);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         //Watch Button Setting Listener
         btnWatch.setOnClickListener(new View.OnClickListener() {

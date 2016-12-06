@@ -60,27 +60,34 @@
                 android:layout_height="80dp">
 <!--Horizonview 추천 User 리스트 보여주기-->
                 <TextView
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    android:text="추천 그룹원"
+                    android:text="Group Member"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp" />
-
+                    android:layout_height="wrap_content" />
                 <com.example.mathpresso.togethermju.listview.HorizontalListView
-                    android:id="@+id/RecommandListView"
+                    android:layout_margin="10dp"
+                    android:id="@+id/MemberListView"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@color/colorFocused"
                     />
             </LinearLayout>
-            <GridView
-                android:id="@+id/grid"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:id="@+id/listContainer"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:columnWidth="100dp"
-                android:gravity="center"
-                android:listSelector="#00000000"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth" />
+                android:orientation="horizontal"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

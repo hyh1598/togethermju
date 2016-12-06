@@ -2,6 +2,7 @@ package com.example.mathpresso.togethermju.rest;
 
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Group;
+import com.example.mathpresso.togethermju.model.Reply;
 import com.example.mathpresso.togethermju.model.User;
 
 import java.util.List;
@@ -35,4 +36,7 @@ public interface GroupService {
 
     @GET("attendgroup/")
     Call<DefaultResponse> attendgroup(@Query("email")String email,@Query("gid")String id);
+
+    @GET("replyview/")
+    Call<List<Reply>> getReplylist(@Query("gid")String gid);
 }
