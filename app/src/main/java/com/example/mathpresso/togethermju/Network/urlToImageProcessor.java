@@ -3,6 +3,9 @@ package com.example.mathpresso.togethermju.Network;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
+
+import com.example.mathpresso.togethermju.core.AppController;
 
 import java.io.BufferedInputStream;
 import java.net.URL;
@@ -16,9 +19,12 @@ public class urlToImageProcessor extends AsyncTask<String,Void,Bitmap> {
     @Override
     protected Bitmap doInBackground(String... params) {
         Bitmap imgBitmap = null;
-        String data = params[0];
+
+        String server_url  = AppController.getBaseUrl()+"loaduserimage/?email="+params[0];
+        Log.d("IMAGEPROCESSOR",server_url);
+        //"http://125.130.223.88:8000/mju/"
         try{
-            URL url = new URL(data);
+            URL url = new URL(server_url);
             URLConnection conn = url.openConnection();
             conn.connect();
             int nSize = conn.getContentLength();

@@ -7,7 +7,7 @@
     android:padding="10dp" >
 
     <ImageView
-        android:id="@+id/imageViewIcon"
+        android:id="@+id/item_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

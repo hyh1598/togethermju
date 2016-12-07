@@ -7,6 +7,7 @@
     android:layout_marginTop="30dp">
 
     <ImageView
+        android:id="@+id/user_imageView"
         android:layout_marginTop="30dp"
         android:background="#FFFFFF"
         android:layout_width="80dp"

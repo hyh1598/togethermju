@@ -1,6 +1,7 @@
 package com.example.mathpresso.togethermju;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,9 +18,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.core.AppController;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView mNavigationView;
     TextView emailTextView ;
     TextView nameTextView ;
+    ImageView imageView;
+    MainImageLoadProcessor imageloader;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -48,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("MAIN:RID",AppController.user.getRid());
             emailTextView.setText("이메일: \n" + AppController.user.getEmail());
             nameTextView.setText("이름: \n" + AppController.user.getName());
+
+            imageloader.execute(AppController.user.getEmail());
+
         }
 
     }
@@ -56,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageloader = new MainImageLoadProcessor();
         initializeLayout();
 
     }
@@ -74,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         emailTextView = (TextView)view.findViewById(R.id.email_text_view);
         nameTextView = (TextView)view.findViewById(R.id.name_text_view);
-
+        imageView = (ImageView)view.findViewById(R.id.user_imageView);
 
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
@@ -140,4 +150,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private class MainImageLoadProcessor extends urlToImageProcessor {
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            if(bitmap!=null){
+                //upload image on AppController user instance
+                AppController.user.setBitmap_pic(bitmap);
+                Log.d("IMAGESTATUS","SUCCESS");
+                imageView.setImageBitmap(bitmap);
+            }
+        }
+    }
 }

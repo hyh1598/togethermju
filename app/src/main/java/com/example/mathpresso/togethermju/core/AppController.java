@@ -82,8 +82,11 @@ public class AppController extends MultiDexApplication {
         spEditor.remove("rid");
         spEditor.remove("name");
         spEditor.remove("major");
+        spEditor.remove("pic");
         spEditor.commit();
     }
+
+    //db에서 최근 데이터 가져오기
     public static boolean UpdateUserinfo(AppController appController){
         User userinfo= new User();
 
@@ -94,15 +97,18 @@ public class AppController extends MultiDexApplication {
         userinfo.setName(appController.getStringValue("name",""));
         userinfo.setMajor(appController.getStringValue("major",""));
         userinfo.setRid(appController.getStringValue("rid",""));
+        userinfo.setPic(appController.getStringValue("pic",""));
         AppController.user = userinfo;
         return true;
     }
+    //데이터 저장하기
     public static void setUserinfo(AppController appController){
         /*data base 에 유저정보 저장*/
         appController.setString("name",user.getName());
         appController.setString("rid",user.getRid());
         appController.setString("email",user.getEmail());
         appController.setString("major",user.getEmail());
+        appController.setString("pic",user.getPic());
             /*
            String rid;
             String email;
