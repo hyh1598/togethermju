@@ -141,6 +141,7 @@ public class GroupDetailsActivity extends AppCompatActivity {
                             Log.d("uploadGroupMember","SUCCESS!!");
                             horizontalListViewAdapter.clear();
                             horizontalListViewAdapter.add(response.body());
+
                         }
                     }
 

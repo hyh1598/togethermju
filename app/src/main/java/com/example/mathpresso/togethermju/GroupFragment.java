@@ -32,6 +32,11 @@ public class GroupFragment extends Fragment {
 
     TextView txtvType;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadJoinGroupList();
+    }
 
     @Nullable
     @Override

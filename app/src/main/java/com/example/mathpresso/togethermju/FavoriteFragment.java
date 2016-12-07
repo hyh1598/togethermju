@@ -52,6 +52,12 @@ public class FavoriteFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadWatchedNotice();
+    }
+
     private void loadWatchedNotice() {
 
 
