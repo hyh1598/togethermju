@@ -19,16 +19,16 @@ import java.util.List;
 public class HorizontalListViewAdapter extends BaseAdapter {
 
     private Context mContext;
-    private OnRecommandUserSelectedListener mListener;
+    private OnMemberSelectedListener mListener;
     private ArrayList<User> userList = new ArrayList<User>();
 
-    public HorizontalListViewAdapter(Context context,ArrayList<User> data,OnRecommandUserSelectedListener listener){
+    public HorizontalListViewAdapter(Context context,ArrayList<User> data,OnMemberSelectedListener listener){
         mContext = context;
         mListener = listener;
         userList = data;
     }
 
-    public interface OnRecommandUserSelectedListener {
+    public interface OnMemberSelectedListener {
         public void onSelect(User user);
     }
     public void add(List<User> ulist){
@@ -38,6 +38,9 @@ public class HorizontalListViewAdapter extends BaseAdapter {
     public void clear(){
         userList.clear();
         notifyDataSetChanged();
+    }
+    public Context getActivity(){
+        return mContext;
     }
 
     @Override

@@ -21,6 +21,10 @@ public class AppController extends MultiDexApplication {
     private Retrofit mRetrofit;
     public static User user = new User();
 
+    public static String getBaseUrl() {
+        return baseUrl;
+    }
+
     private static final String baseUrl = "http://125.130.223.88:8000/mju/";
     private static final String SP_NAME = "localdb";
 

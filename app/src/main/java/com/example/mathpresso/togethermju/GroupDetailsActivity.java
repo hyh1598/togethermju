@@ -80,12 +80,16 @@ public class GroupDetailsActivity extends AppCompatActivity {
 
         //Horizontal List View Binding
         HorizontalListView member_listview = (HorizontalListView) findViewById(R.id.MemberListView);
-        horizontalListViewAdapter = new HorizontalListViewAdapter(getApplicationContext(), userlist, new HorizontalListViewAdapter.OnRecommandUserSelectedListener() {
+        horizontalListViewAdapter = new HorizontalListViewAdapter(getApplicationContext(), userlist, new HorizontalListViewAdapter.OnMemberSelectedListener() {
             @Override
             public void onSelect(User user) {
+                Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
+                intent.putExtra("user",user);
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(),user.getName(),Toast.LENGTH_SHORT).show();
             }
         });
+
         member_listview.setAdapter(horizontalListViewAdapter);
 
         replyListViewAdapter = new ReplyListViewAdapter(replylist, this, new ReplyListViewAdapter.OnReplySelectedListener() {

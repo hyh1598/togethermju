@@ -1,8 +1,11 @@
 package com.example.mathpresso.togethermju.model;
 
+import android.graphics.Bitmap;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,18 +13,38 @@ import java.util.ArrayList;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @DatabaseTable(tableName = "user")
-public class User {
-    String rid;
+public class User implements Serializable {
+    String rid;//for GCM register ID
     String email;
     String password;
     String gender;
     String birth;
     String major;
     String name;
-    ArrayList<String> interest;
+    String pic;//image path in server
+    Bitmap bitmap_pic;//image
+    public void setBitmap_pic(Bitmap bitmap_pic) {
+        this.bitmap_pic = bitmap_pic;
+    }
+
+    public Bitmap getBitmap_pic() {
+        return bitmap_pic;
+    }
+
+
+
+    public String getPic() {
+        return pic;
+    }
+
+    ArrayList<String> interest;//don`t use
     public User(){
 
     }
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
     public User(String name, String email,String major){
         this.name = name;
         this.email = email;

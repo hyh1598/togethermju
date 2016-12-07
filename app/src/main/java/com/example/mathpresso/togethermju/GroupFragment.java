@@ -39,7 +39,6 @@ public class GroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_group, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        txtvType = (TextView) rootView.findViewById(R.id.txtvType);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //add mock data
@@ -51,6 +50,7 @@ public class GroupFragment extends Fragment {
 
                 //when Group Item Clicked, go to GroupDetailActivity.class
                 Intent intent = new Intent(getActivity(), GroupDetailsActivity.class);
+
                 intent.putExtra("group", group);//send selected Group object.
                 startActivity(intent);
             }
