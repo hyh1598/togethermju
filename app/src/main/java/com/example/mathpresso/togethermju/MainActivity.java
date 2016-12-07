@@ -54,8 +54,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("MAIN:RID",AppController.user.getRid());
             emailTextView.setText("이메일: \n" + AppController.user.getEmail());
             nameTextView.setText("이름: \n" + AppController.user.getName());
+            if(AppController.user.getBitmap_pic()==null){
+                imageloader = new MainImageLoadProcessor();
+                imageloader.execute(AppController.user.getEmail());
+            }
 
-            imageloader.execute(AppController.user.getEmail());
 
         }
 
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imageloader = new MainImageLoadProcessor();
+
         initializeLayout();
 
     }

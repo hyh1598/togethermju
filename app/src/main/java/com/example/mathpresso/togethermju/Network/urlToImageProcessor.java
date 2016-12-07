@@ -13,6 +13,8 @@ import java.net.URLConnection;
 
 /**
  * Created by sonjiho on 2016. 12. 8..
+ * user email 넣어주면 user 의 사진을 돌려줌
+ * new urlToImageProcessor.execute([email])
  */
 
 public class urlToImageProcessor extends AsyncTask<String,Void,Bitmap> {
