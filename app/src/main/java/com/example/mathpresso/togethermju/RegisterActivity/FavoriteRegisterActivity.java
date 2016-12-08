@@ -44,7 +44,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
 
     public void postUser() {
         Call<User> call = AppController.getInstance().getRestManager().getUserService().getUserInformation(user.getEmail(),
-                user.getName(), user.getRid(), user.getBirth(), user.getMajor(), user.getPassword());
+                user.getName(), user.getRid(), user.getBirth(), user.getMajor(), user.getPassword(), user.getGender());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

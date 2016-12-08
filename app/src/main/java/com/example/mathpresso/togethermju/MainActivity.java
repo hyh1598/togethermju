@@ -49,6 +49,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.example.mathpresso.togethermju.edit.PasswordEditActivity;
+import com.example.mathpresso.togethermju.edit.UserEditActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1001;
@@ -148,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 AppController.getInstance().clearLocalStore();
                 moveToLoginActivity();
 
+                break;
+            case R.id.menu_password_setting:
+                startActivity(new Intent(this, PasswordEditActivity.class));
                 break;
         }
         return false;

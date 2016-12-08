@@ -8,20 +8,20 @@
         <item>화학과</item>
         <item>생명과학정보학부</item>
         <item>전기공학과</item>
-        <item>전자공학</item>
+        <item>전자공학과</item>
         <item>정보통신공학과</item>
         <item>화학공학과</item>
         <item>신소재공학과</item>
-        <item>환경에너지공학</item>
+        <item>환경에너지공학과</item>
         <item>토목환경공학과</item>
         <item>교통공학과</item>
-        <item>기계공학</item>
+        <item>기계공학과</item>
         <item>산업경영공학과</item>
         <item>디자인학부</item>
         <item>체육학부</item>
         <item>음악학부</item>
         <item>바둑학과</item>
-        <item>영화뮤지컬학</item>
+        <item>영화뮤지컬학부</item>
         <item>건축학부</item>
         <item>공간디자인학과</item>
     </string-array>
@@ -43,30 +43,30 @@
     </string-array>
 
     <string-array name="month">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
         <item>10</item>
         <item>11</item>
         <item>12</item>
     </string-array>
 
     <string-array name="day">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
         <item>10</item>
         <item>11</item>
         <item>12</item>

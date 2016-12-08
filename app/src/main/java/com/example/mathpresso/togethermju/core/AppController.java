@@ -120,9 +120,12 @@ public class AppController extends MultiDexApplication {
         if (email.equals(""))
             return false;
         userinfo.setEmail(email);
-        userinfo.setName(appController.getStringValue("name", ""));
-        userinfo.setMajor(appController.getStringValue("major", ""));
-        userinfo.setRid(appController.getStringValue("rid", ""));
+        userinfo.setName(appController.getStringValue("name",""));
+        userinfo.setMajor(appController.getStringValue("major",""));
+        userinfo.setRid(appController.getStringValue("rid",""));
+        userinfo.setGender(appController.getStringValue("gender",""));
+        userinfo.setBirth(appController.getStringValue("birth",""));
+        userinfo.setPassword(appController.getStringValue("password",""));
 
         AppController.user = userinfo;
         return true;
@@ -131,10 +134,14 @@ public class AppController extends MultiDexApplication {
     //데이터 저장하기
     public static void setUserinfo(AppController appController) {
         /*data base 에 유저정보 저장*/
-        appController.setString("name", user.getName());
-        appController.setString("rid", user.getRid());
-        appController.setString("email", user.getEmail());
-        appController.setString("major", user.getEmail());
+
+        appController.setString("name",user.getName());
+        appController.setString("rid",user.getRid());
+        appController.setString("email",user.getEmail());
+        appController.setString("major",user.getMajor());
+        appController.setString("gender",user.getGender());
+        appController.setString("birth",user.getBirth());
+        appController.setString("password",user.getPassword());
 
             /*
            String rid;
