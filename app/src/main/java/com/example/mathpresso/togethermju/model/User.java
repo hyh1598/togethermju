@@ -8,6 +8,8 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import io.realm.RealmObject;
+
 /**
  * Created by donghyuk on 2016. 11. 17..
  */

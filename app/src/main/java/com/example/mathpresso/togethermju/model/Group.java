@@ -11,18 +11,18 @@ import java.util.ArrayList;
  * Created by choijinjoo on 2016. 11. 17..
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-@DatabaseTable(tableName = "group")
+
 public class Group implements Serializable{
 
-    @DatabaseField
+
     String id;
-    @DatabaseField
+
     String name;
-    @DatabaseField
+
     String introduce;
-    @DatabaseField
+
     String notice;
-    @DatabaseField
+
     ArrayList<String> students;
 
     public void setId(String id) {

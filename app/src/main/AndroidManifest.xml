@@ -35,7 +35,9 @@
             android:name=".GroupDetailsActivity"
             android:label="@string/title_activity_goup_details"
             android:theme="@style/AppTheme" />
-        <activity android:name=".GroupMemberActivity"></activity>
+        <activity
+            android:name=".GroupMemberActivity"
+           />
     </application>
 
 </manifest>
