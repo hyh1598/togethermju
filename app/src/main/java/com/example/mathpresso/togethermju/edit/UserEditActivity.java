@@ -9,16 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.main.MainActivity;
+import com.example.mathpresso.togethermju.MainActivity;
 import com.example.mathpresso.togethermju.R;
-import com.example.mathpresso.togethermju.core.AppController;
-import com.example.mathpresso.togethermju.model.User;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.example.mathpresso.togethermju.core.AppController.user;
 
@@ -27,7 +20,7 @@ public class UserEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_edit);
+        setContentView(R.layout.activity_edit_user);
 
         Spinner majorSpinner = (Spinner) findViewById(R.id.major_spinner);
         Spinner yearSpinner = (Spinner) findViewById(R.id.year_spinner);
@@ -39,13 +32,13 @@ public class UserEditActivity extends AppCompatActivity {
 
         EditText editText = (EditText) findViewById(R.id.user_name);
         editText.setText(user.getName());
-
+/*
         if (user.getGender().equals("남자")) {
             maleButton.setChecked(true);
         } else if (user.getGender().equals("여자")) {
             femaleButton.setChecked(true);
         }
-
+*/
         ArrayAdapter majorAdapter = ArrayAdapter.createFromResource(this, R.array.major,
                 android.R.layout.simple_spinner_item);
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,27 +64,6 @@ public class UserEditActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
     public void clickEditButton(View view) {
-        editUser();
-    }
 
-    public void editUser() {
-        Call<User> call = AppController.getInstance().getRestManager().getUserService().editUserInformation(user.getEmail(),
-                user.getName(), user.getBirth(), user.getMajor(), user.getGender());
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccess()) {
-                    Toast.makeText(getBaseContext(), "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                } else {
-                    int statusCode = response.code();
-                    Log.i("MY TAG", "응답 코드: " + statusCode);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.i("MY TAG", "서버 onFailure 내용: " + t.getMessage());
-            }
-        });
     }
 }

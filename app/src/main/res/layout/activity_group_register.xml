@@ -14,7 +14,13 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:id="@+id/txtvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
@@ -26,82 +32,86 @@
         android:paddingRight="20dp"
         android:paddingTop="60dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:hint="title" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_purpose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="purpose" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="content" />
-        </android.support.design.widget.TextInputLayout>
-        <TextView
-            android:textSize="25dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="모을 인원을선택하세요."
-            android:layout_margin="20dp"/>
-        <Spinner
-            android:id="@+id/personnel_spinner"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="그룹이름 :"
+                android:textStyle="bold" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:id="@+id/input_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-        </Spinner>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="목적 :"
+                android:textStyle="bold" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_purpose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center|bottom"
-            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_weight="1">
-            <Button android:id="@+id/btn_finish"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/b_primary_rad4"
                 android:onClick="finish"
+                android:text="만들기"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="finish"
-                android:background="@color/colorPrimary"
-                android:layout_marginTop="40dp"
-                android:textColor="@android:color/white"
-                />
-            <Button android:id="@+id/btn_cancel"
-                android:onClick="cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="cancel"
-                android:background="@color/colorPrimary"
-                android:layout_marginTop="40dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@android:color/white"/>
+                android:layout_marginTop="40dp"
+                android:background="@drawable/b_primary_rad4"
+                android:onClick="cancel"
+                android:text="취소"
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </LinearLayout>
 

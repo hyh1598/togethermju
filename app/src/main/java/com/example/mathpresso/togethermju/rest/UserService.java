@@ -3,7 +3,6 @@ package com.example.mathpresso.togethermju.rest;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.example.mathpresso.togethermju.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,27 +17,19 @@ public interface UserService {
     //FIXME /noticelist
     @GET("useradd")
     Call<User> getUserInformation(@Query("email")String Email,
-                                 @Query("name")String Name,
-                                 @Query("rid")String RID,
-                                 @Query("birth")String Birth,
-                                 @Query("major")String Major,
-                                 @Query("password")String Password,
-                                  @Query("gender")String Gender);
+                                  @Query("name")String Name,
+                                  @Query("rid")String RID,
+                                  @Query("birth")String Birth,
+                                  @Query("major")String Major,
+                                  @Query("password")String Password);
 
     @GET("userverify")
     Call<User> getUserAuth(@Query("email")String Email,
                            @Query("password")String password);
 
     @GET("useredit")
-    Call<User> editUserInformation(@Query("email")String Email,
-                                  @Query("name")String Name,
-                                  @Query("birth")String Birth,
-                                   @Query("gender")String gender,
-                                   @Query("major")String major);
-
-    @GET("userPasswordEdit")
-    Call<User> editUserPasswordInformation(@Query("password")String Password);
-
-    @GET("userInterestedit")
-    Call<User> editUserInterestInformation(@Query("interest")ArrayList<String> interest);
+    Call<User> editUserInformation(@Query("name")String Email,
+                                   @Query("password")String Password,
+                                   @Query("major")String Major,
+                                   @Query("birth")String Birth);
 }

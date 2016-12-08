@@ -2,11 +2,9 @@ package com.example.mathpresso.togethermju.core;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.Notice;
-import com.example.mathpresso.togethermju.model.User;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -23,13 +21,12 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
 
     private Dao<Notice, Integer> simpleNoticeDao = null;
     private Dao<Group, Integer> simpleGroupDao = null;
-    private Dao<User, Integer> simpleuUserDao = null;
 
 
 
     private final Class databaseClasses[] = {
             Group.class,
-            Notice.class, User.class
+            Notice.class
     };
 
     public DatabaseManager(Context context) {
@@ -70,11 +67,5 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
             simpleGroupDao = getDao(Group.class);
         }
         return simpleGroupDao;
-    }
-    public Dao<User, Integer> getSimpleUserDataDao() throws SQLException {
-        if (simpleuUserDao == null) {
-            simpleuUserDao = getDao(User.class);
-        }
-        return simpleuUserDao;
     }
 }

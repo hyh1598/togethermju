@@ -4,49 +4,77 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * Created by choijinjoo on 2016. 11. 17..
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @DatabaseTable(tableName = "group")
-public class Group {
+public class Group implements Serializable{
+
     @DatabaseField
-    Integer id;
+    String id;
     @DatabaseField
     String name;
     @DatabaseField
     String introduce;
+    @DatabaseField
+    String notice;
+    @DatabaseField
+    ArrayList<String> students;
 
-    public Group() {
-    }
-
-    public Group(Integer id, String name, String introduce) {
-        this.name = name;
+    public void setId(String id) {
         this.id = id;
-        this.introduce = introduce;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getIntroduce() {
-        return introduce;
     }
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce;
     }
 
-    public String getName() {
-        return name;
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setStudents(ArrayList<String> students) {
+        this.students = students;
+    }
+
+
+
+    public Group() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public String getNotice() {
+        return notice;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<String> getStudents() {
+        return students;
+    }
+
+
+
+
+
+
+
+
 }
