@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.notice;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.RegisterActivity.GroupResiterActivity;
+import com.example.mathpresso.togethermju.R;
+import com.example.mathpresso.togethermju.register.GroupResiterActivity;
 import com.example.mathpresso.togethermju.adapter.ListViewAdapter;
 import com.example.mathpresso.togethermju.model.Notice;
 import com.melnykov.fab.FloatingActionButton;

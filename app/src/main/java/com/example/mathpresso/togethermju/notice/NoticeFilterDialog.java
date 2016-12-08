@@ -1,14 +1,13 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.notice;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.KeyboardShortcutGroup;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
+
+import com.example.mathpresso.togethermju.R;
 
 
 /**

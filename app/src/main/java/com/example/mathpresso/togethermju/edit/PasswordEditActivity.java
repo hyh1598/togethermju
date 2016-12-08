@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.mathpresso.togethermju.MainActivity;
+import com.example.mathpresso.togethermju.main.MainActivity;
 import com.example.mathpresso.togethermju.R;
 
 public class PasswordEditActivity extends AppCompatActivity {

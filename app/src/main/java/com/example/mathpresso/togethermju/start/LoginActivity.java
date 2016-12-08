@@ -1,27 +1,22 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.start;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
+import com.example.mathpresso.togethermju.main.MainActivity;
+import com.example.mathpresso.togethermju.R;
+import com.example.mathpresso.togethermju.register.EmailRegisterActivity;
 import com.example.mathpresso.togethermju.model.User;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.example.mathpresso.togethermju.core.AppController;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.mathpresso.togethermju.core.AppController.user;
 
 
 public class LoginActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju.RegisterActivity;
+package com.example.mathpresso.togethermju.register;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

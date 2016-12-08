@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -19,10 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.edit.InterestEditActivity;
 import com.example.mathpresso.togethermju.edit.PasswordEditActivity;
 import com.example.mathpresso.togethermju.edit.UserEditActivity;
+import com.example.mathpresso.togethermju.fragment.FavoriteFragment;
+import com.example.mathpresso.togethermju.fragment.GroupFragment;
+import com.example.mathpresso.togethermju.fragment.NoticeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final String[] TAB_TITLES = {

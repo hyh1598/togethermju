@@ -1,21 +1,12 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.start;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
-import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
-import com.example.mathpresso.togethermju.model.User;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.location.LocationServices;
-
-import java.io.IOException;
-
-import static com.example.mathpresso.togethermju.core.AppController.user;
+import com.example.mathpresso.togethermju.R;
+import com.example.mathpresso.togethermju.register.EmailRegisterActivity;
 
 public class StartMainActivity extends AppCompatActivity {
     @Override

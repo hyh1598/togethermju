@@ -1,9 +1,11 @@
-package com.example.mathpresso.togethermju;
+package com.example.mathpresso.togethermju.start;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.mathpresso.togethermju.R;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju.RegisterActivity;
+package com.example.mathpresso.togethermju.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.LoginActivity;
+import com.example.mathpresso.togethermju.start.LoginActivity;
 import com.example.mathpresso.togethermju.R;
 
 import static com.example.mathpresso.togethermju.core.AppController.user;

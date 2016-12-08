@@ -1,4 +1,4 @@
-package com.example.mathpresso.togethermju.RegisterActivity;
+package com.example.mathpresso.togethermju.register;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.LoginActivity;
+import com.example.mathpresso.togethermju.start.LoginActivity;
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;

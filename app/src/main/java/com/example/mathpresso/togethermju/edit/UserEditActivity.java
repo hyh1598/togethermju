@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.MainActivity;
+import com.example.mathpresso.togethermju.main.MainActivity;
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;
