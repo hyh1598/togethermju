@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,13 @@ public class FavoriteFragment extends Fragment {
 
     WatchedNoticeAdapter mAdapter;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("favoriteFragmet","UPdate");
 
+        loadWatchedNotice();
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,21 +54,14 @@ public class FavoriteFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(mAdapter);
-
         loadWatchedNotice();
         return rootView;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        loadWatchedNotice();
-    }
+
 
     private void loadWatchedNotice() {
-
-
-        AppController.getInstance().getRestManager().getNoticeService().getWatchednotices("hardho@naver.com")
+        AppController.getInstance().getRestManager().getNoticeService().getWatchednotices(AppController.user.getEmail())
                 .enqueue(new Callback<List<Notice>>() {
                     @Override
                     public void onResponse(Call<List<Notice>> call, Response<List<Notice>> response) {

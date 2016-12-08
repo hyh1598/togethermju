@@ -1,14 +1,12 @@
 package com.example.mathpresso.togethermju.model;
 
-import android.graphics.Bitmap;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import io.realm.RealmObject;
+
 
 /**
  * Created by donghyuk on 2016. 11. 17..
@@ -23,28 +21,12 @@ public class User implements Serializable {
     String birth;
     String major;
     String name;
-    String pic;//image path in server
-    Bitmap bitmap_pic;//image
-    public void setBitmap_pic(Bitmap bitmap_pic) {
-        this.bitmap_pic = bitmap_pic;
-    }
-
-    public Bitmap getBitmap_pic() {
-        return bitmap_pic;
-    }
-
-
-
-    public String getPic() {
-        return pic;
-    }
-
     ArrayList<String> interest;//don`t use
+
+
+
     public User(){
 
-    }
-    public void setPic(String pic) {
-        this.pic = pic;
     }
 
     public User(String name, String email,String major){

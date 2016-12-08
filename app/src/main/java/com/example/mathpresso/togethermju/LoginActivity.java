@@ -2,7 +2,6 @@ package com.example.mathpresso.togethermju;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;
@@ -25,16 +23,13 @@ public class LoginActivity extends AppCompatActivity {
     EditText editUserPasswordText ;
     String userEmail;//userEmail
     String userPassword;//userPassword
-    loginImageLoadProcessor imageloader;
+
     ProgressDialog progress;//wating progress diagram
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        imageloader = new loginImageLoadProcessor();
-
     }
 
     public void clickRegisterButton(View view) {
@@ -61,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
             progress.show();
 // To dismiss the dialog
-
 
         }
     }
@@ -99,14 +93,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     Toast.makeText(getBaseContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show();
-                    //image 받아오기
 
-                    imageloader.execute(user.getEmail());
 
                     progress.dismiss();//PROGRESS DIAGRAM 실행 종료
                     startMainActivity();
-
-
 
                 } else {
                     //Login problem
@@ -126,15 +116,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    //image download
-    private class loginImageLoadProcessor extends urlToImageProcessor{
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            if(bitmap!=null){
-                //upload image on AppController user instance
-                AppController.user.setBitmap_pic(bitmap);
-            }
-        }
-    }
+
 }

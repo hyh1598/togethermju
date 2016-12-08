@@ -35,6 +35,7 @@ public class GroupFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d("GroupFragmet","UPdate");
         loadJoinGroupList();
     }
 

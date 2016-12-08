@@ -7,8 +7,7 @@ import com.example.mathpresso.togethermju.model.User;
 
 import java.security.PrivateKey;
 
-import co.moonmonkeylabs.realmsearchview.RealmSearchView;
-import io.realm.Realm;
+
 
 public class GroupMemberActivity extends AppCompatActivity {
 

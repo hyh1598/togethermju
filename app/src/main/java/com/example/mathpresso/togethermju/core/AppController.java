@@ -97,7 +97,7 @@ public class AppController extends MultiDexApplication {
         userinfo.setName(appController.getStringValue("name",""));
         userinfo.setMajor(appController.getStringValue("major",""));
         userinfo.setRid(appController.getStringValue("rid",""));
-        userinfo.setPic(appController.getStringValue("pic",""));
+
         AppController.user = userinfo;
         return true;
     }
@@ -108,7 +108,7 @@ public class AppController extends MultiDexApplication {
         appController.setString("rid",user.getRid());
         appController.setString("email",user.getEmail());
         appController.setString("major",user.getEmail());
-        appController.setString("pic",user.getPic());
+
             /*
            String rid;
             String email;
