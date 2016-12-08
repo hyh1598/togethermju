@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;
@@ -97,6 +98,8 @@ public class HorizontalListViewAdapter extends BaseAdapter {
         Glide.with(mContext).load(server_url)
                 .fitCenter()
                 .bitmapTransform(new CropCircleTransformation(mContext))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(viewHolder.icon);
 
         //new imageViewProcessor().execute(viewHolder);
