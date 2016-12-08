@@ -35,6 +35,7 @@ public class GroupFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d("GroupFragmet","UPdate");
         loadJoinGroupList();
     }
 
@@ -77,6 +78,8 @@ public class GroupFragment extends Fragment {
                         if (response.isSuccess()) {
                             mAdapter.clear();
                             mAdapter.add(response.body());
+
+
                         }
 
                     }

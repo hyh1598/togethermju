@@ -57,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
             progress.show();
 // To dismiss the dialog
 
-
         }
     }
     //after UserAuth, if Success Start MainActivity
