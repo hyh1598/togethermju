@@ -1,12 +1,16 @@
 package com.example.mathpresso.togethermju.rest;
 
-import com.example.mathpresso.togethermju.model.Notice;
+import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.User;
 
-import java.util.List;
-
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -16,14 +20,21 @@ import retrofit2.http.Query;
 public interface UserService {
     //FIXME /noticelist
     @GET("useradd")
-    Call<User> getUserInformation(@Query("email")String Email,
-                                 @Query("name")String Name,
-                                 @Query("rid")String RID,
-                                 @Query("birth")String Birth,
-                                 @Query("major")String Major,
-                                 @Query("password")String Password);
+    Call<User> getUserInformation(@Query("email") String Email,
+                                  @Query("name") String Name,
+                                  @Query("rid") String RID,
+                                  @Query("birth") String Birth,
+                                  @Query("major") String Major,
+                                  @Query("password") String Password);
 
     @GET("userverify")
-    Call<User> getUserAuth(@Query("email")String Email,
-                           @Query("password")String password);
+    Call<User> getUserAuth(@Query("email") String Email,
+                           @Query("password") String password);
+
+    @FormUrlEncoded
+    @Multipart
+    @POST("uploadpic")
+    Call<DefaultResponse> uploadProfileImage(@Field("email") String email, @Part("photo") RequestBody image);
+
+
 }

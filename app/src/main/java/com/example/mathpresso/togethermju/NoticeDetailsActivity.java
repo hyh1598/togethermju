@@ -17,6 +17,7 @@ import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.Notice;
+import com.example.mathpresso.togethermju.tool.Utils;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
@@ -98,8 +99,8 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
             @Override
             public void onSelect(Group group) {
-                Intent intent = new Intent(NoticeDetailsActivity.this,GroupDetailsActivity.class);
-                intent.putExtra("group",group);
+                Intent intent = new Intent(NoticeDetailsActivity.this, GroupDetailsActivity.class);
+                intent.putExtra("group", group);
                 startActivity(intent);
             }
         });
@@ -126,22 +127,23 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
 
     private void loadNoticeGroupList(String id) {
-        //FIXME id값으로 바꿔야함
-        AppController.getInstance().getRestManager().getGroupService().getNoticeGroup(notice.getNoticeSeq())
-                .enqueue(new Callback<List<Group>>() {
-                    @Override
-                    public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-                        if (response.isSuccess()) {
-                            mAdapter.clear();
-                            mAdapter.add(response.body());
+        if (!Utils.isEmpty(id)) {
+            AppController.getInstance().getRestManager().getGroupService().getNoticeGroup(id)
+                    .enqueue(new Callback<List<Group>>() {
+                        @Override
+                        public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
+                            if (response.isSuccess()) {
+                                mAdapter.clear();
+                                mAdapter.add(response.body());
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<List<Group>> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<List<Group>> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     private void postWatchNotice(Notice notice) {
