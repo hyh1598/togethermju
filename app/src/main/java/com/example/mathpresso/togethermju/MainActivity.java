@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("MAIN:NAME", AppController.user.getName());
             Log.d("MAIN:EMAIL", AppController.user.getEmail());
             Log.d("MAIN:RID", AppController.user.getRid());
+
             emailTextView.setText(AppController.user.getEmail());
             nameTextView.setText(AppController.user.getName());
             loadProfileImage();

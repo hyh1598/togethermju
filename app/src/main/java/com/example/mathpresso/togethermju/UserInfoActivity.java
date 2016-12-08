@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
 import android.widget.TextView;
-
 
 import com.example.mathpresso.togethermju.model.User;
 
@@ -26,7 +23,7 @@ public class UserInfoActivity extends AppCompatActivity {
     TextView major;
     TextView gender;
     TextView age;
-    int changeAge;
+
 
 
 
@@ -53,7 +50,7 @@ public class UserInfoActivity extends AppCompatActivity {
         changeAge = 2017 - Integer.parseInt(user.getBirth().substring(0, 4));
         String.valueOf(changeAge);
         */
-        age.setText(changeAge);
+        age.setText(user.getBirth());
         email.setText(user.getEmail());
         gender.setText(user.getGender());
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -70,7 +70,8 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/introduce_txtv"
+                        android:background="@color/cast_expanded_controller_progress_text_color"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:padding="10dp"
@@ -117,6 +118,7 @@
                             android:background="@drawable/b_primary_rad18">
 
                             <TextView
+                                android:id="@+id/attend_status"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
@@ -138,60 +140,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
-                    <LinearLayout
-                        android:id="@+id/containerComment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        
-                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:id="@+id/containerMessage"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/white"
-                                android:orientation="horizontal">
-
-                                <EditText
-                                    android:id="@+id/etxtContent"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:background="#fff"
-                                    android:inputType="textMultiLine"
-                                    android:isScrollContainer="true"
-                                    android:maxHeight="96dp"
-                                    android:minHeight="40dp"
-                                    android:paddingLeft="6dp"
-                                    android:textSize="14dp" />
-                            </LinearLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/btnSubmit"
-                                android:layout_width="60dp"
-                                android:layout_height="match_parent"
-                                android:background="@color/colorPrimary"
-                                android:enabled="false">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:text="등록"
-                                    android:textColor="@color/white"
-                                    android:textSize="14dp" />
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
 
                 </RelativeLayout>
 
@@ -201,4 +150,58 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/containerComment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/containerMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etxtContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="#fff"
+                    android:inputType="textMultiLine"
+                    android:isScrollContainer="true"
+                    android:maxHeight="96dp"
+                    android:minHeight="40dp"
+                    android:paddingLeft="6dp"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/btnSubmit"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:enabled="false">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="등록"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

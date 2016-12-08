@@ -1,8 +1,8 @@
 package com.example.mathpresso.togethermju;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,13 +12,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.CustomAndroidGridViewAdapter;
@@ -26,7 +26,6 @@ import com.example.mathpresso.togethermju.adapter.HorizontalListViewAdapter;
 import com.example.mathpresso.togethermju.adapter.ReplyListViewAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.listview.HorizontalListView;
-
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.GroupReply;
@@ -36,7 +35,6 @@ import com.example.mathpresso.togethermju.tool.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import de.mrapp.android.dialog.MaterialDialog;
 import retrofit2.Call;
@@ -61,6 +59,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
     RelativeLayout btnSubmit;
     LinearLayout containerComment;
     RelativeLayout btnJoin;
+    TextView attendstate;
 
 
     //test data
@@ -77,10 +76,8 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
 
         //Toolbar 초기화
         initToolbar();
-
         // layout 초기화
         initializeLayout();
-
         isGroupMember();
         loadGroupMember();
         loadreplies();
@@ -123,6 +120,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
         btnSubmit.setOnClickListener(this);
         btnJoin = (RelativeLayout) findViewById(R.id.btnJoin);
         btnJoin.setOnClickListener(this);
+        attendstate = (TextView)findViewById(R.id.attend_status);
 
 
     }
@@ -136,6 +134,8 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
         collapsingToolbarLayoutAndroid = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_android_layout);
         //Group Name Binding
         collapsingToolbarLayoutAndroid.setTitle(group.getName());
+        TextView textView = (TextView)findViewById(R.id.introduce_txtv);
+        textView.setText(group.getIntroduce());
     }
 
 
@@ -209,10 +209,14 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
                     public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                         if (response.isSuccess() && response.body().getResult().equals("true")) {
                             if (response.body().getResult().equals("true")) {
+                                Log.d("INPUTSTATUE","VISIBLE");
                                 containerComment.setVisibility(View.VISIBLE);
+                                attendstate.setText("참여 중");
                             } else {
                                 containerComment.setVisibility(View.GONE);
 
+                                Log.d("INPUTSTATUE","GONE");
+                                attendstate.setText("그룹 참여하기");
                             }
                         }
                     }
@@ -261,6 +265,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
                             public void onClick(DialogInterface dialog, int which) {
                                 attendGroup();
                                 dialog.dismiss();
+                                isGroupMember();
                             }
                         })
                         .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
@@ -272,6 +277,8 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
                 dialog.show();
                 break;
         }
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etxtContent.getWindowToken(), 0);
     }
 
     //Recommand User Uploading
