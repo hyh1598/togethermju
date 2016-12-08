@@ -9,12 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.MainActivity;
 import com.example.mathpresso.togethermju.R;
+import com.example.mathpresso.togethermju.RegisterActivity.FavoriteRegisterActivity;
 import com.example.mathpresso.togethermju.core.AppController;
+import com.example.mathpresso.togethermju.model.User;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.mathpresso.togethermju.core.AppController.user;
 
@@ -122,6 +129,65 @@ public class UserEditActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
     public void clickEditButton(View view) {
+        EditText nameEditText = (EditText) findViewById(R.id.user_name);
 
+        Spinner majorSpinner = (Spinner) findViewById(R.id.major_spinner);
+        Spinner yearSpinner = (Spinner) findViewById(R.id.year_spinner);
+        Spinner monthSpinner = (Spinner) findViewById(R.id.month_spinner);
+        Spinner daySpinner = (Spinner) findViewById(R.id.day_spinner);
+
+        RadioButton maleButton = (RadioButton) findViewById(R.id.male_radio_button);
+        RadioButton femaleButton = (RadioButton) findViewById(R.id.female_radio_button);
+
+        String gender;
+        String name = nameEditText.getText().toString();
+        String major = majorSpinner.getSelectedItem().toString();;
+        String birth = yearSpinner.getSelectedItem().toString() + "." +
+                monthSpinner.getSelectedItem().toString() + "." +
+                daySpinner.getSelectedItem().toString();;
+
+        if ((maleButton.isChecked() == true && femaleButton.isChecked() == false)) {
+            gender = "남자";
+
+            user.setName(name);
+            user.setMajor(major);
+            user.setBirth(birth);
+            user.setGender(gender);
+            editUser();
+            startActivity(new Intent(this, MainActivity.class));
+        } else if (femaleButton.isChecked() == true && maleButton.isChecked() == false) {
+            gender = "여자";
+
+            user.setName(name);
+            user.setMajor(major);
+            user.setBirth(birth);
+            user.setGender(gender);
+            editUser();
+            startActivity(new Intent(this, MainActivity.class));
+        }
+    }
+
+    public void editUser() {
+        Call<User> call = AppController.getInstance().getRestManager().getUserService().editUserInformation(
+                user.getEmail(), user.getMajor(), user.getBirth(), user.getGender());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccess()) {
+
+                    Log.d("jsondata",String.valueOf(response.message()));
+                    Toast.makeText(getBaseContext(), "개인정보 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    int statusCode = response.code();
+                    Log.d("jsondata",String.valueOf(response.body()));
+                    Log.i("MY TAG", "응답 코드: " + statusCode);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.i("MY TAG", "서버 onFailure 내용: " + t.getMessage());
+            }
+        });
     }
 }

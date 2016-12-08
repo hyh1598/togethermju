@@ -34,4 +34,7 @@ public interface UserService {
                                    @Query("major")String Major,
                                    @Query("birth")String Birth,
                                    @Query("gender")String Gender);
+
+    @GET("usereditpassword")
+    Call<User> editUserPassword(@Query("password")String Password);
 }
