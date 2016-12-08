@@ -23,8 +23,6 @@ public class UserInfoActivity extends AppCompatActivity {
     TextView major;
     TextView gender;
     TextView age;
-    int changeAge;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,8 @@ public class UserInfoActivity extends AppCompatActivity {
         user = (User) intent.getSerializableExtra("user");
         //Toolbar 초기화
         initToolbar();
-
+        String temp;
+        int cal;
         name = (TextView) findViewById(R.id.name);
         major = (TextView) findViewById(R.id.major);
         age = (TextView) findViewById(R.id.age);
@@ -44,11 +43,14 @@ public class UserInfoActivity extends AppCompatActivity {
 
         name.setText(user.getName());
         major.setText(user.getMajor());
-        /*
-        changeAge = 2017 - Integer.parseInt(user.getBirth().substring(0, 4));
-        String.valueOf(changeAge);
-        */
-        age.setText(changeAge);
+
+        temp = user.getBirth().substring(0, 4);
+        cal = Integer.parseInt(temp);
+        cal = 2017 - cal;
+        String.valueOf(cal);
+        temp = cal + ("(" + user.getBirth() + ")");
+
+        age.setText(temp);
         email.setText(user.getEmail());
         gender.setText(user.getGender());
     }

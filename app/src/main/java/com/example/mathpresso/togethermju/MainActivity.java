@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.core.AppController;
+import com.example.mathpresso.togethermju.edit.PasswordEditActivity;
 import com.example.mathpresso.togethermju.edit.UserEditActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -114,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.menu_user_setting:
                 startActivity(new Intent(this, UserEditActivity.class));
+                break;
+            case R.id.menu_password_setting:
+                startActivity(new Intent(this, PasswordEditActivity.class));
                 break;
         }
         return false;

@@ -21,7 +21,9 @@ public interface UserService {
                                   @Query("rid")String RID,
                                   @Query("birth")String Birth,
                                   @Query("major")String Major,
-                                  @Query("password")String Password);
+                                  @Query("password")String Password,
+                                  @Query("gender")String Gender);
+
 
     @GET("userverify")
     Call<User> getUserAuth(@Query("email")String Email,
@@ -29,7 +31,7 @@ public interface UserService {
 
     @GET("useredit")
     Call<User> editUserInformation(@Query("name")String Email,
-                                   @Query("password")String Password,
                                    @Query("major")String Major,
-                                   @Query("birth")String Birth);
+                                   @Query("birth")String Birth,
+                                   @Query("gender")String Gender);
 }

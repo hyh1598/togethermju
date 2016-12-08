@@ -25,12 +25,6 @@ public class User implements Serializable {
 
     }
 
-    public User(String name, String email,String major){
-        this.name = name;
-        this.email = email;
-        this.major = major;
-    }
-
 
     public void setName(String name) {
         this.name = name;
