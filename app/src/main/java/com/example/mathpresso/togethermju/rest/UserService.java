@@ -20,6 +20,7 @@ import retrofit2.http.Query;
 public interface UserService {
     //FIXME /noticelist
     @GET("useradd")
+
     Call<User> getUserInformation(@Query("email") String Email,
                                   @Query("name") String Name,
                                   @Query("rid") String RID,
@@ -38,6 +39,7 @@ public interface UserService {
     @FormUrlEncoded
     @POST("uploadpic")
     Call<DefaultResponse> uploadProfileImage(@Body okhttp3.RequestBody requestBody);
+
 
 
 }

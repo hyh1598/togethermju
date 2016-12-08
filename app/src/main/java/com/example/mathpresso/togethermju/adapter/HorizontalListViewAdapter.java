@@ -22,6 +22,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
@@ -34,7 +35,9 @@ public class HorizontalListViewAdapter extends BaseAdapter {
     private OnMemberSelectedListener mListener;
     private ArrayList<User> userList = new ArrayList<User>();
 
+
     public HorizontalListViewAdapter(Context context, ArrayList<User> data, OnMemberSelectedListener listener) {
+
         mContext = context;
         mListener = listener;
         userList = data;
@@ -55,6 +58,7 @@ public class HorizontalListViewAdapter extends BaseAdapter {
     }
 
     public Context getActivity() {
+
         return mContext;
     }
 
@@ -76,6 +80,7 @@ public class HorizontalListViewAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         MemberViewHolder viewHolder = null;
+
 
         if (convertView == null) {
 
@@ -102,6 +107,7 @@ public class HorizontalListViewAdapter extends BaseAdapter {
         //new imageViewProcessor().execute(viewHolder);
 
 
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,15 +127,18 @@ public class HorizontalListViewAdapter extends BaseAdapter {
     //image 처리
     private class imageViewProcessor extends AsyncTask<MemberViewHolder, Void, MemberViewHolder> {
 
+
         @Override
         protected MemberViewHolder doInBackground(MemberViewHolder... params) {
 
             MemberViewHolder memberViewHolder = params[0];
 
+
             String server_url = AppController.getBaseUrl() + "loaduserimage/?email=" + memberViewHolder.email;
             Log.d("IMAGEPROCESSOR", server_url);
             //"http://125.130.223.88:8000/mju/"
             try {
+
                 URL url = new URL(server_url);
                 URLConnection conn = url.openConnection();
                 conn.connect();
@@ -139,6 +148,7 @@ public class HorizontalListViewAdapter extends BaseAdapter {
                 bis.close();
 
             } catch (Exception e) {
+
                 e.printStackTrace();
             }
             return memberViewHolder;
@@ -149,7 +159,6 @@ public class HorizontalListViewAdapter extends BaseAdapter {
             super.onPostExecute(memberViewHolder);
             Log.d("IMAGE_MAPPING", "SUCCESS");
             memberViewHolder.icon.setImageBitmap(memberViewHolder.bitmap);
-
         }
     }
 

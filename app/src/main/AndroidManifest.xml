@@ -35,6 +35,9 @@
         <activity android:name=".NoticeDetailsActivity" />
         <activity android:name=".RegisterActivity.GroupRegisterActivity" />
         <activity android:name=".UserInfoActivity"/>
+
+        <activity android:name=".edit.UserEditActivity"/>
+
         <activity
             android:name=".GroupDetailsActivity"
             android:label="@string/title_activity_goup_details"

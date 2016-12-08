@@ -1,6 +1,8 @@
 package com.example.mathpresso.togethermju;
 
+
 import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -10,11 +12,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.adapter.CustomAndroidGridViewAdapter;
@@ -22,6 +26,7 @@ import com.example.mathpresso.togethermju.adapter.HorizontalListViewAdapter;
 import com.example.mathpresso.togethermju.adapter.ReplyListViewAdapter;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.listview.HorizontalListView;
+
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.Group;
 import com.example.mathpresso.togethermju.model.GroupReply;
@@ -32,12 +37,15 @@ import com.example.mathpresso.togethermju.tool.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import de.mrapp.android.dialog.MaterialDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class GroupDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+
     private Group group;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayoutAndroid;
@@ -48,6 +56,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
     //Group member Activity 로 옮길 예정 grid view
     GridView gridView;
     CustomAndroidGridViewAdapter gridViewAdapter;//GridViewAdapter
+
     EditText etxtContent;
     RelativeLayout btnSubmit;
     LinearLayout containerComment;
@@ -68,6 +77,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
 
         //Toolbar 초기화
         initToolbar();
+
         // layout 초기화
         initializeLayout();
 
@@ -79,19 +89,23 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initializeLayout() {
+
         //Horizontal List View Binding
         HorizontalListView member_listview = (HorizontalListView) findViewById(R.id.MemberListView);
         horizontalListViewAdapter = new HorizontalListViewAdapter(getApplicationContext(), userlist, new HorizontalListViewAdapter.OnMemberSelectedListener() {
             @Override
             public void onSelect(User user) {
                 Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
+
                 intent.putExtra("user", user);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), user.getName(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
         member_listview.setAdapter(horizontalListViewAdapter);
+
 
         replyListViewAdapter = new ReplyListViewAdapter(null, this, new ReplyListViewAdapter.OnReplySelectedListener() {
             @Override
@@ -113,6 +127,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+
     private void initToolbar() {
         //Toolbal Set for showing Group Name
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -123,6 +138,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
         collapsingToolbarLayoutAndroid.setTitle(group.getName());
     }
 
+
     private void loadreplies() {
         AppController.getInstance().getRestManager().getGroupService().getReplylist(group.getId()).enqueue(new Callback<List<GroupReply>>() {
             @Override
@@ -130,24 +146,27 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
                 if (response.isSuccess()) {
                     replyListViewAdapter.clear();
                     replyListViewAdapter.add(response.body());
+
                 }
             }
 
             @Override
             public void onFailure(Call<List<GroupReply>> call, Throwable t) {
 
+
             }
         });
     }
-
     // load group member
     private void loadGroupMember() {
+
         AppController.getInstance().getRestManager().getGroupService().getGroupMember(group.getId())
                 .enqueue(new Callback<List<User>>() {
                     @Override
                     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                         if (response.isSuccess()) {
                             Log.d("uploadGroupMember", "SUCCESS!!");
+
                             horizontalListViewAdapter.clear();
                             horizontalListViewAdapter.add(response.body());
 
@@ -223,7 +242,6 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
     }
-
 
     @Override
     public void onClick(View v) {

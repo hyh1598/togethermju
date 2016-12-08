@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju.RegisterActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.LoginActivity;
@@ -30,7 +32,7 @@ import static com.example.mathpresso.togethermju.core.AppController.user;
 public class FavoriteRegisterActivity extends AppCompatActivity {
     private GoogleApiClient mGoogleApiClient;
     GoogleCloudMessaging gcm;
-
+    ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,84 +78,122 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
 
         ArrayList<String> checkList = new ArrayList<String>();
 
-        new RegisterTask().execute(null, null, null);
-
         if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("봉사활동");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
             checkList.add("스터디");
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == false) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
@@ -161,8 +201,12 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == false)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
@@ -170,8 +214,12 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == false) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
@@ -179,8 +227,12 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == false)) {
             checkList.add("봉사활동");
@@ -188,8 +240,12 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         } else if ((volunteer_checkbox.isChecked() == true) && (study_checkbox.isChecked() == true)
                 && (contest_checkbox.isChecked() == true) && (support_checkbox.isChecked() == true)) {
             checkList.add("서포터즈");
@@ -198,12 +254,23 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            postUser();
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
+
+            new RegisterTask().execute(null, null, null);
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
+
+
         } else {
             Toast.makeText(this, "관심사를 선택해주세요.", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void server_load(){
+        postUser();
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
     class RegisterTask extends AsyncTask<Void, Void, String> {
         @Override
@@ -218,7 +285,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
                     gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
                 }
                 user.setRid(gcm.register("241720710605"));
-                Log.i("HELLO, USER!", "REGISTER ID: " + user.getRid());
+                Log.i("RECEIVERID", "REGISTER ID: " + user.getRid());
                 string = "REGISTER ID IS\n" + user.getRid();
             } catch (IOException e) {
                 string = "ERROR IN REGISTERING" +e.getMessage();
@@ -227,7 +294,11 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String msg) {}
+        protected void onPostExecute(String msg) {
+            progress.dismiss();//PROGRESS DIAGRAM 실행 종료
+            server_load();
+
+        }
     }
 
     @Override
