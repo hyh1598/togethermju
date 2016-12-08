@@ -48,7 +48,7 @@ public class UserInfoActivity extends AppCompatActivity {
         cal = Integer.parseInt(temp);
         cal = 2017 - cal;
         String.valueOf(cal);
-        temp = cal + ("(" + user.getBirth() + ")");
+        temp = cal + (" (" + user.getBirth() + ")");
 
         age.setText(temp);
         email.setText(user.getEmail());
