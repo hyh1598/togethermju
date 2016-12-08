@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         initializeLayout();
 
+        if (shouldAskPermissions()) {
+            askPermissions();
+        }
+
     }
 
     private void initializeLayout() {
@@ -199,10 +203,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.user_imageView:
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                this.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                AppController.getInstance().getRestManager().getUserService().uploadProfileImage()
+                        .enqueue(new Callback<DefaultResponse>() {
+                            @Override
+                            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+                                Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+                                Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                this.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
         }
     }
@@ -237,6 +255,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
+    protected boolean shouldAskPermissions() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+    @TargetApi(23)
+    protected void askPermissions() {
+        String[] permissions = {
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE"
+        };
+        int requestCode = 200;
+        requestPermissions(permissions, requestCode);
+    }
+
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static Uri handleImageUri(Uri uri) {

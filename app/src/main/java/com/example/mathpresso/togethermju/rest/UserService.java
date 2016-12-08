@@ -5,8 +5,6 @@ import com.example.mathpresso.togethermju.model.User;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -31,10 +29,12 @@ public interface UserService {
     Call<User> getUserAuth(@Query("email") String Email,
                            @Query("password") String password);
 
-    @FormUrlEncoded
     @Multipart
     @POST("uploadpic")
-    Call<DefaultResponse> uploadProfileImage(@Field("email") String email, @Part("photo") RequestBody image);
+    Call<DefaultResponse> uploadProfileImage(@Query("email") String email, @Part("photo") RequestBody image);
+
+    @POST("uploadpic")
+    Call<DefaultResponse> uploadProfileImage();
 
 
 }

@@ -52,7 +52,6 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
     RelativeLayout btnSubmit;
     LinearLayout containerComment;
     RelativeLayout btnJoin;
-    MaterialDialog dialog;
 
 
     //test data
@@ -111,21 +110,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
         btnJoin = (RelativeLayout) findViewById(R.id.btnJoin);
         btnJoin.setOnClickListener(this);
 
-        dialog = new MaterialDialog.Builder(this)
-                .setTitle("그룹에 가입하시겠습니까?")
-                .setPositiveButton("네", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        attendGroup();
-                        dialog.dismiss();
-                    }
-                })
-                .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
+
     }
 
     private void initToolbar() {
