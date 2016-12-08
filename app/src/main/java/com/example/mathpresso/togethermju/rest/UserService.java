@@ -2,9 +2,11 @@ package com.example.mathpresso.togethermju.rest;
 
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.model.User;
+import com.squareup.okhttp.RequestBody;
 
-import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -33,8 +35,9 @@ public interface UserService {
     @POST("uploadpic")
     Call<DefaultResponse> uploadProfileImage(@Query("email") String email, @Part("photo") RequestBody image);
 
+    @FormUrlEncoded
     @POST("uploadpic")
-    Call<DefaultResponse> uploadProfileImage();
+    Call<DefaultResponse> uploadProfileImage(@Body okhttp3.RequestBody requestBody);
 
 
 }

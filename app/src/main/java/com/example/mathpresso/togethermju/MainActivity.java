@@ -34,14 +34,13 @@ import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.tool.ImageFilePath;
+import com.example.mathpresso.togethermju.tool.Utils;
 
-import java.io.File;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -203,24 +202,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.user_imageView:
-                AppController.getInstance().getRestManager().getUserService().uploadProfileImage()
-                        .enqueue(new Callback<DefaultResponse>() {
-                            @Override
-                            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
-                                Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
-                            }
+//                AppController.getInstance().getRestManager().getUserService().uploadProfileImage("email")
+//                        .enqueue(new Callback<DefaultResponse>() {
+//                            @Override
+//                            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+//                                Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+//                                Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                        });
 
-                            @Override
-                            public void onFailure(Call<DefaultResponse> call, Throwable t) {
-                                Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
-
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                this.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                this.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
         }
     }
@@ -230,13 +229,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
             Uri uri = data.getData();
-            String filePath = getFilePathFromUri(this, uri);
+            final String filePath = getFilePathFromUri(this, uri);
             if (filePath != null) {
-                File imageFile = new File(filePath);
                 String email = AppController.getInstance().getStringValue("email", "");
-                RequestBody file = RequestBody.create(MediaType.parse("image/*"), imageFile);
+                final okhttp3.RequestBody requestBody =
+                        Utils.getImageBodyBuilder(new HashMap<String, String>() {{
+                            put("photo", filePath);
+                        }}).addFormDataPart("email", email).build();
 
-                AppController.getInstance().getRestManager().getUserService().uploadProfileImage(email, file)
+
+                AppController.getInstance().getRestManager().getUserService().uploadProfileImage(requestBody)
                         .enqueue(new Callback<DefaultResponse>() {
                             @Override
                             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
