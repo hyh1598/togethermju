@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju;
 
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -36,20 +38,13 @@ import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.tool.ImageFilePath;
-import com.example.mathpresso.togethermju.tool.Utils;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView mNavigationView;
+
     TextView emailTextView;
     TextView nameTextView;
     ImageView imgvProfile;
@@ -83,11 +79,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("MAIN:NAME", AppController.user.getName());
             Log.d("MAIN:EMAIL", AppController.user.getEmail());
             Log.d("MAIN:RID", AppController.user.getRid());
+
             emailTextView.setText(AppController.user.getEmail());
             nameTextView.setText(AppController.user.getName());
             loadProfileImage();
             //            imageloader = new MainImageLoadProcessor();
             //imageloader.execute(AppController.user.getEmail());
+
 
         }
 
@@ -99,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         initializeLayout();
+
 
         if (shouldAskPermissions()) {
             askPermissions();
@@ -118,9 +117,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //drawer Layout
         View view = LayoutInflater.from(this).inflate(R.layout.drawer_header, null);
 
+
         emailTextView = (TextView) view.findViewById(R.id.email_text_view);
         nameTextView = (TextView) view.findViewById(R.id.name_text_view);
         imgvProfile = (ImageView) view.findViewById(R.id.user_imageView);
+
 
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_item_logout:
                 AppController.getInstance().clearLocalStore();
                 moveToLoginActivity();
+
                 break;
         }
         return false;
@@ -191,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
+
             if (bitmap != null) {
                 //upload image on AppController user instance
                 Log.d("IMAGESTATUS", "SUCCESS");
@@ -365,4 +368,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return getFilePathFromKitkatUri(context, uri);
         }
     }
+
 }

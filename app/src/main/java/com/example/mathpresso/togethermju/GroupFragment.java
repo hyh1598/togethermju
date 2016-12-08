@@ -78,6 +78,7 @@ public class GroupFragment extends Fragment {
                         if (response.isSuccess()) {
                             mAdapter.clear();
                             mAdapter.add(response.body());
+
                         }
 
                     }

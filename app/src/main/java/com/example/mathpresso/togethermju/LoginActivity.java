@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
     }
 
     public void clickRegisterButton(View view) {
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             progress.setMessage("Wait while loading...");
             progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
             progress.show();
+
 // To dismiss the dialog
 
         }

@@ -8,11 +8,13 @@
 
     <ImageView
         android:id="@+id/user_imageView"
+
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
         android:background="#FFFFFF"
+
         android:src="@drawable/boy" />
 
     <LinearLayout
@@ -20,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
+
         android:orientation="vertical">
 
 

@@ -21,8 +21,6 @@ public class User implements Serializable {
     String name;
     ArrayList<String> interest;//don`t use
 
-
-
     public User(){
 
     }
@@ -32,72 +30,79 @@ public class User implements Serializable {
         this.email = email;
         this.major = major;
     }
-    public String setName(String name) {
+
+    public void setName(String name) {
         this.name = name;
-        return this.name;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String setRid(String rid) {
+
+
+    public void setRid(String rid) {
         this.rid = rid;
-        return this.rid;
     }
 
     public String getRid() {
         return this.rid;
     }
 
-    public String setEmail(String email) {
+
+
+    public void setEmail(String email) {
         this.email = email;
-        return this.email;
     }
 
     public String getEmail() {
         return this.email;
     }
 
-    public String setPassword(String password) {
+
+
+    public void setPassword(String password) {
         this.password = password;
-        return this.password;
     }
 
     public String getPassword() {
         return this.password;
     }
 
-    public String setGender(String gender) {
-        this.gender = this.gender;
-        return this.gender;
+
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getGender() {
         return this.gender;
     }
 
-    public String setBirth(String birth) {
+
+
+    public void setBirth(String birth) {
         this.birth = birth;
-        return this.birth;
     }
 
     public String getBirth() {
         return this.birth;
     }
 
-    public String setMajor(String major) {
+
+
+    public void setMajor(String major) {
         this.major = major;
-        return this.major;
     }
 
     public String getMajor() {
         return this.major;
     }
 
-    public ArrayList<String> setFavorite(ArrayList<String> interest) {
+
+
+    public void setFavorite(ArrayList<String> interest) {
         this.interest = interest;
-        return this.interest;
     }
 
     public ArrayList<String> getFavorite() {

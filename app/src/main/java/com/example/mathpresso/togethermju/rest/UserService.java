@@ -24,6 +24,7 @@ import retrofit2.http.Query;
 public interface UserService {
     //FIXME /noticelist
     @GET("useradd")
+
     Call<User> getUserInformation(@Query("email") String Email,
                                   @Query("name") String Name,
                                   @Query("rid") String RID,

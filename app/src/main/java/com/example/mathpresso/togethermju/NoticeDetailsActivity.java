@@ -99,8 +99,10 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         mAdapter = new GroupAdapter(null, this, new GroupAdapter.OnGroupSelectedListener() {
             @Override
             public void onSelect(Group group) {
+
                 Intent intent = new Intent(NoticeDetailsActivity.this, GroupDetailsActivity.class);
                 intent.putExtra("group", group);
+
                 startActivity(intent);
             }
         });
@@ -127,6 +129,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
 
     private void loadNoticeGroupList(String id) {
+
         if (!Utils.isEmpty(id)) {
             AppController.getInstance().getRestManager().getGroupService().getNoticeGroup(id)
                     .enqueue(new Callback<List<Group>>() {
@@ -144,6 +147,7 @@ public class NoticeDetailsActivity extends AppCompatActivity {
                         }
                     });
         }
+
     }
 
     private void postWatchNotice(Notice notice) {

@@ -32,6 +32,8 @@ public class AppController extends MultiDexApplication {
         return baseUrl;
     }
 
+    private static final String APIKEY ="AIzaSyCoQG3LIHt0zeWIjTkCWjlls3x5wSccfF8";
+    private static final String PROJECTNUM = "334320554531";
     private static final String baseUrl = "http://125.130.223.88:8000/mju/";
     private static final String SP_NAME = "localdb";
 
