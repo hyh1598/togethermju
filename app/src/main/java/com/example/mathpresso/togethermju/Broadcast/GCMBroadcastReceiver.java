@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.mathpresso.togethermju.MainActivity;
+import com.example.mathpresso.togethermju.GroupDetailsActivity;
 
 public class GCMBroadcastReceiver extends BroadcastReceiver {
     public GCMBroadcastReceiver() {
@@ -29,7 +29,7 @@ public class GCMBroadcastReceiver extends BroadcastReceiver {
 
     }
     private void sendToActivity(Context context,String message){
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, GroupDetailsActivity.class);
         intent.putExtra("message",message);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);

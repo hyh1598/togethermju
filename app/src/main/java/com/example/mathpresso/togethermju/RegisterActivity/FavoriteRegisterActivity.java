@@ -2,7 +2,6 @@ package com.example.mathpresso.togethermju.RegisterActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,7 +17,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.location.LocationServices;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -30,7 +28,7 @@ import static com.example.mathpresso.togethermju.core.AppController.user;
 
 public class FavoriteRegisterActivity extends AppCompatActivity {
     private GoogleApiClient mGoogleApiClient;
-    GoogleCloudMessaging gcm;
+
     ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +80,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("서포터즈");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -93,7 +91,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("봉사활동");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -104,7 +102,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -115,7 +113,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -127,7 +125,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("봉사활동");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -139,7 +137,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -151,7 +149,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -163,7 +161,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -175,7 +173,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -187,7 +185,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -200,7 +198,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("스터디");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -213,7 +211,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -226,7 +224,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -239,7 +237,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
             checkList.add("공모전");
 
             user.setFavorite(checkList);
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -254,7 +252,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
 
             user.setFavorite(checkList);
 
-            new RegisterTask().execute(null, null, null);
+//            new RegisterTask().execute(null, null, null);
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setMessage("Wait while loading...");
@@ -265,42 +263,16 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "관심사를 선택해주세요.", Toast.LENGTH_SHORT).show();
         }
+
+        server_load();
     }
+
     public void server_load(){
         postUser();
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
-    class RegisterTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected void onPreExecute() {}
 
-        @Override
-        protected String doInBackground(Void... params) {
-            String string;
-
-            try {
-                if (gcm == null) {
-                    gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-                }
-                user.setRid(gcm.register(AppController.PROJECTNUM));
-
-                Log.i("RECEIVERID", "REGISTER ID: " + user.getRid());
-                string = "REGISTER ID IS\n" + user.getRid();
-            } catch (IOException e) {
-                string = "ERROR IN REGISTERING" +e.getMessage();
-            }
-            return string;
-        }
-
-        @Override
-        protected void onPostExecute(String msg) {
-            progress.dismiss();//PROGRESS DIAGRAM 실행 종료
-            server_load();
-
-
-        }
-    }
 
     @Override
     protected void onStart() {

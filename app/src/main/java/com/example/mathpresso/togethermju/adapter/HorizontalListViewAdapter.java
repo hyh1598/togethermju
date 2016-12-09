@@ -115,8 +115,8 @@ public class HorizontalListViewAdapter extends BaseAdapter {
 //                .into(viewHolder.icon);
 //
 
-        viewHolder.email = email;
-        new imageViewProcessor().execute(viewHolder);
+//        viewHolder.email = email;
+//        new imageViewProcessor().execute(viewHolder);
 
 
 

@@ -2,6 +2,7 @@ package com.example.mathpresso.togethermju;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,10 +13,23 @@ import android.widget.Toast;
 import com.example.mathpresso.togethermju.RegisterActivity.EmailRegisterActivity;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.mathpresso.togethermju.core.AppController.user;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -23,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editUserPasswordText ;
     String userEmail;//userEmail
     String userPassword;//userPassword
+    GoogleCloudMessaging gcm;
 
     ProgressDialog progress;//wating progress diagram
 
@@ -73,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+
+
     public void userAuth(String email, String password) {
         Call<User> call = AppController.getInstance().getRestManager().getUserService().getUserAuth(email, password);
         call.enqueue(new Callback<User>() {
@@ -89,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                         return ;
                     }
                     //Current UserInfo
-                    AppController.user = user;
+                    user = user;
                     //Userinfo store in DB, for auto login
                     AppController.setUserinfo(AppController.getInstance());
 
@@ -98,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     progress.dismiss();//PROGRESS DIAGRAM 실행 종료
+                    new RegisterTask().execute(null,null,null);
                     startMainActivity();
 
                 } else {
@@ -119,4 +137,75 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+    protected void registerRID(String email ,String rid) {
+        HttpURLConnection connection;
+        DataOutputStream request = null;
+
+        URL url = null;
+        String response = null;
+
+        try {
+            url = new URL("http://125.130.223.88:8000/gcm/v1/device/register/");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestMethod("POST");
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name",email);
+            jsonObject.put("reg_id",rid);
+            jsonObject.put("dev_id","phone");
+
+            request = new DataOutputStream(connection.getOutputStream());
+            request.write(jsonObject.toString().getBytes());
+            request.flush();
+            request.close();
+            String line = "";
+            InputStreamReader isr = new InputStreamReader(connection.getInputStream());
+            BufferedReader reader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            // Response from server after login process will be stored in response variable.
+            response = sb.toString();
+            // You can perform UI operations here
+            Log.d("Message from Server",response);
+            isr.close();
+            reader.close();
+
+        } catch (IOException e) {
+            // Error
+        } catch (JSONException e){
+
+        }
+    }
+    class RegisterTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String string;
+
+            try {
+                if (gcm == null) {
+                    gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+                }
+                user.setRid(gcm.register(AppController.PROJECTNUM));
+                registerRID(AppController.user.getEmail(),AppController.user.getRid());
+                Log.i("RECEIVERID", "REGISTER ID: " + user.getRid());
+                string = "REGISTER ID IS\n" + user.getRid();
+            } catch (IOException e) {
+                string = "ERROR IN REGISTERING" +e.getMessage();
+            }
+            return string;
+        }
+
+        @Override
+        protected void onPostExecute(String msg) {
+
+        }
+    }
 }

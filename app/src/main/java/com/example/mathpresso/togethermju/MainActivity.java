@@ -32,7 +32,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.util.Util;
 import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
@@ -48,9 +47,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import com.example.mathpresso.togethermju.edit.PasswordEditActivity;
-import com.example.mathpresso.togethermju.edit.UserEditActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1001;
@@ -84,9 +80,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             emailTextView.setText(AppController.user.getEmail());
             nameTextView.setText(AppController.user.getName());
-//            loadProfileImage();
-            imageloader = new MainImageLoadProcessor();
-            imageloader.execute(AppController.user.getEmail());
+            loadProfileImage();
+//            imageloader = new MainImageLoadProcessor();
+//            imageloader.execute(AppController.user.getEmail());
 
 
         }
@@ -101,9 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String str = intent.getStringExtra("message");
         if(str!=null)Toast.makeText(this,str, Toast.LENGTH_LONG);
+
         initializeLayout();
-
-
         if (shouldAskPermissions()) {
             askPermissions();
         }
