@@ -47,6 +47,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1001;
     private static final String[] TAB_TITLES = {
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void moveToLoginActivity() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
