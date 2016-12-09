@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.mathpresso.togethermju.GroupDetailsActivity;
+import com.example.mathpresso.togethermju.model.Group;
 
 public class GCMBroadcastReceiver extends BroadcastReceiver {
 
@@ -40,6 +41,8 @@ public class GCMBroadcastReceiver extends BroadcastReceiver {
 
     private void sendToActivity(Context context,String message){
         Intent intent = new Intent(context, GroupDetailsActivity.class);
+        Group group = new Group();
+        //message parsing 후 데이터에 담아 전송
         intent.putExtra("message",message);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);

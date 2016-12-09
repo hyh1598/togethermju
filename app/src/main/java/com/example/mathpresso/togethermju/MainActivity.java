@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             emailTextView.setText(AppController.user.getEmail());
             nameTextView.setText(AppController.user.getName());
-            loadProfileImage();
-//            imageloader = new MainImageLoadProcessor();
-//            imageloader.execute(AppController.user.getEmail());
+//            loadProfileImage();
+            imageloader = new MainImageLoadProcessor();
+            imageloader.execute(AppController.user.getEmail());
 
 
         }
