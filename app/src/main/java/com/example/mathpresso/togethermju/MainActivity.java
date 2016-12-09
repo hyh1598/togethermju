@@ -31,20 +31,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.util.Util;
 import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.tool.ImageFilePath;
-import com.example.mathpresso.togethermju.tool.Utils;
 
-import java.util.HashMap;
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import com.example.mathpresso.togethermju.edit.PasswordEditActivity;
+import com.example.mathpresso.togethermju.edit.UserEditActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1001;
@@ -122,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imgvProfile = (ImageView) view.findViewById(R.id.user_imageView);
 
 
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -140,14 +145,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_setting:
-                Toast.makeText(this, "move to setting activity", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.menu_item_logout:
                 AppController.getInstance().clearLocalStore();
                 moveToLoginActivity();
-
-                break;
         }
         return false;
     }
@@ -208,6 +208,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Glide.with(this).load(server_url)
                 .fitCenter()
                 .bitmapTransform(new CropCircleTransformation(this))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(imgvProfile);
     }
 
@@ -244,27 +246,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Uri uri = data.getData();
             final String filePath = getFilePathFromUri(this, uri);
             if (filePath != null) {
-                String email = AppController.getInstance().getStringValue("email", "");
-                final okhttp3.RequestBody requestBody =
-                        Utils.getImageBodyBuilder(new HashMap<String, String>() {{
-                            put("photo", filePath);
-                        }}).addFormDataPart("email", email).build();
+                File file = new File(filePath);
+                RequestBody requestBody2 = RequestBody.create(MediaType.parse("image/jpeg"), file);
 
-
-                AppController.getInstance().getRestManager().getUserService().uploadProfileImage(requestBody)
+                AppController.getInstance().getRestManager().getUserService().uploadProfileImage("ss")
                         .enqueue(new Callback<DefaultResponse>() {
                             @Override
                             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
-                                if (response.isSuccess() && response.body().getResult().equals("success")) {
-                                    loadProfileImage();
+                                if (response.isSuccess()) {
+
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<DefaultResponse> call, Throwable t) {
-                                Log.d("upload profile", t.getMessage().toString());
+
                             }
                         });
+
+//                File file = new File(filePath);
+//                RequestBody requestFile =
+//                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//                AppController.getInstance().getRestManager().getUserService().uploadProfileImage(requestFile)
+//                        .enqueue(new Callback<DefaultResponse>() {
+//                            @Override
+//                            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
+//                                if (response.isSuccess() && response.body().getResult().equals("success")) {
+//                                    loadProfileImage();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+//                                Log.d("upload profile", t.getMessage().toString());
+//                            }
+//                        });
 
             } else {
             }

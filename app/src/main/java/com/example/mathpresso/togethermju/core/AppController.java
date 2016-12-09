@@ -7,6 +7,13 @@ import com.example.mathpresso.togethermju.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
@@ -43,16 +50,33 @@ public class AppController extends MultiDexApplication {
     }
 
     public Retrofit getRetrofit() {
+        OkHttpClient okClient = new OkHttpClient.Builder()
+                .addInterceptor(INTERCEPTOR)
+                .build();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
         JacksonConverterFactory jacksonConverterFactory = JacksonConverterFactory.create(objectMapper);
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(okClient)
                 .addConverterFactory(jacksonConverterFactory)
                 .build();
 
         return mRetrofit;
     }
+
+    private final Interceptor INTERCEPTOR = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request original = chain.request();
+            Request.Builder builder = original.newBuilder();
+            builder.addHeader("accept", "application/json");
+            builder.addHeader("Content-Type", "application/json");
+            Request request = builder.build();
+            Response response = chain.proceed(request);
+            return response;
+        }
+    };
 
     public RestManager getRestManager() {
         if (mRestManager == null) {
@@ -89,27 +113,35 @@ public class AppController extends MultiDexApplication {
     }
 
     //db에서 최근 데이터 가져오기
-    public static boolean UpdateUserinfo(AppController appController){
-        User userinfo= new User();
+    public static boolean UpdateUserinfo(AppController appController) {
+        User userinfo = new User();
 
-        String email = appController.getStringValue("email","");//email을 통해 검증
-        if(email.equals(""))
+        String email = appController.getStringValue("email", "");//email을 통해 검증
+        if (email.equals(""))
             return false;
         userinfo.setEmail(email);
         userinfo.setName(appController.getStringValue("name",""));
         userinfo.setMajor(appController.getStringValue("major",""));
         userinfo.setRid(appController.getStringValue("rid",""));
+        userinfo.setGender(appController.getStringValue("gender",""));
+        userinfo.setBirth(appController.getStringValue("birth",""));
+        userinfo.setPassword(appController.getStringValue("password",""));
 
         AppController.user = userinfo;
         return true;
     }
+
     //데이터 저장하기
-    public static void setUserinfo(AppController appController){
+    public static void setUserinfo(AppController appController) {
         /*data base 에 유저정보 저장*/
+
         appController.setString("name",user.getName());
         appController.setString("rid",user.getRid());
         appController.setString("email",user.getEmail());
-        appController.setString("major",user.getEmail());
+        appController.setString("major",user.getMajor());
+        appController.setString("gender",user.getGender());
+        appController.setString("birth",user.getBirth());
+        appController.setString("password",user.getPassword());
 
             /*
            String rid;

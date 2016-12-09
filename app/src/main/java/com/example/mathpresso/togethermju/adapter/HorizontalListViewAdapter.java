@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+<<<<<<< HEAD
+=======
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+>>>>>>> 5140a4c5c57a78e685f5e710790b1d05cd6eb153
 import com.example.mathpresso.togethermju.R;
 import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.User;
@@ -95,6 +100,15 @@ public class HorizontalListViewAdapter extends BaseAdapter {
         String server_url = AppController.getBaseUrl() + "loaduserimage/?email=" + email;
 
 
+<<<<<<< HEAD
+=======
+        Glide.with(mContext).load(server_url)
+                .fitCenter()
+                .bitmapTransform(new CropCircleTransformation(mContext))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(viewHolder.icon);
+>>>>>>> 5140a4c5c57a78e685f5e710790b1d05cd6eb153
 
 //
 //        Glide.with(mContext).load(server_url)

@@ -8,7 +8,9 @@ import android.provider.MediaStore;
 import java.io.File;
 import java.util.Map;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * Created by sonjiho on 2016. 12. 8..
@@ -21,6 +23,10 @@ public class Utils {
 
     public static okhttp3.RequestBody getImageBody(Map<String, String> map) {
         return getImageBodyBuilder(map).build();
+    }
+    public static RequestBody toRequestBody (String value) {
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), value);
+        return body ;
     }
 
     public static MultipartBody.Builder getImageBodyBuilder(Map<String,String> map) {
