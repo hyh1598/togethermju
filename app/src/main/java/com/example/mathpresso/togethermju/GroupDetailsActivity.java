@@ -74,6 +74,7 @@ public class GroupDetailsActivity extends AppCompatActivity implements View.OnCl
         Intent intent = getIntent();
         group = (Group) intent.getSerializableExtra("group");
 
+
         //Toolbar 초기화
         initToolbar();
         // layout 초기화

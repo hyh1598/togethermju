@@ -10,7 +10,7 @@ android {
     }
     defaultConfig {
         applicationId "com.example.mathpresso.togethermju"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         multiDexEnabled true

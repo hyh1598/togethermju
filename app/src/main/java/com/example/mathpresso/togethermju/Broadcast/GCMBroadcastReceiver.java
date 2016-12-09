@@ -1,11 +1,18 @@
 package com.example.mathpresso.togethermju.Broadcast;
 
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.mathpresso.togethermju.MainActivity;
+import com.example.mathpresso.togethermju.R;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class GCMBroadcastReceiver extends BroadcastReceiver {
 
@@ -26,16 +33,37 @@ public class GCMBroadcastReceiver extends BroadcastReceiver {
         if(action != null){
             if(action.equals("com.google.android.c2dm.intent.RECEIVE")){
                 String message = intent.getStringExtra("message");
+                String content = intent.getStringExtra("group");
                 Log.d("jiho",message);
-                sendToActivity(context,message);
+                notification(context,message,content);
             }
         }else{
             Log.d("jiho","actionNULL");
         }
 
+
     }
 
 
+    private void notification(Context context,String message,String content ){
+        NotificationManager noManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+
+        // NotificationID, PendingIntent
+        Intent noIntent = new Intent(context,MainActivity.class);
+
+        PendingIntent pendIntent = PendingIntent.getActivity(context, 0, noIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification.Builder builder = new Notification.Builder(context)
+                .setContentTitle("[GROUP] "+content)
+                .setContentText("RE: "+message)
+                .setSmallIcon(R.drawable.myongji2)
+                .setContentIntent(pendIntent)
+                .setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_SOUND);
+
+        Notification no = builder.build();
+        noManager.notify(11, no);
+    }
 
     private void sendToActivity(Context context,String message){
         Toast.makeText(context,message,Toast.LENGTH_LONG).show();

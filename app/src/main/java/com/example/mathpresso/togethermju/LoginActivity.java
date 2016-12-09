@@ -133,8 +133,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //GCM not implementing
-
     protected void registerRID(String email ,String rid) {
         HttpURLConnection connection;
         DataOutputStream request = null;
@@ -152,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",email);
             jsonObject.put("reg_id",rid);
-            jsonObject.put("dev_id","phone");
+            jsonObject.put("dev_id","phone");//for test
 
             request = new DataOutputStream(connection.getOutputStream());
             request.write(jsonObject.toString().getBytes());

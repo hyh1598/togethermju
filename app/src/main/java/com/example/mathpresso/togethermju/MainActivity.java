@@ -28,7 +28,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -69,11 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         //User정보확인 없을 경우 , Login다시요청
-        if (!AppController.UpdateUserinfo(AppController.getInstance())) {
-            //로그아웃
-            AppController.getInstance().clearLocalStore();
-            moveToLoginActivity();
-        } else {
+
             Log.d("MAIN:NAME", AppController.user.getName());
             Log.d("MAIN:EMAIL", AppController.user.getEmail());
             Log.d("MAIN:RID", AppController.user.getRid());
@@ -85,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             imageloader.execute(AppController.user.getEmail());
 
 
-        }
+
 
     }
 
@@ -93,11 +88,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
-
-        String str = intent.getStringExtra("message");
-        if(str!=null)Toast.makeText(this,str, Toast.LENGTH_LONG);
-
+        //lastest User Info Checking
+        if (!AppController.UpdateUserinfo(AppController.getInstance())) {
+            //로그아웃
+            AppController.getInstance().clearLocalStore();
+            moveToLoginActivity();
+        }
         initializeLayout();
         if (shouldAskPermissions()) {
             askPermissions();
