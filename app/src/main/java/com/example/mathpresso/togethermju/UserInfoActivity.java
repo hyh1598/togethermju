@@ -1,14 +1,18 @@
 package com.example.mathpresso.togethermju;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mathpresso.togethermju.Network.urlToImageProcessor;
 import com.example.mathpresso.togethermju.model.User;
 
 public class UserInfoActivity extends AppCompatActivity {
@@ -17,12 +21,19 @@ public class UserInfoActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayoutAndroid;
     CoordinatorLayout rootLayoutAndroid;
     RecyclerView recyclerView;
-
+    ImageView imageView ;
     TextView name;
     TextView email;
     TextView major;
     TextView gender;
     TextView age;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(user.getEmail()!=null)
+            new MainImageLoadProcessor().execute(user.getEmail());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,7 @@ public class UserInfoActivity extends AppCompatActivity {
         initToolbar();
         String temp;
         int cal;
+        imageView = (ImageView)findViewById(R.id.imageView01);
         name = (TextView) findViewById(R.id.name);
         major = (TextView) findViewById(R.id.major);
         age = (TextView) findViewById(R.id.age);
@@ -65,6 +77,20 @@ public class UserInfoActivity extends AppCompatActivity {
         //Group Name Binding
         if(user!=null)collapsingToolbarLayoutAndroid.setTitle(user.getName());
     }
+
+    private class MainImageLoadProcessor extends urlToImageProcessor {
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+
+            if (bitmap != null) {
+                //upload image on AppController user instance
+                Log.d("IMAGESTATUS", "SUCCESS");
+                imageView.setImageBitmap(bitmap);
+            }
+        }
+    }
+
 
 
 

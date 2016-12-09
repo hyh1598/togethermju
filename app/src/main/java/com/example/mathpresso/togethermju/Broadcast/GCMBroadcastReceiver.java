@@ -1,5 +1,6 @@
 package com.example.mathpresso.togethermju.Broadcast;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,12 @@ import android.util.Log;
 import com.example.mathpresso.togethermju.GroupDetailsActivity;
 
 public class GCMBroadcastReceiver extends BroadcastReceiver {
+
+
+    Context mContext;
+    String sMsg = "";
+    private NotificationManager mNotificationManager;
+
     public GCMBroadcastReceiver() {
     }
 
@@ -28,6 +35,9 @@ public class GCMBroadcastReceiver extends BroadcastReceiver {
         }
 
     }
+
+
+
     private void sendToActivity(Context context,String message){
         Intent intent = new Intent(context, GroupDetailsActivity.class);
         intent.putExtra("message",message);
