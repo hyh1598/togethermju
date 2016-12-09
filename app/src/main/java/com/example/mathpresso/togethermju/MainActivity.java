@@ -49,6 +49,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import com.example.mathpresso.togethermju.edit.PasswordEditActivity;
 import com.example.mathpresso.togethermju.edit.UserEditActivity;
 
@@ -125,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imgvProfile = (ImageView) view.findViewById(R.id.user_imageView);
 
 
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -143,17 +143,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_setting:
-                Toast.makeText(this, "move to setting activity", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.menu_item_logout:
                 AppController.getInstance().clearLocalStore();
                 moveToLoginActivity();
-
-                break;
-            case R.id.menu_password_setting:
-                startActivity(new Intent(this, PasswordEditActivity.class));
-                break;
         }
         return false;
     }
@@ -258,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .enqueue(new Callback<DefaultResponse>() {
                             @Override
                             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
-                                if(response.isSuccess()){
+                                if (response.isSuccess()) {
 
                                 }
                             }

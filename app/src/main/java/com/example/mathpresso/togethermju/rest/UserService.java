@@ -48,6 +48,8 @@ public interface UserService {
     @POST("uploadpic")
     Call<DefaultResponse> uploadProfileImage(@Field("photo") String body);
 
+    // not use
+    @GET("")
     Call<User> getUserInformation(@Query("email") String Email,
                                   @Query("name") String Name,
                                   @Query("rid") String RID,
