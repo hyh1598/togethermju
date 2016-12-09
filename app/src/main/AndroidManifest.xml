@@ -5,12 +5,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="com.example.temp_user.gcmex1.permission.C2D_MESSAGE" />
+    <permission android:name="com.example.mathpresso.togethermju.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="com.example.mathpresso.togethermju.permission.C2D_MESSAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
 
     <application
         android:name=".core.AppController"
@@ -34,16 +35,27 @@
         <activity android:name=".StartMainActivity" />
         <activity android:name=".NoticeDetailsActivity" />
         <activity android:name=".RegisterActivity.GroupRegisterActivity" />
-        <activity android:name=".UserInfoActivity"/>
-
-        <activity android:name=".edit.UserEditActivity"/>
-
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".edit.UserEditActivity" />
         <activity
             android:name=".GroupDetailsActivity"
             android:label="@string/title_activity_goup_details"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".GroupMemberActivity"></activity>
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".GroupMemberActivity" />
+
+        <receiver
+            android:name=".Broadcast.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="com.example.mathpresso.together"/>
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="com.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
     </application>
 
 </manifest>

@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -37,7 +36,6 @@ import com.example.mathpresso.togethermju.core.AppController;
 import com.example.mathpresso.togethermju.model.DefaultResponse;
 import com.example.mathpresso.togethermju.tool.ImageFilePath;
 import com.example.mathpresso.togethermju.tool.Utils;
-
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -80,9 +78,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             emailTextView.setText(AppController.user.getEmail());
             nameTextView.setText(AppController.user.getName());
-            loadProfileImage();
-            //            imageloader = new MainImageLoadProcessor();
-            //imageloader.execute(AppController.user.getEmail());
+//            loadProfileImage();
+            imageloader = new MainImageLoadProcessor();
+            imageloader.execute(AppController.user.getEmail());
 
 
         }
@@ -93,7 +91,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
 
+        String str = intent.getStringExtra("message");
+        if(str!=null)Toast.makeText(this,str, Toast.LENGTH_LONG);
         initializeLayout();
 
 
@@ -202,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void loadProfileImage() {
         String server_url = AppController.getBaseUrl() + "loaduserimage/?email=" + AppController.user.getEmail();
+        Log.d("IMAGESERVER",server_url);
 
         Glide.with(this).load(server_url)
                 .fitCenter()

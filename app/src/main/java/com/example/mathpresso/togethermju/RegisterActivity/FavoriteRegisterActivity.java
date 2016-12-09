@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mathpresso.togethermju.LoginActivity;
@@ -284,7 +283,8 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
                 if (gcm == null) {
                     gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
                 }
-                user.setRid(gcm.register("241720710605"));
+                user.setRid(gcm.register(AppController.PROJECTNUM));
+
                 Log.i("RECEIVERID", "REGISTER ID: " + user.getRid());
                 string = "REGISTER ID IS\n" + user.getRid();
             } catch (IOException e) {
@@ -297,6 +297,7 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         protected void onPostExecute(String msg) {
             progress.dismiss();//PROGRESS DIAGRAM 실행 종료
             server_load();
+
 
         }
     }
@@ -318,4 +319,5 @@ public class FavoriteRegisterActivity extends AppCompatActivity {
         }
         super.onStop();
     }
+
 }
