@@ -1,6 +1,7 @@
 package com.example.mathpresso.togethermju.core;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.support.multidex.MultiDexApplication;
 
 import com.example.mathpresso.togethermju.model.User;
@@ -8,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -27,6 +28,8 @@ public class AppController extends MultiDexApplication {
     private SharedPreferences sharedPref;
     private Retrofit mRetrofit;
     public static User user = new User();
+
+
 
     public static String getBaseUrl() {
         return baseUrl;

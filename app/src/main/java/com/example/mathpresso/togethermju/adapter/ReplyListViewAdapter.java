@@ -22,6 +22,7 @@ import java.io.BufferedInputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by sonjiho on 2016. 12. 6..
@@ -31,7 +32,8 @@ import java.util.ArrayList;
 public class ReplyListViewAdapter extends CustomAdapter<GroupReply, ReplyListViewAdapter.ViewHolder> {
     OnReplySelectedListener mListener;
     Activity mActivity;
-
+    //image cash
+    HashMap<String,Bitmap> imgCashMap = new HashMap<String,Bitmap>();
 
     public interface OnReplySelectedListener {
         public void onSelect(Notice notice);
@@ -43,6 +45,7 @@ public class ReplyListViewAdapter extends CustomAdapter<GroupReply, ReplyListVie
         super(context, data);
         mListener = listener;
         mActivity = context;
+
     }
 
     @Override
@@ -55,7 +58,7 @@ public class ReplyListViewAdapter extends CustomAdapter<GroupReply, ReplyListVie
 
     @Override
     public void onBindViewHolder(ReplyListViewAdapter.ViewHolder holder, int position) {
-
+        Bitmap tempimg;
 
         final GroupReply item = mItems.get(position);
 
@@ -73,7 +76,12 @@ public class ReplyListViewAdapter extends CustomAdapter<GroupReply, ReplyListVie
 //                .into(holder.icon);
 
         holder.email = item.getEmail();
-        new ReplyListViewAdapter.imageViewProcessor().execute(holder);
+        //imaging cash
+        if((tempimg = imgCashMap.get(holder.email))!=null){
+            holder.icon.setImageBitmap(tempimg);
+        }else{
+            new ReplyListViewAdapter.imageViewProcessor().execute(holder);
+        }
 
 
     }
@@ -134,6 +142,7 @@ public class ReplyListViewAdapter extends CustomAdapter<GroupReply, ReplyListVie
             super.onPostExecute(ViewHolder);
             Log.d("IMAGE_MAPPING", "SUCCESS");
             ViewHolder.icon.setImageBitmap(ViewHolder.bitmap);
+            imgCashMap.put(ViewHolder.email,ViewHolder.bitmap);
         }
     }
 }
